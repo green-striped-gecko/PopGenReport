@@ -1,0 +1,108 @@
+\section{Testing for null alleles}
+
+\subsection{Comparison of the observed number of homozygotes vs. expected}
+Boxplots show the bootstrap distribution of the expected number of homozygotes for each allele with the boxes showing the 25th (lower edge), 50th (solid line), and 75th (upper edge) percentiles of the distribution and the whiskers showing 1.5 * the inter-quartile range. Solid black dots indicate outliers while red dots indicate the observed number of homozygotes for the allele. If the red dot is above the end of the whisker it suggests that there is an excess of homozygotes for that allele. 
+\newline
+\newline The probability of the observed number of homozygotes for each allele is available in the results object using null.all\$homozygotes\$probability.obs
+
+\noindent
+<<echo=FALSE, results='hide', message=FALSE>>=
+nullalleles<-null.all(cats)  
+obs.ho<-nullalleles$homozygotes$observed
+boot.ho<-nullalleles$homozygotes$bootstrap
+@
+
+
+<<null_all, echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi>>=
+for (i in 1:length(obs.ho)) {
+  boot.dist<-melt(boot.ho[[i]])
+  obs.val<-as.matrix(obs.ho[[i]],ncol=1)
+  rownames(obs.val)<-seq(1:length(obs.ho[[i]]))
+  obs.val<-melt(t(obs.val))
+  print(
+    ggplot(data=boot.dist,aes(as.factor(X2),value)) +geom_boxplot(fill="grey")+theme_classic()+geom_point(data=obs.val,aes(as.factor(X2),value, colour="red"),size=3)+ylab("Number of homozygotes")+xlab("Allele")+ scale_x_discrete(labels=unname(cats@all.names[[1]]))+ggtitle(cats@loc.names[i])+ theme(legend.position="none")
+  )
+}  
+@
+
+<<echo=FALSE,results='asis'>>=
+tab <-nullalleles$homozygotes$probability.obs
+cap_first<-"Probability of the observed number of homozygotes"
+cap_cont<-"Probability of the observed number of homozygotes (continued)"
+
+
+breaktab(tab, cap_first, cap_cont)
+
+#breaktab <- function(tab, cap_first, cap_cont)
+#{
+#num_tables<-ceiling(dim(tab)[2]/8)
+#for(i in 1:num_tables){
+#  if(i==1) {
+#    tempcap<-cap_first
+#  } else if (i>1) {
+#    tempcap<-cap_cont
+#  }
+#  firstcol<-1+(8*(i-1))
+#  lastcol<-i*8
+#  if(lastcol>dim(tab)[2]) lastcol<-dim(tab)[2]
+#  tempdata2<-as.matrix(tab[,firstcol:lastcol])
+#  if((lastcol-firstcol)==0) colnames(tempdata2)<-colnames(tab)[dim(tab)[2]]
+#  tab2<-xtable(tempdata2,cap=tempcap, digits=3)
+#  print(tab2,include.rownames=TRUE, ,add.to.row=list(list(seq(1,nrow(tab2),2)),"\\rowcolor[gray]{0.9} ")) 
+#}
+#}
+write.csv(nullalleles$homozygotes$probability.obs, paste(cats@other$filename,"-null_allele_probability.csv", sep=""), row.names=TRUE)
+@
+
+\FloatBarrier
+
+\subsection{Frequency of null alleles}
+\subsubsection{Determined using Chakraborty et al. (1992)}
+<<echo=FALSE,results='hide'>>=
+method1.boot<-nullalleles$null.allele.freq$bootstrap$method1
+colnames(method1.boot)<-cats@loc.names
+method1.boot<-melt(method1.boot)
+method1.obs<-melt(nullalleles$null.allele.freq$summary1[1,])
+method1.obs$names <- rownames(method1.obs)
+@
+
+<<null_all_Chakraborty, echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi>>=
+
+   ggplot(data=method1.boot,aes(X2,value)) +geom_boxplot(fill="grey")+theme_classic()+geom_point(data=method1.obs,aes(names,value, colour="red"),size=3)+ylab("Frequency of null alleles")+xlab("Locus")+ scale_x_discrete(labels=unname(cats@loc.names))+ggtitle("Null allele frequency - Chakraborty et al. (1992)")+ theme(legend.position="none")+geom_hline(yintercept=0,colour="lightgrey")
+@
+
+<<echo=FALSE,results='hide'>>=
+method1_summary_cap<-"Summary of null allele frequencies by locus for Chakraborty et al. (1992)"
+method1_table<-xtable(nullalleles$null.allele.freq$summary1, cap=method1_summary_cap, digits=3)
+print(method1_table,include.rownames=TRUE)
+write.csv(nullalleles$null.allele.freq$summary2, paste(cats@other$filename,"-null_allele_freq_Chakraborty.csv", sep=""), row.names=TRUE)
+@
+
+
+\subsubsection{Determined using Brookfield (1996)}
+<<echo=FALSE,results='hide'>>=
+method2.boot<-nullalleles$null.allele.freq$bootstrap$method2
+colnames(method2.boot)<-cats@loc.names
+method2.boot<-melt(method2.boot)
+method2.obs<-melt(nullalleles$null.allele.freq$summary2[1,])
+method2.obs$names <- rownames(method2.obs)
+@
+
+<<null_all_Brookfield, echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi>>=
+ggplot(data=method2.boot,aes(X2,value)) +geom_boxplot(fill="grey")+theme_classic()+geom_point(data=method2.obs,aes(names,size=3))+ylab("Frquency of null alleles")+xlab("Locus")+ scale_x_discrete(labels=unname(cats@loc.names))+ggtitle("Null allele frequency - Brookfield (1996)")+ theme(legend.position="none")+geom_hline(yintercept=0,colour="lightgrey")
+@
+
+
+<<echo=FALSE,results='asis'>>=
+method2_summary_cap<-"Summary of null allele frequencies by locus for Brookfield (1996)"
+method2_table<-xtable(nullalleles$null.allele.freq$summary2, cap=method2_summary_cap, digits=3)
+print(method2_table,include.rownames=TRUE)
+write.csv(nullalleles$null.allele.freq$summary2, paste(cats@other$filename,"-null_allele_freq_Brookfield.csv", sep=""), row.names=TRUE)
+@
+
+\FloatBarrier
+<<echo=FALSE, results='hide'>>=
+allresults$null.all<-list(nullalleles)
+@
+\FloatBarrier
+

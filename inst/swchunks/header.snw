@@ -1,0 +1,27 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage{lscape}
+\usepackage[section]{placeins}
+\usepackage{rotating}
+\usepackage[margin=1.0in]{geometry}
+\usepackage[table]{xcolor}
+\usepackage[hidelinks]{hyperref}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+\begin{document}
+
+\title{A Population Genetic Report}
+
+<<echo=FALSE,results='hide'>>=
+ip <- installed.packages()
+ver <- ip[which(ip[,1]=="PopGenReport"),"Version"]
+@
+<<echo=FALSE, results='asis'>>=
+cat(paste("\\subtitle {using PopGenReport Ver.",ver,"}\n"))
+@
+\author{Adamack \& Gruber (2014)}
+\maketitle
+\tableofcontents
+\newpage
+

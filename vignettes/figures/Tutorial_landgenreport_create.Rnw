@@ -1,0 +1,551 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage{lscape}
+\usepackage[section]{placeins}
+\usepackage{rotating}
+\usepackage[margin=1.0in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{mathpazo}
+\usepackage{tabularx}
+\usepackage{pdfpages}
+%\usepackage{listings}
+\usepackage{natbib}
+\bibliographystyle{plainnat}%Choose a bibliograhpic style
+%\VignetteIndexEntry{Tutorial landgenreport}
+%\VignetteEngine{knitr::knitr}
+
+%\lstset{breaklines=true,showstringspaces=false}
+<<setup, include=FALSE, cache=FALSE>>=
+suppressMessages(require(knitr))
+suppressMessages(require(adegenet))
+suppressMessages(require(raster))
+
+#opts_chunk$set(fig.path = 'figure/listings-')
+options(replace.assign = TRUE, width=60)
+#render_latex()
+@
+
+
+
+\newcommand{\abstand}{0.5cm}
+\begin{document}
+
+\title{Landscape Genetics Intro}
+\subtitle{Introduction to landgenreport}
+\author{Bernd Gruber \& Aaron Adamack}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Preface}
+This tutorial provides an overview how to use landgenreport to perform a least-cost path modeling analysis as a part of a landscape genetic analysis. The tutorial assumes that you already have a basic understanding of how to use R. For example you should know how to run a function and load a package. If you don't have this level of understanding of R, there are a number of excellent tutorials and introductions to R available online. You can find them by using your favourite search engine to search for ``R introduction'' or ``R tutorial''. To start using this tutorial, you will need to install the package PopGenReport and (optionally) have a LaTeX environment installed on your computer in order to make full use of the package. For information on how to install PopGenReport and LaTeX please visit our website: \url{http://www.popgenreport.org} and/or look at the other PopGenReport package tutorial (PopGenReportIntroduction) [via \texttt{browseVignettes("PopGenReport")}]. If you are using the Windows operating system, you can alternatively download a mobile version of the package (including a running LaTeX environment): PopGenPack. This allows you to either run the package from a USB device or copy it to a specified folder on your system, without the need to setup all of the software packages. Finally, you should read a publication on least-cost path modelling [e.g. Gruber \& Adamack (in prep.)] to understand the principles behind the least-cost path modelling approach.
+
+\section{A simple least-cost path modelling analysis (LCPMA)}
+
+After starting R with your favourite R Editor (we suggest Rstudio [\url{http://www.rstudio.org}] you will need to load the latest version of the package PopGenReport into your workspace and confirm that you are running at least Version 2.0, by typing: 
+
+<<a1>>=
+require(PopGenReport)
+#check which version you have
+packageVersion("PopGenReport")
+#If you have a version before 2.0 then you need to update the package 
+#using the command install.packages (remove the hash symbol in the next line)
+#install.packages("PopGenReport")
+@
+
+
+Once you have confirmed that you have the right version of PopGenReport, you can run a simple LCPMA by typing the command shown in the example text below. Please note (this is true for every command line using the function \texttt{landgenreport}):\\*
+\textbf{You need to change the argument mk.pdf=FALSE to mk.pdf=TRUE if you want a full report. The argument is set to FALSE here, to make sure that the examples run even if you don\'t have a LaTeX environment installed, which is not recommended, but may be the case for users who do not want to install LaTeX or do not have the necessary admin rights on their computer.}
+
+<<c0,echo=TRUE, tidy=FALSE, fig.show='hide'>>=
+#remember for a full report set: mk.pdf=TRUE
+results1 <-landgenreport(landgen, fric.raster, "D", NN=4,  mk.pdf=FALSE)
+
+#let us check if there is anything returned to our results1 object
+names(results1)
+#there should be a list called: leastcost in your results1 object
+@
+
+The complete output of our least-cost path modelling analysis (LCPMA) is stored in the results folder at the indicated path (the exact location depends on the temporary folder on your machine). In this folder you should find a number of CSV, PDF, SVG and other files.  Please see if you can locate the files. 
+If you set mk.pdf=TRUE you will find a full report of your analysis in a single PDF named LandGenReport.pdf (this PDF can be found at the end of this tutorial in the section \ref{sec:appendix}: Appendix).
+
+Hint: You can set the output folder to a more convenient location by setting the output path via the \texttt{path.pgr} argument. Please make sure the specified folder does exist, for example:\\*
+\\*[0.5cm]
+\texttt{results<-landgenreport(landgen,fric.raster,"D",NN=4,path.pgr="D:/temp")}
+\\*[0.5cm]
+There are four essential bits of information that needs to be provided to the \texttt{landgenreport} function: 
+\begin{enumerate}
+  \item {landgen: a genetic data set that contains the genotypes and coordinates of several individuals (a genind object) }
+  \item {fric.raster: the cost layer of the landscape (a raster object)}
+  \item {``D'': a character which indicates the type of genetic distance index that will be used to create the pairwise-genetic distance matrix, e.g Jost's D in this case}
+  \item {The number of next neighbours used for the least-cost path creation, 4 or 8}
+\end{enumerate}
+
+For the example above, all four types of information have been provided in the correct format. Now we will run a real world example, that details the steps necessary to create the three objects for your own data set. 
+
+\subsection{Genetic data set - create a genind object [with coordinates]}
+We start with the genetic data set. Quite often, you will already have your data formatted for another genetic analysis program such as: STRUCTURE, GENETIX, GENEPOP or FSTAT. These file formats can easily be converted into a \texttt{genind} object. Below, we provide some example for converting your data into a genind object if your data is already in the format for STRUCTURE.
+
+First you need to tell R where your data set is located. Please be very exact when you provide the path to your file, otherwise R will not be able to find it. For this example, we will assume your data is stored in the folder 'D:/data' and is named 'testdata.struc'.
+If your data is in the STRUCTURE format, simply type:\\ \\
+\texttt{gendata <- read.structure('D:/data/testdata.struc')} \\
+
+For other data formats, the command is very similar:
+
+\texttt{gendata <- read.genetic('D:/data/testdata.gtx') \# for genetix files}
+
+\texttt{gendata <- read.genepop('D:/data/testdata.gen') \# for genepop files}
+
+\texttt{gendata <- read.fstat('D:/data/testdata.dat') \# for fstat files}
+\\[\abstand]
+For the next example I use a structure file that is provided by the package \texttt{adegenet} called nancycats. After the file name you need to provide some details on how your STRUCTURE file is formatted. For more details, just type the function name preceded by a ``?''. For \texttt{read.structure} you need to type \texttt{?read.structure} to get to the R help pages for this function and \texttt{?nancycats} to get an overview on the data set.
+
+<<a2,echo=TRUE, tidy=FALSE>>=
+fname <- system.file("files/nancycats.str",package="adegenet") 
+fname #location of the structure file
+gendata <-read.structure(fname,onerowperind=FALSE, n.ind=237, 
+          n.loc=9, col.lab=1, col.pop=2, ask=FALSE)
+@
+
+Using the read functions above your data will be converted into a genind object. You can confirm that your dataset is now a genind object by typing:
+<<a3>>=
+class(gendata)
+@
+
+We can explore the content of the genind object by typing its name ``gendata'' into the console. 
+
+<<a4, tidy=FALSE>>=
+gendata
+@
+
+The slots of the genind object (indicated by the @ sign which are subcomponents of gendata) can also be examined by typing their names into the console. For example, there are slots that indicate the population that each individual belongs to (@pop), the loci names (@loc.names) and the number of alleles per locus (@loc.nall). You should always check this information to confirm that your data has loaded correctly. 
+
+<<a5,tidy=FALSE>>=
+gendata@pop
+gendata@loc.names
+gendata@loc.nall
+
+# or we can use the table function to get the number of individuals
+# per population
+table(gendata@pop)
+@
+
+From the lines @tab and @ind.names, you can see that we have 237 individual genotypes in this data set, information on nine loci for each individual (from the lines starting @loc.nall or @loc.names), and there are ten individuals in population ``P01'' (from the command table(gendata@pop)).
+
+\subsubsection{Add spatial information to a genind object}
+The genind object is missing some information that is very important for our LCPMA. It is missing the spatial coordinates for each individual genetic sample. STRUCTURE files can include spatial coordinates, but other genetic file formats often cannot. Thus, we will show you here how to add spatial coordinates to the genind object (gendata) from a separate file. First the spatial coordinates need to be loaded into the R workspace and then added to the correct slot in our genind object, namely in the slot @other\textdollar xy. There are two requirements for your spatial data:
+\begin{enumerate}
+  \item {Your data is in the same coordinate system as your cost matrix layer}
+  \item {The coordinates need to be in a projected coordinate system and (not longitude and latitude), so distances can be calculated directly from the coordinates}
+\end{enumerate}
+Quite often spatial coordinates are provided via latitude and longitude. If this is the case and distances are calculated without projection, this would result in imprecise estimates of spatial distances as these distance calculations would based on angles as measurement units. Therefore we demonstrate in the example below, how to project the latitude and longitude coordinates into the Mercator system (a coordinate system used by Google maps, which can be used worldwide, see Example: How to project latlong data into Mercator\ref{sec:mercator})).
+
+First we load the data from a CSV file (a comma separated text file, that for each individual has a x and a y coordinate) into the workspace using the read.csv function.
+
+<<a5b>>=
+coordfile <- system.file("extdata/nancycoords.csv",package="PopGenReport")
+coords <- read.csv(coordfile)
+#we check the first 6 entries
+head(coords)
+
+@
+
+
+We can plot the individuals by their coordinates using the plot function:
+
+<<a6>>=
+#define some nice colours for each population (there are 17 populations)
+cols <- rainbow(17)
+plot(coords, col=cols[gendata@pop], pch=16)
+@
+
+
+Now we can add the coordinates (coords) to our genind object (gendata). The correct place to add the coordinates is the slot @other\textdollar xy. This can be done by typing:
+
+<<a7, tidy=FALSE>>=
+gendata@other$xy <- coords
+#check if there is now a new slot @other$xy
+gendata
+@
+
+\subsection{Creating a cost matrix layer}
+
+This part of the exercise is admittedly a bit artificial as there are numerous ways to create cost layers. The most common approach is to use a Geographic Information System (GIS) and create a raster layer that incorporates the structures which are thought to influence connectivity. For example, roads may be a barrier to dispersal and thus cells that code for roads would be given high resistance value. Alternatively, you could create an image file based on Google Earth layers (see example below), where certain landuse classes (e.g. forest) are outlined and filled with a certain colour. The colour codes for the amount of resistance value of the forest. The raster package in R is capable of loading almost every possible file formats including ESRI raster layers, ascii formats, bitmap files, geotiffs and other image formats that can be used to represent a map. All you need to provide to the raster function in R is the filepath and filename. For example if your cost matrix layer is stored using the ESRI raster file format with the name ``raster.asc'' in the folder ``D:/data'' then you simply type:
+
+costlayer <- raster(``D:/data/raster.asc'')
+
+To demonstrate that any image format can be used, we use the image of the R-logo (the red-component only) that is provided by R as our cost matrix layer. This is admittedly a useless cost matrix layer and we don't expect to find a relationship between our genetic data set and the cost matrix layer.
+
+<<a8>>=
+
+logo <- raster(system.file("external/rlogo.grd", package="raster")) 
+
+@
+
+To test if this file has been loaded successfully, we plot it and also add the sampled individuals from our genetic data set (gendata) to the map.
+
+<<a9>>=
+plot(logo)
+points(coords, col=cols[gendata@pop], pch=16)
+@
+
+
+\subsection{Selecting a relatedness index}
+
+There are five indices of genetic differentation currently implemented in the \texttt{landgenreport} function (check: ?landgenreport for details). Three indices are based on a subpopulation differentiation (``D'', ``Gst.Hedrick'', ``Gst.Nei''= an often used variant of Fst) and two on relatedness between individuals (``Kosman'' \& Lennard, ``Smouse'' \& Peakall). The difference between the indices is that if an individual based index is used then least-cost paths are calculated between all pairs of individuals (in the case of our example dataset there are 237*236/2 = 27966 pairs of individual genetic distances), if an index based on subpopulations is used (such as Jost's D), then the least-cost paths are calculated on a subpopulation basis (only 17*16/2 = 136 pairs in our example). This is important as the calculation of least-cost paths can be a lengthy process (which mainly depends on the resolution of the cost matrix layer and the number of pairwise paths that needs to be calculated) as it is a computationally expensive process. Note that the analysis is not restricted to the currently implemented genetic differentiation indices. An example how researcher can use their own favorite genetic distance index is provided below (see Section \ref{sec:custom}: A customised step by step analysis).
+
+\subsection{Run the created example}
+
+For demonstration purposes we limited the number of subpopulations used in this example to the first six subpopulations. We did this by simply subsetting our genetic data set using the index function ``[]''. If we add up the number individuals in the first six subpopulations, we find that there are 93 individuals in the first six subpopulations. 
+
+
+<<a10>>=
+table(gendata@pop) #individuals per population
+
+#cumulative sum of the individuals (they are sorted by subpopulations)
+cumsum(table(gendata@pop))
+#so we see there are 93 individuals in the first 4 subpopulations
+
+@
+Once you have loaded all your data sets and made sure they are in the right format, the final command to run the LCPMA is very simple, just type:
+<<c1, fig.show='hide' >>=
+#remember you need to  set mk.pdf=TRUE for a full report
+results2 <-  landgenreport(gendata[1:93,], logo, "D",NN=4, mk.pdf=FALSE)
+@
+
+
+\section{The results of a least-cost path modelling analysis}
+
+This time we want to have a closer look at the \texttt{results2} object to understand the output of our analysis. First, we want to create a map using the first six subpopulations and then add the least-cost paths to our analysis. Second, we check if the cost matrix (the R logo) contributes to the explanation of the genetic structure of our subpopulations (checking the results of partial mantel tests and the results of a multiple regression on distance matrices).
+
+To look into the results2 object we need to learn about its slots (components). 
+<<a11>>=
+names(results2)
+@
+
+This tells us there is a subcomponent leastcost. All of the results of the LCPMA are combined in this subcomponent and they can be accessesed via:
+
+<<a12>>=
+names(results2$leastcost)
+@
+
+The reason for the subcomponent ``leastcost'' is, that the landgenreport function is meant to be extendable. For future implementations of additional analyses, it is more convenient to have the output separated in a subcomponent. The names of the subcomponents are all fairly self-explanatory. For example \texttt{eucl.mat} holds the full pairwise matrix of Euclidean distances. You can access it by typing its full name into the console.
+
+<<a13>>=
+results2$leastcost$eucl.mat
+@
+
+As expected this is a matrix with dimensions 6 x 6 (we only used the first 6 subpopulations), which is symmetrical (the distance from subpopulation 1 to subpopulation 6 is the same as from 6 to 1) and has zero entries along the diagonal (the distance from population 1 to population 1 is zero). 
+
+In more detail the subsubcomponents are:
+\begin{itemize}
+  \item {eucl.mat        : Euclidean distance matrix}
+  \item {cost.matnames   : names of your cost layers}
+  \item {cost.mats       : the cost matrices (based on your least-cost path algorithm)}
+  \item {pathlength.mat  : the lengths of your least-cost paths (should not be used for an LCPMA, see Etherington \& Holland 2013)}
+  \item {paths           : the actual paths as SpatialLines objects}
+  \item {gen.mat         : the genetic distance matrix}
+  \item {mantel.tab      : a table that shows the results of partial Mantel tests (\citep{Wasserman2010})}
+  \item {mmrr.tab        : a table that shows the results of a multiple matrix regression with randomisation analysis}
+\end{itemize}
+
+\subsection{A map of the least-cost paths}
+
+Please note that all of the following plots have already been created by the landgenreport function that you ran earlier and can be found in the indicated results folder. However, to help you better understand the output of the landgenreport function we recreate some of the plots ``by hand''. This allows you to change the standard output if you think the standard output needs to be customised.
+
+For a simple map of the least-cost path we need three types of information - the least cost layer, the coordinates of the sample individuals for each sub-population and the least-cost paths. All of this information is within our input data and/or the results2 object. The cost matrix layer is our logo object and we need to find our coordinates for the first six subpopulations. If you remember we put them into our gendata object in the slot @other\textdollar xy.
+
+<<a14>>=
+plot(logo)  
+points(gendata@other$xy[1:93,], col=gendata@pop, pch=16)
+@
+
+Finally, we need to find the least-cost paths. They are stored in the \texttt{paths} subcomponent of our \texttt{results2} object. As only one cost matrix layer has been supplied we can access the least-cost path by referencing the first entry in the paths component. We can check how many paths there are by typing:
+<<a16>>=
+numpaths <- length((results2$leastcost$paths[[1]]))
+numpaths
+@
+
+There are 15, which is exactly what we would expect if we'd calculated the number of possible pairs (6*5/2 = 15).
+To plot the paths we need to do a bit of clever programming. The idea is simple, we create a loop that prints the paths one at a time. In R this can be done using a for loop or more elegantly using the lapply function (lapply simply applies a function to our path list).
+<<a17>>=
+plot(logo)  
+points(gendata@other$xy[1:93,], col=gendata@pop, pch=16)
+for (i in 1:numpaths)
+{
+  lines(results2$leastcost$paths[[1]][[i]])  
+}
+
+#or more elegant (dummy is just needed to suppress the console output)
+dummy <- lapply(results2$leastcost$paths[[1]], function (x) lines(x) )
+@
+
+\subsection{Checking the results of partial mantel tests and MMRR}
+
+To check the results of partial mantel tests and MMRR, we simply access the respective subsubcomponents by their names:
+<<a18>>=
+results2$leastcost$mantel.tab
+@
+<<a19>>=
+results2$leastcost$mmrr.tab
+@
+
+
+As expected both analyses indicated that our resistance layer (the R logo) does not explain the population structure of the six subpopulations. Please note that the logo is called ``red'' in this example, because it is only the red component of the R logo image. The first partial Mantel test tests whether the genetic distance matrix (gen) is correlated with the cost matrix layer (red) controlling for Euclidean distances. This is not the case. Also there is no correlation between the genetic distances (Gen) and the Euclidean distances, controlling for the cost matrix (line 2 of the mantel.tab output). To understand this approach, please refer to \citet{Wasserman2010} and Cushman et al. 2013. The basic idea behind this series of tests is that the partial Mantel test on the correlation between a genetic distance matrix and a cost matrix (controlled by Euclidean distance) should be significant, but the reverse (genetic distance matrix correlated with Euclidean distance matrix controlled for the cost distance matrix) should not be significant.
+
+The MMRR approach tests whether a linear regression between competing distance matrices (Euclidean and cost matrices) is significant, using a randomisation approach to find the test statistics \citep{Wang2012}. To access the results of this approach we simply access the subcomponent \texttt{mmrr.tab}.
+
+
+
+The results are similar to the partial Mantel test. None of the distance matrices can explain the genetic structure between the six subpopulations. The overall correlation (Fstat, Fpvalue and r2 value) is not significant and the distance layers separately do not correlate with the genetic distance matrix (tpvalue for each layer).
+
+Be aware that all of these results can be found in the indicated results folder and also in the complete report if the argument mk.pdf=TRUE was set when running the function landgenreport (check the Appendix for an output of the first example).
+
+\subsection{Output of the first example}
+
+To see how the results would look if there was a significant relationship between a cost matrix layer and the pairwise genetic distances, we will now take a look at our first example. The output is stored in the results1 object.
+Remember we ran: \\*
+
+\texttt{results <-landgenreport(landgen, fric.raster, "D", NN=4, mk.pdf=TRUE)} \\*
+
+We can rerun the same code as above by simply changing everywhere we typed results2 to results1. This also demonstrates one of the advantages of using a script when running an analysis.
+
+<<a20>>=
+#cost matrix layer from example 1
+plot(fric.raster) 
+#what are the coordinates of the samples
+points(landgen@other$xy, col=landgen@pop, pch=16) 
+#plot the least cost paths
+dummy <- lapply(results1$leastcost$paths[[1]], function (x) lines(x) )
+#the partial Mantel test results
+results1$leastcost$mantel.tab
+#the MMRR test results
+results1$leastcost$mmrr.tab
+@
+
+
+\subsection{Use the read.genetable function to create a genind object with coordinates in one go}
+
+This part of the tutorial demonstrates a different approach to creating a genind object from genetic data stored in a simple CSV table created by a spreadsheet program such as EXCEL or CALC. (also see the examples provided in the PopGenReportIntroduction.pdf)
+
+We use the following data set:
+
+<<a21>>=
+platyfile <-  system.file("extdata/platypus1c.csv",package="PopGenReport")
+platy <- read.csv(platyfile)
+head(platy)
+
+@
+
+The first row of the file is a header row. Subsequent rows contain the data for single individuals/samples. The first column contains a unique identifier for the individual/sample. The title for this column must be ''ind''. The second column (optional) is the population that the individual/sample belongs to. The title for the population column (if it is used) must be ''pop''. Separate columns are used for the latitude and longitude coordinates (given in decimal degrees) of each individual/sample (optional) and these columns (if used) should be titled 'lat' and 'long'. As an optional alternative, Mercator coordinates (or grid points) can be used for spatial coordinates. If this option is used, the column titles should be ``x'' and ``y''. Additional (optional) observations such as gender, age, phenotype, etc. can be placed in a contiguous block of columns. You are free to choose the column titles for these columns, but avoid using spaces and symbols in these titles as they have a tendency to create problems. The remaining columns contain the genetic data. Here you can use a single column per locus (with each of the alleles separated by a defined separator <not commas>) or you can have a single column for each allele. The column titles for the genetic data are up to you, but again we discourage the use of spaces and punctuation marks in the column titles.
+
+It is \textbf{very, very} important to follow these formatting instructions closely if you want to import your own data. Keep the spelling and case of the column titles ('ind', 'pop', 'lat', 'long', 'x', and 'y') consistent with the formatting shown in the examples. Additionally, use the same column order as was used in this example. The number of columns can vary (e.g. if you provide more (or less) additional information about your samples or if you have more or less loci). There is some error proofing in the import function, but it is best to stick with the example format as closely as possible. From personal experience, if your dataset isn't being imported correctly, it is most likely because you have made a mistake with the column titles, e.g. something like typing 'latitude', 'Lat', or 'LAT' instead of 'lat'. More detailed instruction and how to access the sample files can be found by typing: \texttt{?read.genetable}.
+
+To load the data and to create a genind object from a CSV file that includes individual coordinates, we use the \texttt{read.genetable} function from PopGenReport. Here we need to specify which columns contain the required information. As can be seen above the first column has information on the individual identifier, the second has the information on the subpopulation and the third and fourth contain spatial coordinates in latitude and longitude. Columns 5 and 6 have additional information on gender and age and the rest of the columns are our genetic markers (six loci, both alleles are coded in one column, separated by a ``/'' symbol). You can also specify the character for missing values if it is not ``NA'' (default value for missing data in R).
+
+<<a22>>=
+platy.gen <- read.genetable(platyfile, ind=1, pop=2, lat=3, long=4, other.min=5,
+                            other.max=6, oneColPerAll=FALSE, sep="/", ploidy=2)
+platy.gen
+@
+
+If you want you can explore the content of the data set by accessing its slots (e.g. @pop, @ind.names).
+Using \texttt{read.genetable}, we created a valid genind object with spatial coordinates in one step. Unfortunately the coordinates are provided as latitude and longitude and they are not useful if you want to calculate pairwise Euclidean distances. Therefore we need to convert them (reproject them) into a coordinate system that is better suited to performing simple Euclidean distance calculations.
+
+
+\section{How to project latlong data into Mercator}
+\label{sec:mercator}
+
+Before we convert our spatial coordinates, we use the \texttt{mk.map} feature of PopGenReport which creates a  map of your samples using a map downloaded from Google maps and your sample spatial coordinates provided as latitudes and longitudes. 
+<<c19,echo=TRUE,  results='markup'>>=
+### remember set mk.pdf=TRUE if you want to have a report !!!!!!
+popgenreport(platy.gen, mk.map=TRUE,mk.counts=FALSE, mapdotcolor="red", 
+            maptype="roadmap", mk.pdf=FALSE)
+@
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./figures/platy-map.pdf}
+\caption{Map on platypus samples in Tasmania}
+\label{fig:platy}
+\end{figure}
+
+To convert the coordinates we need to first specify which coordinate system the coordinates are currently in (for latitudes and longitudes, WGS1984 is the most commonly used format) and which coordinate system they should be converted to (in this case a Mercator projection (see \texttt{?Mercator} using the dismo package)).
+For this exercise we need to load an additional package the dismo package (it should already be loaded from when you loaded the PopGenReport package, but it is better to make sure that it is explicitly loaded into the workspace). We then extract our latlong coordinates from the \texttt{@other\textdollar latlong} slot (be aware the data needs to be in the order longitude followed by latitude, thus for the current example we reverse the index by setting the columns to 2:1).
+
+
+
+<<a23>>=
+require(dismo) #load package rgdal
+#extract coordinates (long, lat)
+longlat<- as.matrix(platy.gen@other$latlong[,2:1])  
+#projection from latlong to Mercator
+xy <-Mercator(longlat)
+#add it to platy.gen at @other$xy
+platy.gen@other$xy <- xy #again change  and then long
+@
+
+
+For a LCPMA we need to have a cost matrix for the area. For this example, we will simply create one using Google maps (be aware that we are assuming that the colours of the map correctly code for resistance values, which is probably not useful in most cases, but is good enough for demonstration purposes.)
+
+<<a24>>=
+e<- extent(range(longlat[,1]), range(longlat[,2])) #extent of the map
+tasmap <- gmap(e,style="feature:all|element:labels|visibility:off", 
+                maptype="roadmap")
+names(tasmap) <- "Tasmania"
+plot(tasmap)
+points(platy.gen@other$xy, pch=16)
+@
+
+
+Now we can do our LCPMA, this time we want to use Hedrick's Gst as a genetic distance index between subpopulations and the 8 nearest neighbouring cells when calculating the least-cost path. Please refer to the help page of \texttt{landgenreport} (\texttt{?landgenreport}) for more options.
+
+<<c2, fig.show='hide'>>=
+#remember to set mk.pdf=TRUE for a full report
+results3 <-landgenreport(platy.gen, tasmap, "Gst.Hedrick", NN=8, mk.pdf=FALSE)
+results3$leastcost$mmrr.tab
+@
+
+
+As was done in the prior example, we can plot our least-cost paths to check if they have artefacts (e.g. terrestrial animals dispersing via the sea).
+
+<<a25>>=
+#cost matrix layer tasmap
+plot(tasmap) 
+#here is where the samples are from
+points(platy.gen@other$xy, col=platy.gen@pop, pch=16) 
+#plot the least cost paths
+dummy <- lapply(results3$leastcost$paths[[1]], function (x) lines(x) )
+@
+
+\section{A customised step by step analysis}
+\label{sec:custom}
+
+This section explains how to do a customised LCPMA analysis. Instead of using the function \texttt{landgenreport}, we use the low-level functions \texttt{genleastcost} (to calculate a least-cost paths) and \texttt{lgrMMRR} (to run a separate multiple matrix regression with randomisation analysis). Additionally, we aim to test a suit of cost matrix layers at the same time. This is often necessary as we do not know the precise resistance values of our cost matrix layers. Thus, we would like to try a number of values and test which resistance values best explain the population structure. For this example, we use the data set that is provided by \texttt{landgenreport} (previously used in the first example).
+
+The first step is to create a set of cost matrix layers that we would like to test. To do this we first use \texttt{fric.raster} and change the values of the linear structures only. So first we need to explore which values the linear structures initially have.
+
+
+<<a26>>=
+plot(fric.raster)
+table(values(fric.raster))
+@
+
+As can be seen from the plot and the matrix output, the matrix cost layer has a value of 1 and the green structures have a value of 20. We will use this information to change the values of the green linear structure to four different values (20 [the original value], 0.1, 5 and 50). Then we stack all these different layers into a single object (called a raster stack) and then run this through our \texttt{landgenreport} function.
+
+<<a27>>=
+val <-  c(20, 0.1,5,50)
+
+r <- stack(fric.raster)  #the first entry is the original matrix
+for (i in 2:4)   
+{
+r[[i]]  <- fric.raster  #create a copy of fric.raster
+r[[i]][values(r[[i]]==20)] <- val[i] #set to new value
+names(r[[i]])
+}
+names(r) <- paste("Layer",val,sep="") #rename layers
+plot(r) ###plot all layers (please check the scale)
+@
+
+
+This created the four different layers and combined them into a single raster stack named ``r''. Please note that values for the green structures are all different as indicated by the scale bar for each plot. Now we can run the LCPMA as before, but using the complete raster stack, using the \texttt{landgenreport} function.
+
+<<c5, fig.show='hide'>>=
+results4a <- landgenreport(landgen, r , "Gst.Nei", 4)
+results4a$leastcost$mmrr.tab
+@
+
+Instead of running the \texttt{landgenreport} function we could use the \texttt{genleastcost} function. This function offers the same functionality as \texttt{landgenreport}, but allows us to run the analysis step by step and makes it possible to customise the analysis (see also \texttt{?genleastcost}). 
+
+<<c4>>=
+results4b <- genleastcost(landgen, r, "Gst.Nei", 4)
+names(results4b)
+@
+
+A nice feature of genleastcost is that you can observe the progress of the function by looking at the plots that are created as the analysis proceeds. As can be seen, results4b  has the same slots as the results produced by the \texttt{landgenreport} function (actually without the leastcost level), but the mmrr.tab slot and the mantel.tab slot are missing.
+Instead of using the 'raw' Gst.Nei index (which is a variant of Fst), we could first visually plot Gst.Nei (actually Gst.Nei / (1-Gst.Nei)) against the log of Euclidean distance, which is the standard transformation used for an isolation by distance plot. For this, we need to extract the values from our results4b object.
+
+<<a28>>=
+eucl <- log(results4b$eucl.mat)
+gen  <- results4b$gen.mat / (1-results4b$gen.mat)
+plot(eucl, gen, ylab="Fst/1-Fst", xlab="log distance")
+@
+
+There seems to be a bit of a relationship between both distance matrices. Thus, we use a MMRR that also includes the Euclidean distance matrix. We can use the \texttt{lgrMMRR} function, which is based on the MMRR function from \citet{Wang2012}. It requires three arguments, a genetic distance matrix, cost matrix(ces) and a Euclidean distance matrix (see \texttt{?lgrMMRR} for details). 
+
+<<a29, fig.show='hide'>>=
+lgrMMRR( gen, results4b$cost.mats, eucl)
+@
+
+If you compare this output to the output created by the \texttt{landreport} function you can see that they are fairly similar, so the transformation did not affect the result in this case. Layer5 (the green structure has a resistance value of 5) seems to be the cost matrix layer that best describes the data.
+
+Be aware that all of the cost matrices might be highly correlated to the genetic distance matrix. We can check this by looking at the actual least-cost paths for the four cost matrices. For this we need to slightly extend our script so we can have all of the least-cost paths for each of the cost matrices in one output object.
+
+<<a30>>=
+#cost matrix layer from example 1
+par(mfrow=c(2,2)) #four plots 2 by 2
+for (i in 1:4)
+{
+plot(r[[i]], main=names(r)[i])
+#here are the coordinates stored
+points(platy.gen@other$xy, col=platy.gen@pop, pch=16) 
+#plot the least cost paths
+dummy <- lapply(results4a$leastcost$paths[[i]], function (x) lines(x) )
+}
+@
+
+To calculate the correlation between the cost matrices we need to extract them and put them into the \texttt{cor} function. Again this can be achieved elegantly using the lapply function, admittedly a bit confusing because we need to reformat our data, so that it can be processed by the different functions.
+
+
+<<a31>>=
+
+layers <- data.frame(lapply (results4b$cost.mats, 
+                             function(x) as.numeric(as.dist(x))))
+pairs(layers) #plots the pairwise correlations
+cor(layers)   #calculate r values for each pair
+@
+
+Here we actually see that Layer5, Layer20 and Layer50 are highly correlated \(r>0.9\) and therefore the three matrices should not be used at the same time in the MMRR. We can select only Layer0.1 and Layer20 (the first two from the raster stack) and rerun the \texttt{lgrMMRR} function.
+
+<<a32, fig.show='hide'>>=
+lgrMMRR( gen, results4b$cost.mats[1:2], eucl)
+@
+
+This time only Layer20 comes out as being significant, which is reassuring as in the example a resistance value of 20 was used in a simulation of our populations.
+
+Finally for completeness, we can also run the \citet{Wasserman2010} approach that uses a series of partial  Mantel tests. Again we use only the first two layers of the raster stack and the function used is called \texttt{wassermann}.
+<<a33, fig.show='hide'>>=
+wassermann( gen, results4b$cost.mats[1:2], eucl)
+@
+
+Here Layer20 shows the a significant correlation when corrected for Euclidean distance or Layer0.1, which is not true for the inverse. All other comparison are not following the requirements of \citet{Wasserman2010} (a significant correlation corrected by the competing layer and a non-significant correlation corrected by the original layer), so both methods lead to the same conclusion that Layer20 is the cost matrix that explains best the connectivity in the landscape.
+
+
+\section{Contacts and Citation}
+
+Please do not hesitate to contact the authors of \texttt{PopGenReport} if you have any comments or questions regarding the package. First of all we are certain there will still be ''bugs'' in the code as it is impossible to test it under all conditions. Additionally, we would like to expand the capabilities of PopGenReport in the future and comments on features that you would like to have included for your analysis are most welcome. For further updates please check our website: \url{www.popgenreport.org}.\\
+For citation please use
+<<a34, tidy=FALSE>>=
+citation("PopGenReport")
+@
+
+Have fun running \texttt{PopGenReport} and may there be exciting results :-)
+\\*
+Bernd \& Aaron\\*
+bernd.gruber@canberra.edu.au\\*
+aaron.adamack@canberra.edu.au
+
+ 
+
+\section{References}
+\bibliography{lgr}
+
+\section{Appendix}
+\label{sec:appendix}
+
+Output of a full report running: 
+\texttt{results <-landgenreport(landgen, fric.raster, "D",  mk.pdf=TRUE)}.
+\includepdf[pages={-}]{./figures/landgenreport_example.pdf}
+
+\end{document}

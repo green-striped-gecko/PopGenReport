@@ -1,0 +1,48 @@
+\section{Spatial autocorrelation following Smouse and Pekall 1999}
+Global spatial autocorrelation is a multivariate approach combining all loci into a single analysis. The autocorrelation coefficient r is calculated for each pairwise genetic distance pairs for all specified distance classes. For more information see Smouse and Peakall 1999, Peakall et a. 2003 and Smouse et al. 2008. For full references refer to the help files by typing ''?spautocor''.
+
+ <<echo=FALSE, results='hide'>>=
+
+gen.m<-as.matrix(gd.smouse(cats, verbose=FALSE))
+eucl.m <- as.matrix(dist(cats@other$xy))
+reps=100
+nbins = 10
+
+splist<- spautocor(gen.m, eucl.m, shuffle=FALSE, bins=nbins)
+bssplist <- replicate(reps, spautocor(gen.m, eucl.m,shuffle=TRUE, bins=nbins))
+
+#convert the output into a matrix
+bs <-matrix(unlist(bssplist), nrow=reps, ncol=nbins, byrow=TRUE)
+bs.l <- apply(bs,2, quantile, probs=0.025, na.rm=TRUE)
+bs.u <- apply(bs,2, quantile, probs=0.975, na.rm=TRUE)
+
+splist <- cbind(splist,r.l=bs.l,r.u = bs.u)
+
+
+
+write.csv(splist, file=paste(filename,"-spautcor.csv", sep=""), row.names=FALSE)
+
+splist.tab <- xtable(splist, digits=3,cap="Spatial autocorrelation and bootstrap results using the approach of Smouse and Pekall 1999.")
+allresults$spaautocor<-list(splist)
+@
+
+<<echo=FALSE, results='asis'>>=
+print(splist.tab, include.rownames=TRUE, ,add.to.row=list(list(seq(1,nrow(splist),2)),"\\rowcolor[gray]{0.9} "))
+
+@
+
+
+\FloatBarrier
+ <<spautocor,  echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi >>=
+ 
+matplot(cbind(splist$r,bs.u, bs.l), type="l", lty=c(1,2,2), lwd=c(2,1,1), ylab="Spatial autocorrelation r", axes=FALSE, col=c(1,3,3), xlab="Distance class (endpoint)")
+axis(2)
+axis(1, at=1:nbins, labels=signif(splist$bin,3))
+axis(1, at=1:nbins, labels=splist$N, line=1, tick=FALSE)
+box()
+abline(h=0, lty=2)
+mtext("N=",1,line=2, at=0)
+mtext("Bins",1,line=1, at=0)
+
+@
+

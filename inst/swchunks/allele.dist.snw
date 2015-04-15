@@ -1,0 +1,138 @@
+\section{Distribution of alleles by subpopulation and loci}
+\subsection{Allele frequency plots for all subpopulations and loci}
+
+<<echo=FALSE, results='hide',warning=FALSE>>=
+numloci<-length(cats@loc.names)
+freq_alleles<-allele.dist(cats, mk.figures=FALSE)
+breaks<-seq(0,1,.05)
+color.palette  <- colorRampPalette(c("yellow", "red"))(length(breaks) - 1)
+
+@ 
+\FloatBarrier
+<<allelfreq, echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi,fig.show='as.is'>>=
+
+for (i in 1:numloci)
+{
+    nr <- nrow(freq_alleles[[2]][[i]])
+    nc <- ncol(freq_alleles[[2]][[i]])
+    mp<-  barplot(freq_alleles[[2]][[i]], beside=TRUE, border=NA, ylim=c(0,1.1), main=paste("Loci: ",cats@loc.names[i]," # ",i,sep=""), col=rainbow(nrow(freq_alleles[[2]][[i]])), axes=FALSE, space=c(0,2), names.arg=rep(NA,nc), las=2, cex.axis=0.8 )
+    # axis(1, labels=TRUE, tick=FALSE, las=2)
+    text(colMeans(mp, na.rm=TRUE),rep(1.05,nc),colnames(freq_alleles[[2]][[i]]))
+    labs <- rownames(freq_alleles[[2]][[i]] )
+    axis(1, at=seq(1,max(mp)+nr,nr+2), labels=FALSE, tick=TRUE, las=2, tck=0)
+    abline(v=seq(1,max(mp)+nr,nr+2), lty=2)
+    axis(1, at=mp, labels=rep(labs, nc), las=2 ,tick=FALSE,tck= -0.02, line=-0.5)
+    axis(2)
+}  
+@
+\FloatBarrier 
+\subsection{Heatmaps of allele frequencies for all subpopulation and loci}
+Cell colors indicate the proportion of the the total number of alleles in a subpopulation (e.g. 2N) that are of a particular allele type. The numbers within a cell are the counts of the number of alleles in a particular population.  
+
+
+\FloatBarrier
+<<keyall, echo=FALSE, fig.width=6, fig.height=2, fig.path=fig.path, dev=dev, dpi=dpi, fig.cap="Color indicates the proportion of the total number of alleles in a subpopulation", warning=FALSE, fig.show='as.is'>>=
+barplot(rep(1,20), col=color.palette, axes=FALSE,space=0, border=NA, main="Colour key for allele frequencies" )
+axis(1, seq(0,20,1), seq(0,100, 5))  
+@
+
+\FloatBarrier
+<<heatmap, warning=FALSE, echo=FALSE,  fig.width=7, fig.height=5, fig.path=fig.path, dev=dev, dpi=dpi>>=
+
+numloci<-length(cats@loc.names)
+for (i in 1:numloci)
+{
+  if(unname(cats@loc.nall[i])>1){
+    figlabel<-paste("Loci: ",cats@loc.names[i]," # ",i,sep="")
+    dat <- t(freq_alleles[[2]][[i]])
+    dat <- dat[,seq(ncol(dat),1,-1)]
+    counts <- t(freq_alleles[[1]][[i]])
+    counts <- counts[,seq(ncol(counts),1,-1)]
+    
+    image( dat, col=color.palette, axes=FALSE, main=figlabel, zlim=c(0,1))
+    rn <- rownames(dat)
+    cn <- colnames(dat)  
+    axis(1, at = seq(0,1,len=nrow(dat)),labels=rn, cex.axis= max(1-nrow(dat)/100,0.5), las=2 )
+    axis(2, at = seq(0,1,len=ncol(dat)),labels=cn , las=2, cex.axis= max(1-ncol(dat)/100,0.5))
+    box()
+    co <- expand.grid(seq(0,1,len=nrow(dat)),seq(0,1,len=ncol(dat)))
+    text(co[,1], co[,2],counts, cex=max(0.5,min(1-nrow(dat)/100, 1-ncol(dat)/100)))
+##test of filled.contour
+#     plot.new()
+#    plot.window(xlim=c(0,1), ylim=c(0,1))
+#    title(main= figlabel)
+#                                                  
+#
+#  .filled.contour( seq(0,1,len=nrow(dat)), seq(0,1,len=ncol(dat)), z=dat, col=color.palette, levels= seq(0,1,0.05))
+#   axis(1, at = seq(0,1,len=nrow(dat)),labels=rn, cex.axis= max(1-nrow(dat)/100,0.5), line=FALSE)
+#   axis(2, at = seq(0,1,len=ncol(dat)),labels=cn , las=2, cex.axis= max(1-ncol(dat)/100,0.5), line=FALSE)
+  } else 
+    {
+    warning("Locus ",unname(cats@loc.names[i])," has only ",unname(cats@loc.nall[i])," allele, figure not made \n")
+  }
+}
+@
+\FloatBarrier
+
+\subsection{Private Alleles}
+<<echo=FALSE, results='hide'>>=
+pa<-freq_alleles$private.alleles
+noprivate.allel=TRUE
+tempcount<-0
+for(i in 1:length(pa)){
+  if(!is.na(pa[[i]][1])){
+ noprivate.allel=FALSE
+    if(tempcount==0){
+      if(is.null(dim(pa[[i]]))){
+        patemp<-cbind(unname(cats@loc.names)[i],as.matrix(t(pa[[i]])))
+        colnames(patemp)[1]<-"Locus"
+        privall<-patemp
+      } else if (!is.null(dim(pa[[i]]))){
+        patemp<-cbind(unname(cats@loc.names)[i],pa[[i]])
+        colnames(patemp)[1]<-"Locus"
+        privall<-patemp
+      }
+    } else if (tempcount>0){
+      if(is.null(dim(pa[[i]]))){
+        patemp<-cbind(unname(cats@loc.names)[i],as.matrix(t(pa[[i]])))
+        colnames(patemp)[1]<-"Locus"
+        privall<-rbind(privall,patemp)
+      } else if (!is.null(dim(pa[[i]]))){
+        patemp<-cbind(unname(cats@loc.names)[i],pa[[i]])
+        colnames(patemp)[1]<-"Locus"
+        privall<-rbind(privall,patemp)
+      }      
+    }
+    tempcount<-tempcount+1
+  }
+}
+if (noprivate.allel==TRUE)
+{
+privall <-  data.frame(Locus="-",Population="-", Allele="-")
+mat.priv.all <- data.frame(Population="-")
+} else
+{
+mat.priv.all<-as.matrix(t(table(privall[,2])))
+} 
+rownames(mat.priv.all)<-"Number of private alleles"
+
+@
+\FloatBarrier
+\subsubsection{All private alleles}
+<<echo=FALSE, results='asis'>>=
+print(xtable(privall,c("List of private alleles by locus and population")),include.rownames=FALSE)
+write.table(privall, paste(filename,"-all_private_alleles.csv", sep=""), row.names=FALSE, col.names=TRUE, sep=",")
+@
+\FloatBarrier
+\subsubsection{Number of private alleles by population}
+<<echo=FALSE, results='asis'>>=
+print(xtable(mat.priv.all,c("Number of private alleles by population")))
+write.csv(mat.priv.all, paste(filename,"-num_priv_allele_pop.csv", sep=""))
+@
+
+\FloatBarrier
+<<echo=FALSE, results='hide'>>=
+allresults$allele.dist<-list(frequencies=freq_alleles[[2]], count=freq_alleles[[1]], priv.allele=freq_alleles[[3]])
+@
+\FloatBarrier
+

@@ -1,0 +1,48 @@
+\section{Customised part using your own function}
+
+\subsection{if you need a subsection }
+You can use the ''\texttt{mk.custom=TRUE}'' switch to run your own customised part of the report. 
+Edit the file custom.snw in the library folder of the \texttt{PopGenReport} package
+ (\Sexpr{paste(.libPaths()[1],"/PopGenReport/swchunks/custom.snw",sep="")}). 
+Write your explanation using latex syntax.
+
+<<echo=TRUE, results='markup', message=FALSE>>=
+#to hide this output set echo=FALSE, results='hide' in the line above
+#write in your code to calculate something here. Your genind object is accessed via the name 'cats'. 
+
+#create your own analysis
+results <- summary(cats)$pop.eff
+
+#create your table and use this for the report
+#to print it as a table, it has to be a data.frame!!!
+customtab <- data.frame(results)  
+@
+
+<<echo=FALSE,results='asis'>>=
+#here you print your results table, with a caption. 
+table_cap<-"Customised table: Number of samples per population"
+custom.report.table<-xtable(customtab, cap=table_cap, digits=3)
+print(custom.report.table,include.rownames=TRUE)
+
+#and save your table as csv to the folder
+write.csv(customtab, paste(cats@other$filename,"-cutomtab.csv", sep=""), row.names=TRUE)
+@
+\FloatBarrier
+
+The plot below shows the number of samples per subpopuation as a pie chart. 
+Please note, the comment of the R help pages in regards to pie charts. Pie charts are a very bad 
+way of displaying information. The eye is good at judging linear measures and bad at judging 
+relative areas. A bar chart or dot chart is a preferable way of displaying this type of data.
+                                                                                             
+<<custom_figure, echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi>>=
+#this is how you create a plot of your results
+pie(customtab[,1], labels=rownames(customtab))
+@
+\FloatBarrier
+
+<<echo=FALSE, results='hide'>>=
+#return your result to the popgenreport function
+allresults$custom<-list(customtab)
+@
+\FloatBarrier
+

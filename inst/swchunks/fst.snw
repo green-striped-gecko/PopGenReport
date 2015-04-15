@@ -1,0 +1,62 @@
+
+\section{Calculation of F statistics for each locus across all sampling locations}
+<<echo=FALSE, results='hide'>>=
+# Calculate Fst values for each loci
+FST_results<-Fst(as.loci(cats),pop=cats@pop)
+#FST_results_table<-xtable(t(FST_results),caption="FST statistics for each locus across all locations")
+FST_results<-as.data.frame(FST_results)
+FST_results<-FST_results[order(FST_results$Fst),]
+FSTfigset<-as.data.frame(FST_results)
+FSTfigset<-FSTfigset[order(FSTfigset$Fst),]
+FSTplot<-as.data.frame(FSTfigset$Fst)
+rownames(FSTplot)<-rownames(FSTfigset)
+colnames(FSTplot)<-"Fst"
+tab_pop_Fst<-xtable(FST_results,caption="Population wide Fit, Fst, and Fst values for each locus. The table is sorted in ascending order based on Fst.",digits=4)
+write.csv(FST_results, paste(cats@other$filename,"-Fst_by_loc.csv", sep=""), row.names=TRUE)
+@
+
+<<echo=FALSE,results='asis'>>=
+print(tab_pop_Fst,include.rownames=TRUE,add.to.row=list(list(seq(1,nrow(FST_results),2)),"\\rowcolor[gray]{0.9} "))
+@
+
+<<pop_locus_fst, echo=FALSE, fig.width=6, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi, fig.cap="Fst across entire population at each locus. Solid line shows median Fst, dotted line shows mean Fst, dashed lines indicate 2.5th and 97.5th percentiles of Fst">>=
+  barplot(FST_results$Fst, ylim=c(0,signif(max(FST_results$Fst),1)), names.arg=rownames(FST_results), las=3,ylab="Fst", cex.names=0.8)
+  percentiles<-quantile(FST_results$Fst,probs=c(0.025,0.5,0.975))
+  abline(a=percentiles[1],b=0,lty=2)
+  abline(a=percentiles[2],b=0,lty=1)
+  abline(a=percentiles[3],b=0,lty=2)
+  abline(a=mean(FST_results$Fst),b=0,lty=3)
+@
+\FloatBarrier
+
+\section{Computation of Nei's pairwise Fst between all pairs of populations}
+<<echo=FALSE, results='hide'>>=
+# this step recreates table 3 in Goosens (but still need statistical tests)
+# calculates all pairwise Fst values
+mat.fst <- pairwise.fst(cats, res.type="matrix",truenames=TRUE)
+#for testing purposes
+#mat.fst <-as.matrix(dist(cbind(runif(85),runif(85))))
+mat.fst[upper.tri(mat.fst)]<-NA
+
+write.csv(mat.fst, paste(cats@other$filename,"-pairwise_Fst.csv", sep=""), row.names=TRUE)
+
+tab_pairwise_fst<-xtable(mat.fst,caption="Nei's pairwise Fst between all pairs of populations",digits=3)
+@
+
+
+
+<<echo=FALSE,results='asis'>>=
+
+if (dim(mat.fst)[1]<13) print(tab_pairwise_fst,include.rownames=TRUE, add.to.row=list(list(seq(1,nrow(mat.fst),2)),"\\rowcolor[gray]{0.9} "))  else
+print(tab_pairwise_fst,include.rownames=TRUE, floating.environment='sidewaystable', scalebox=max(1-(dim(mat.fst)[1]-15)/50,0.2),add.to.row=list(list(seq(1,nrow(mat.fst),2)),"\\rowcolor[gray]{0.9} ") )
+
+#print(tab_pop_Fst,include.rownames=TRUE,add.to.row=list(list(seq(1,nrow(FST_results),2)),"\\rowcolor[gray]{0.9} "))
+
+@
+
+<<echo=FALSE, results='hide'>>=
+allresults$fst<-list(FSTbyloci=FST_results, FSTpairwise=mat.fst)
+@
+
+
+\FloatBarrier

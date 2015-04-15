@@ -1,0 +1,99 @@
+
+
+\section{Hs and Ht based population differentiation statistics}
+
+<<echo=FALSE, results='hide'>>=
+# fixed error in harmonic mean due to low sample size!!!!
+pgrharmonic_mean<-    function (x) 
+{
+    if (sum(is.na(x)>0)) return(NA) else
+    {
+    if (!all(x >= 0)) {
+        return(NA)
+    }
+    return(1/mean(1/x))
+    }
+}
+ reassignInPackage("harmonic_mean", pkgName="mmod", pgrharmonic_mean)
+
+differentiate<-diff_stats(cats)
+difftitle1<-"Hs and Ht based estimates of differentiation: Gst, Gst and Dest for each locus"
+difftitle2<-"Hs and Ht based global estimates of differentiation: Gst, Gst and Dest for each locus"
+diffglobmat<-matrix(NA,nrow=1,ncol=length(differentiate$global))
+diffglobmat[1,]<-differentiate$global
+colnames(diffglobmat)<-names(differentiate$global)
+diffbylocus<-xtable(differentiate$per.locus, cap=difftitle1, digits=3)
+diffglobal<-xtable(diffglobmat, cap=difftitle2, digits=3)
+write.csv(differentiate$per.locus, paste(cats@other$filename,"-differentiate_by_loc.csv", sep=""), row.names=TRUE)
+write.csv(diffglobmat, paste(cats@other$filename,"-differentiate_global.csv", sep=""), row.names=TRUE)
+@
+
+<<echo=FALSE,results='asis'>>=
+print(diffbylocus,include.rownames=TRUE, ,add.to.row=list(list(seq(1,nrow(differentiate$per.locus),2)),"\\rowcolor[gray]{0.9} "))
+print(diffglobal,include.rownames=FALSE, ,add.to.row=list(list(seq(1,nrow(diffglobmat),2)),"\\rowcolor[gray]{0.9} "))
+@
+
+<<echo=FALSE,results='hide'>>=
+if (length(levels(cats@pop))>2){
+  pairD<-pairwise_D(cats)
+  pairDmat<-as.matrix(pairD)
+  pairDmat[upper.tri(pairDmat,diag=TRUE)]<-NA
+  colnames(pairDmat)<-cats@pop.names
+  rownames(pairDmat)<-cats@pop.names
+ # pairDmat<-pairDmat[-1,]
+
+  pairGstH<-pairwise_Gst_Hedrick(cats)
+  pairGstHmat<-as.matrix(pairGstH)
+  pairGstHmat[upper.tri(pairGstHmat,diag=TRUE)]<-NA
+  colnames(pairGstHmat)<-cats@pop.names
+  rownames(pairGstHmat)<-cats@pop.names
+ # pairGstHmat<-pairGstHmat[-1,]
+
+
+  pairGstN<-pairwise_Gst_Nei(cats)
+  pairGstNmat<-as.matrix(pairGstN)
+  pairGstNmat[upper.tri(pairGstNmat,diag=TRUE)]<-NA
+  colnames(pairGstNmat)<-cats@pop.names
+  rownames(pairGstNmat)<-cats@pop.names
+ # pairGstNmat<-pairGstNmat[-1,]
+
+  pairdiff1<-"mmod Jost's D pairwise"
+  pairdiff2<-"Pairwise Gst - Hedrick"
+  pairdiff3<-"Pairwise Gst - Nei"
+
+  pairDtab<-xtable(pairDmat, cap=pairdiff1, digits=3)
+  pairGstHtab<-xtable(pairGstHmat, cap=pairdiff2, digits=3)
+  pairGstNtab<-xtable(pairGstNmat, cap=pairdiff3, digits=3)
+  write.csv(pairDmat, paste(cats@other$filename,"-pairwise_JostD.csv", sep=""), row.names=TRUE)
+  write.csv(pairGstHmat, paste(cats@other$filename,"-pairwise_Gst_Hedricks.csv", sep=""), row.names=TRUE)
+  write.csv(pairGstNmat, paste(cats@other$filename,"-pairwise_Gst_Nei.csv", sep=""), row.names=TRUE)
+}
+@
+
+
+<<echo=FALSE,results='asis'>>=
+if (length(levels(cats@pop))>2){
+
+if (dim(pairDmat)[1]<13)   print(pairDtab,include.rownames=TRUE)  else
+  print(pairDtab,include.rownames=TRUE, floating.environment='sidewaystable', scalebox=max(1-(dim(pairDmat)[1]-15)/50,0.2))
+
+if (dim(pairGstHmat)[1]<13)   print(pairGstHtab,include.rownames=TRUE)  else
+  print(pairGstHtab,include.rownames=TRUE, floating.environment='sidewaystable', scalebox=max(1-(dim(pairGstHmat)[1]-15)/50,0.2))
+
+if (dim(pairGstNmat)[1]<13)   print(pairGstNtab,include.rownames=TRUE)  else
+  print(pairGstNtab,include.rownames=TRUE, floating.environment='sidewaystable', scalebox=max(1-(dim(pairGstNmat)[1]-15)/50,0.2))
+  
+#  print(pairDtab,include.rownames=TRUE)
+ # print(pairGstHtab,include.rownames=TRUE)
+ # print(pairGstNtab,include.rownames=TRUE)
+}
+@
+
+
+<<echo=FALSE, results='hide'>>=
+if (length(levels(cats@pop))>2){
+allresults$differ.stats<-list(HsHt=differentiate,pairwise.D=pairDmat, pairwise.GstH=pairGstH, pairwise.GstN=pairGstN)
+}
+@
+
+\FloatBarrier

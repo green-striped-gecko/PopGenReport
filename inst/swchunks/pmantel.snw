@@ -1,0 +1,127 @@
+\newpage
+\section{Landscape Genetic Analysis}
+Here some initial words on the method....
+
+\subsection{Maps of resistance matrices}
+The following pages show simple maps of the resistance matrices. In case of the pathtype is ''leastcost'' also the least-cost paths are shown.
+
+<<frictionmap, echo=FALSE, results='hide' ,fig.path=fig.path, dev=dev, dpi=dpi>>=
+
+ncost <- dim(fr.raster)[3]
+glc<- genleastcost(cats=cats, fr.raster=fr.raster, gen.dist=gen.dist, pathtype=pathtype, NN=NN, theta=theta )
+
+@
+
+\FloatBarrier
+\newpage
+\subsection{Pairwise Euclidean distances}
+
+<<echo=FALSE, results='hide'>>=
+cost.cap <- "Pairwise euclidean distances"
+  paireucltab<-xtable(glc$eucl.mat, cap=cost.cap, digits=0)
+  write.csv(glc$eucl.mat, paste(cats@other$filename,"-pairwise_euclidean.distance.csv", sep=""), row.names=TRUE)
+@  
+<<echo=FALSE,results='asis'>>=
+if (dim(glc$eucl.mat)[1]<8)   print( paireucltab,include.rownames=TRUE, add.to.row=list(list(seq(1,nrow(glc$eucl.mat),2)),"\\rowcolor[gray]{0.9} "))  else  print( paireucltab,include.rownames=TRUE, floating.environment='sidewaystable', scalebox=max(1-(dim(glc$eucl.mat)[1]-15)/50,0.2), add.to.row=list(list(seq(1,nrow(glc$eucl.mat),2)),"\\rowcolor[gray]{0.9} "))
+@
+
+\FloatBarrier
+\subsection{Pairwise cost distances}
+
+<<echo=FALSE, results='asis'>>=
+for (i in 1:ncost)
+{
+cost.cap <- paste("Pairwise cost distances - ",glc$cost.matnames[i],", pathtype='",pathtype,"', NN=",NN, sep="")
+  paircosttab<-xtable(glc$cost.mats[[i]], cap=cost.cap, digits=0)
+  if (dim(glc$cost.mats[[i]])[1]<8)   print( paircosttab,include.rownames=TRUE, add.to.row=list(list(seq(1,nrow(glc$cost.mats[[i]]),2)),"\\rowcolor[gray]{0.9} "))  else  print( paircosttab,include.rownames=TRUE, floating.environment='sidewaystable', scalebox=max(1-(dim(glc$cost.mats[[i]])[1]-15)/50,0.2), add.to.row=list(list(seq(1,nrow(glc$cost.mats[[i]]),2)),"\\rowcolor[gray]{0.9} "))
+  write.csv(glc$cost.mats[[i]], paste(cats@other$filename,"_",glc$cost.matnames[i],"_cost.distance.csv", sep=""), row.names=TRUE)
+}
+@  
+
+
+
+\FloatBarrier
+\subsection{Pairwise path lengths}
+Path lengths are only calculated if path type is ''leastcost''.
+<<echo=FALSE, results='asis'>>=
+if(pathtype=="leastcost")
+{
+for (i in 1:ncost)
+{
+cost.cap <- paste("Pairwise path lengths (based on least cost paths) - ",glc$cost.matnames[i],", pathtype='",pathtype,"', NN=",NN, sep="")
+
+  p <- glc$pathlength.mats[[i]]
+  pairpathtab<-xtable(p, cap=cost.cap, digits=0)
+  write.csv(p, paste(cats@other$filename,"_",glc$cost.matnames[i],"_pathlengths.csv", sep=""), row.names=TRUE)
+
+if (dim(p)[1]<8)   print( pairpathtab,include.rownames=TRUE, add.to.row=list(list(seq(1,nrow(p),2)),"\\rowcolor[gray]{0.9} "))  else  print( pairpathtab,include.rownames=TRUE, floating.environment='sidewaystable', scalebox=max(1-(dim(p)[1]-15)/50,0.2), add.to.row=list(list(seq(1,nrow(p),2)),"\\rowcolor[gray]{0.9} "))
+}
+}
+@
+
+
+
+
+
+\FloatBarrier
+\subsection{Pairwise genetic distances (\Sexpr{gen.dist})}
+
+
+<<echo=FALSE,results='asis'>>=
+#write gendist.mat
+  pairdiff<-paste("Pairwise genetic distance (",gen.dist,")",sep="") 
+  pairgentab<-xtable(glc$gen.mat, cap=pairdiff, digits=3)
+  write.csv(glc$gen.mat, paste(cats@other$filename,"-pairwise_",gen.dist,".csv", sep=""), row.names=TRUE)
+
+if (dim(glc$gen.mat)[1]<8)   print( pairgentab,include.rownames=TRUE, add.to.row=list(list(seq(1,nrow(glc$gen.mat),2)),"\\rowcolor[gray]{0.9} "))  else  print( pairgentab,include.rownames=TRUE, floating.environment='sidewaystable', scalebox=max(1-(dim(glc$gen.mat)[1]-15)/50,0.2), add.to.row=list(list(seq(1,nrow(glc$gen.mat),2)),"\\rowcolor[gray]{0.9} "))
+@
+
+\FloatBarrier
+\subsection{Pairwise plots of distance matrices}
+<<pairs, echo=FALSE, results='hide',  fig.width=7, fig.height=7, fig.path=fig.path, dev=dev, dpi=dpi>>=
+
+
+cm <-lapply(glc$cost.mats, as.numeric)
+dmats<-data.frame(eucl=as.numeric(glc$eucl.mat), gendist =as.numeric(glc$gen.mat), cm)
+ggpairs(dmats, lower = list(continuous = "smooth"), diag=list(continuous = "density"), upper = list(continuous = "smooth"), axisLabels='show')
+
+
+@
+
+
+\FloatBarrier
+\subsection{Partial Mantel tests following the approach of Wassermann et al. 2010 }
+
+
+
+<<mantel, echo=FALSE, results='hide',  fig.width=7, fig.height=5, fig.path=fig.path, dev=dev, dpi=dpi>>=
+wman <- wassermann(gen.mat=glc$gen.mat, cost.mat=glc$cost.mats , eucl.mat=glc$eucl.mat)
+
+cost.cap <- "Mantel tests following methodology of Wassermann et al. 2011"
+  manteltab<-xtable(wman$mantel.tab, cap=cost.cap, digits=3)
+  write.csv(wman$mantel.tab, paste(cats@other$filename,"-manteltests.csv", sep=""), row.names=TRUE)
+@
+<<echo=FALSE,results='asis'>>=
+print( manteltab,include.rownames=TRUE, add.to.row=list(list(seq(1,nrow(wman$mantel.tab),2)),"\\rowcolor[gray]{0.9} ")) 
+@
+
+\FloatBarrier
+\subsection{Multiple Matrix Regression with Randomization analysis}
+The approach follows the approach of Wang 2013 and Legendre et al. 1994.
+
+
+
+<<echo=FALSE, results='asis'>>=
+mmrr.tab <- lgrMMRR(gen.mat=glc$gen.mat, cost.mat=glc$cost.mats , eucl.mat=glc$eucl.mat)
+
+cost.cap <- "Multiple Matrix Regression wiht Randomization"
+  mtab<-xtable(mmrr.tab$mmrr.tab, cap=cost.cap, digits=3)
+  write.csv(mmrr.tab$mmrr.tab, paste(cats@other$filename,"-mmrr.csv", sep=""), row.names=TRUE)
+@
+<<echo=FALSE,results='asis'>>=
+print(mtab,include.rownames=TRUE, add.to.row=list(list(seq(1,nrow(mmrr.tab$mmrr.tab),2)),"\\rowcolor[gray]{0.9} "))
+@
+
+<<echo=FALSE, results='hide'>>=
+allresults$leastcost <-list(eucl.mat=glc$eucl.mat, cost.matnames=glc$cost.matnames, cost.mats=glc$cost.mats,pathlength.mats= glc$pathlength.mats, paths=glc$paths, gen.mat=glc$gen.mat, mantel.tab=wman$mantel.tab, mmrr.tab=mmrr.tab$mmrr.tab)
+@

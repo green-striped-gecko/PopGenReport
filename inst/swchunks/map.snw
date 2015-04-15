@@ -1,0 +1,33 @@
+\newpage
+\section{Sampling locations}
+
+<<echo=FALSE,results='hide'>>=
+
+# This section of code is used to focus in on the correct area for a species map
+# find the min, max and mean of latitude and longitude
+lat.min<-floor(min(cats@other$latlong[,1], na.rm=TRUE))
+lat.max<-ceiling(max(cats@other$latlong[,1], na.rm=TRUE))
+lat.mean<-mean(cats@other$latlong[,1], na.rm=TRUE)
+
+long.min<-floor(min(cats@other$latlong[,2], na.rm=TRUE))
+long.max<-ceiling(max(cats@other$latlong[,2], na.rm=TRUE))
+long.mean<-mean(cats@other$latlong[,2], na.rm=TRUE)
+
+# get maps from Google
+# using bounding box instead of center coordinates
+
+if (is.null(cats@other$mapzoom)) 
+  newmap <- GetMap.bbox(lonR=c(long.min, long.max), latR=c(lat.min, lat.max), maptype=cats@other$maptype) else 
+ newmap <- GetMap.bbox(lonR=c(long.min, long.max), latR=c(lat.min, lat.max), maptype=cats@other$maptype, zoom= cats@other$mapzoom)
+  
+  
+mapcolor <-   col2rgb(cats@other$mapdotcolor)/255
+colX = rgb(mapcolor[1,],mapcolor[2,], mapcolor[3,],cats@other$mapdotalpha)
+@
+
+<<map, echo=FALSE, fig.path=fig.path, dev=dev, dpi=dpi, fig.cap="Sample locations">>=
+PlotOnStaticMap(newmap,lat = cats@other$latlong[,1], lon = cats@other$latlong[,2],  cex=cats@other$mapdotsize, pch= cats@other$mapdottype,  col=colX, FUN = points, add=FALSE)
+@
+
+
+\FloatBarrier

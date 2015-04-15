@@ -1,0 +1,32 @@
+
+\section{Allelic richness}
+<<echo=FALSE,results='asis'>>=
+ar <- allel.rich(cats)
+@
+
+
+Allelic richness for each locus and subpopulation was based on a subsample of {\Sexpr{ar$alleles.sampled}} alleles.
+
+<<echo=FALSE,results='asis'>>=
+main_cap_first<-"Allelic richness by locus and population"
+ar_main_cap_cont<-"Allelic richness by locus and population (continued)"
+tab <- ar$all.richness
+breaktab(tab, main_cap_first, ar_main_cap_cont)
+write.csv(ar$all.richness, paste(cats@other$filename,"-allelic_richness.csv", sep=""), row.names=TRUE)
+sum_ar<-rbind(ar$mean.richness,ar$sum.richness)
+rownames(sum_ar)<-c("Mean richness","Total richness")
+
+tab<- sum_ar
+cap_first<-"Allelic richness summary statistics"
+cap_cont<-"Allelic richness summary statistics (continued)"
+breaktab(tab, cap_first, cap_cont)
+
+write.csv(sum_ar, paste(cats@other$filename,"-summary_allelic_richness.csv", sep=""), row.names=TRUE)
+
+@
+
+<<echo=FALSE, results='hide'>>=
+allresults$allel.rich<-list(ar)
+@
+
+\FloatBarrier

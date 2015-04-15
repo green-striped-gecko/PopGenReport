@@ -1,0 +1,25 @@
+\section{Kosman and Leonard}
+
+\noindent
+
+<<echo=FALSE, results='hide'>>=
+
+# calculate genetic distance using Kosman and Leonard function
+kosmanout<-gd.kosman(cats)
+genedist<-as.dist(kosmanout$geneticdist)
+loci.used<-as.dist(kosmanout$loci_used)
+geodist<-dist(cats@other$xy)
+
+# make a figure showing geographic distance vs genetic distance
+fname.Kosman_dist<-paste(cats@other$filename,"-Kosman_dist",sep="")
+
+# add results from this section to allresults list
+allresults$gd.kosman<-list(geneticdist=genedist,geogdist=geodist,lociused=loci.used)
+@
+<<Kosman-dist, echo=FALSE, fig.width=6, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi, fig.cap="Genetic Dissimilarity (Kosman and Leonard 2005) vs Geographic Distance. The line represents the running average.">>=
+
+  xyplot(genedist~geodist,pch=20,xlab="Geographic Distance",ylab="Genetic Dissimilarity", col=rgb(0,0,0.8,0.5), type=c("p", "smooth"), lwd=4,ylim=c(-0.05,1.05),xlim=c((0-0.02*max(geodist,na.rm=TRUE)),(1.05*max(geodist,na.rm=TRUE))))
+
+@
+
+\FloatBarrier

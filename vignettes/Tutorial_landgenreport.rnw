@@ -1,0 +1,7 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage{pdfpages}
+%\VignetteIndexEntry{Tutorial landgenreport}
+%\VignetteEngine{knitr::knitr}
+\begin{document}
+\includepdf[pages={-}]{./figures/Tutorial_landgenreport.pdf}
+\end{document}

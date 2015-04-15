@@ -1,0 +1,97 @@
+\section{Testing for HWE for each combination of location and locus}
+
+
+\subsection{Testing HWE for each combination of location and locus}
+
+<<echo=FALSE, results='hide', warning=FALSE>>=
+# see if there is a significant departure from HWE for each popxloc
+testhw<-HWE.test.genind(cats,res="matrix")
+denom<-dim(testhw)[1]*dim(testhw)[2]
+rownames(testhw)<-cats@pop.names
+testhw<-round(testhw,digits=4)
+# this step rotates the HWE table based on which dimension is bigger in order to better fit the page
+if (dim(testhw)[1]>dim(testhw)[2]){
+  tabhw<-testhw
+} else{
+  tabhw<-t(testhw)
+}
+
+if (dim(testhw)[1]>dim(testhw)[2]){
+  testhw
+} else{
+  t(testhw)
+}
+write.csv(testhw, paste(cats@other$filename,"-HWE_by_locus_location.csv", sep=""), row.names=TRUE)
+pop_hwe_table<-xtable(tabhw,caption="Chi-square test of HWE p-values for each combination of location and locus",digits=3)
+@
+
+\noindent
+The table below shows the p-value for the test of HWE for each combination of location and locus. The p-values shown here differ from those produced by GENALEX as the Chi-square test performed here includes the Yates continuity correction which GENALEX does not. As a large number of Chi-square tests are performed, $\alpha$ = 0.05  cannot be used as Type I errors are likely to occur. Instead a Bonferroni adjustment is used $\alpha$ = (0.05/ \Sexpr{denom}) = \Sexpr{round(0.05/denom,digits=5)}.
+
+<<echo=FALSE,results='asis'>>=
+print(pop_hwe_table,include.rownames=TRUE, add.to.row=list(list(seq(1,nrow(tabhw),2)),"\\rowcolor[gray]{0.9} "))
+@
+
+
+
+
+
+\FloatBarrier
+
+\subsection{Combinations of location and locus that depart from HWE}
+
+<<echo=FALSE,results='asis'>>=
+# determine which combinations of location and locus are significant compared to Bonferroni corrected alpha.
+idx<-which(testhw<(0.05/denom),TRUE)
+if (dim(idx)[1]>0) {
+  row.names(idx)<-NULL
+  idx<-as.data.frame(idx)
+  sig_hwe<-data.frame(col1=cats@pop.names[idx$row],col2=cats@loc.names[idx$col],col3=testhw[cbind(idx$row,idx$col)],row.names=NULL)
+  colnames(sig_hwe)<-c("Population","Locus","p-value")
+  ordered_sig_hwe<-sig_hwe[order(sig_hwe$Locus,sig_hwe$Population),]
+  numrows<-dim(ordered_sig_hwe)[1]
+  write.csv(sig_hwe, paste(cats@other$filename,"-sig_depart_HWE.csv", sep=""))
+  # makes life easier if the number of rows is even
+  if ((numrows%%2) == 1) {
+    ordered_sig_hwe<-rbind(ordered_sig_hwe,c(NA,NA,NA))
+    numrows<-dim(ordered_sig_hwe)[1]
+  }
+  # if more than 116 rows, this table will be spread over multiple pages
+  pages<-numrows %/% 116
+  partialpage<-numrows %% 116
+  if (partialpage!=0) pages<-pages+1
+  for (i in 1:pages){
+    pglinemin<-(1 + (i-1)*116)
+    pglinemax<-(i*116)
+    pagerows<-pglinemax-pglinemin+1
+    firstmax<-pglinemin+pagerows/2-1
+    second1<-firstmax+1 # first obs, 2nd column
+    if (numrows<=pglinemax){ #i.e. this is the last page
+      pglinemax<-numrows
+      pagerows<-pglinemax-pglinemin+1
+      halfcol<-pagerows/2
+      firstmax<-pglinemin+halfcol-1
+      second1<-firstmax+1
+      temp <- cbind(as.data.frame(ordered_sig_hwe$Population[pglinemin:firstmax]), as.data.frame(ordered_sig_hwe$Locus[pglinemin:firstmax]), as.data.frame(ordered_sig_hwe$"p-value"[pglinemin:firstmax]), as.data.frame(ordered_sig_hwe$Population[second1:pglinemax]), as.data.frame(ordered_sig_hwe$Locus[second1:pglinemax]), as.data.frame(ordered_sig_hwe$"p-value"[second1:pglinemax]))
+    } else {
+      temp <- cbind(as.data.frame(ordered_sig_hwe$Population[pglinemin:firstmax]), as.data.frame(ordered_sig_hwe$Locus[pglinemin:firstmax]), as.data.frame(ordered_sig_hwe$"p-value"[pglinemin:firstmax]), as.data.frame(ordered_sig_hwe$Population[second1:pglinemax]), as.data.frame(ordered_sig_hwe$Locus[second1:pglinemax]), as.data.frame(ordered_sig_hwe$"p-value"[second1:pglinemax]))
+    }
+    colnames(temp)<-c("Population","Locus","p-value","Population ","Location ","p-value ")  
+    captext<-cat("Combinations of locus and location that depart from HWE. Table",i,"of \n",pages,sep=" ")
+    tab_ord_sig_hwe<-xtable(temp,caption=cat("Combinations of locus and location that depart from HWE. Table",i,"of",pages,sep=" "),digits=4)
+  }
+  print(tab_ord_sig_hwe,include.rownames=FALSE, add.to.row=list(list(seq(1,nrow(temp),2)),"\\rowcolor[gray]{0.9} "))
+} else if(dim(idx)[1]==0) {
+  cat("There were no departures from HWE for any combination of sub-population and locus")
+  temp<-NA
+} else {
+  cat("A negative number was produced for the number of departures from HWE. Something isn't working right...")
+  temp<-NA
+}
+@
+
+
+<<echo=FALSE, results='hide'>>=
+allresults$hwe<-list(HWEchisq=tabhw, departures=temp)
+@
+\FloatBarrier

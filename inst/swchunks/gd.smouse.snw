@@ -1,0 +1,52 @@
+\section{Genetic distance between individuals using Smouse and Peakall}
+
+\noindent
+
+<<echo=FALSE, results='hide'>>=
+# create a scratchpad version of individual coordinates
+tempcoords<-cats@other$xy
+
+# get an initial count of individuals
+initmaxind<-(dim(tempcoords))[1]
+indpop<-cats@pop[1:initmaxind,drop=TRUE] # gets a list of the individual's populations
+
+# create empty lists which will contain the individuals and populations removed 
+indsrmv<-c()
+popsgone<-c()
+
+# first look for individuals who are the only ones in their pop
+# go through the list of populations
+for (i in 1:length(sumcats$pop.eff)){
+  # find out who only has 1 individual
+  if (sumcats$pop.eff[i]<2){
+    indrmv<-which(indpop==levels(cats@pop)[i])
+    indsrmv<-c(indsrmv, indrmv)
+    popsgone<-c(popsgone,i)
+  }
+}
+
+# remove individuals if the population only has one individual
+if(length(indsrmv)>0){
+  indsrmv<-indsrmv*(-1)
+  tempcoords<-tempcoords[indsrmv,]
+}
+
+# calculate genetic distance based on Smouse and Peakall
+genedist<-gd.smouse(cats,verbose=FALSE)
+# calculate genetic distance
+geodist<-dist(tempcoords)
+
+allresults$gd.smouse<-list(geneticdist=genedist,geogdist=geodist)
+@
+
+
+
+<<Smouse-dist, echo=FALSE, fig.width=6, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi, fig.cap="Genetic Dissimilarity (Smouse and Peakall 1999) vs Geographic Distance. The line represents the running average.">>=
+
+  xyplot(genedist~geodist,pch=20,xlab="Geographic Distance",ylab="Genetic Dissimilarity", col=rgb(0,0,0.8,0.5), type=c("p", "smooth"),xlim=c((0-0.02*max(geodist,na.rm=TRUE)),(max(geodist,na.rm=TRUE)*1.05)),ylim=c(0,(max(genedist)*1.05)), lwd=4)
+
+
+@
+
+
+

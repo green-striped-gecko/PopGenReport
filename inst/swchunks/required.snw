@@ -1,0 +1,77 @@
+<<echo=FALSE,results='hide', message=FALSE>>=
+suppressPackageStartupMessages(require(RgoogleMaps))
+suppressPackageStartupMessages(require(adegenet))
+suppressPackageStartupMessages(require(ade4))
+suppressPackageStartupMessages(require(pegas))
+suppressPackageStartupMessages(require(genetics))
+suppressPackageStartupMessages(require(gap))
+suppressPackageStartupMessages(require(lattice))
+suppressPackageStartupMessages(require(calibrate))
+suppressPackageStartupMessages(require(xtable))
+suppressPackageStartupMessages(require(plyr))
+suppressPackageStartupMessages(require(mmod))
+suppressPackageStartupMessages(require(dismo))
+suppressPackageStartupMessages(require(R.utils))
+suppressPackageStartupMessages(require(knitr))
+suppressPackageStartupMessages(require(reshape))
+suppressPackageStartupMessages(require(gdistance))
+suppressPackageStartupMessages(require(vegan))
+suppressPackageStartupMessages(require(sp))
+suppressPackageStartupMessages(require(ggplot2))
+suppressPackageStartupMessages(require(raster))
+suppressPackageStartupMessages(require(GGally))
+options(width = 80)
+
+#global functions and parameters....
+brtab <- function(mat,capt,rown, width=9)
+{
+
+n.entry<- dim(t(mat))[2]
+tab <- t(mat)
+pta <- matrix(NA,ncol=min(width,n.entry), nrow=2*ceiling(n.entry/width))
+for (i in 1:n.entry)
+{
+pta[2*(floor((i-1)/width)+1),((i-1) %% width)+1] <- tab[i]
+pta[2*(floor((i-1)/width)+1)-1,((i-1) %% width)+1] <- colnames(tab)[i]
+}
+
+
+pta <- cbind(rep(rown,ceiling(n.entry/width)),pta)
+
+
+print(xtable(pta,  cap=capt), add.to.row=list(list(seq(1,2*ceiling(n.entry/width),2)),"\\rowcolor[gray]{0.9} "), include.rownames=FALSE, include.colnames=FALSE, hline.after=c(0,nrow(pta)))
+}
+
+#long table break
+breaktab <- function(tab, cap_first, cap_cont)
+{
+num_tables<-ceiling(dim(tab)[2]/8)
+for(i in 1:num_tables){
+  if(i==1) {
+    tempcap<-cap_first
+  } else if (i>1) {
+    tempcap<-cap_cont
+  }
+  firstcol<-1+(8*(i-1))
+  lastcol<-i*8
+  if(lastcol>dim(tab)[2]) lastcol<-dim(tab)[2]
+  tempdata2<-as.matrix(tab[,firstcol:lastcol])
+  if((lastcol-firstcol)==0) colnames(tempdata2)<-colnames(tab)[dim(tab)[2]]
+  tab2<-xtable(tempdata2,cap=tempcap, digits=3)
+  print(tab2,include.rownames=TRUE, ,add.to.row=list(list(seq(1,nrow(tab2),2)),"\\rowcolor[gray]{0.9} ")) 
+}
+}
+
+
+#initial calculations
+sumcats<-summary(cats)
+samplocnum<-sumcats$pop.eff
+filename<-cats@other$filename
+allresults<-list()
+
+
+#figure parameters....
+fig.path <- paste(cats@other$filename,"-",sep="")
+dev <- c('pdf', 'png','svg')
+dpi <- 300
+@

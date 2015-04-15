@@ -1,0 +1,15 @@
+Package: PopGenReport
+Type: Package
+Title: PopGenReport: A simple way to analyse and visualize population genetic
+        data
+Version: 2.1
+Date: 2014-10-16
+Author: Aaron Adamack & Bernd Gruber
+Maintainer: Bernd Gruber <Bernd.Gruber@canberra.edu.au>
+Description: This package provides an easy way to analyse population genetic data
+License: GPL
+LazyData: TRUE
+Depends: R (>= 3.0.0), knitr, adegenet, raster
+Imports: lattice, RgoogleMaps, gap, calibrate, xtable, plyr, dismo,
+        reshape, ggplot2, R.utils, ade4, pegas, genetics, rgdal, gdistance, vegan, sp, mmod, GGally
+VignetteBuilder: knitr
