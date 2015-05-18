@@ -53,10 +53,12 @@ landgenreport <- function(cats,
   #cut down length of loci names to  6  and make sure they are unique
   cats@loc.names <- substr(cats@loc.names,1,6)   
   if (length(unique(cats@loc.names))!= length(cats@loc.names)) 
-  {cats@loc.names <- paste(1:length(cats@loc.names),"-",substr(cats@loc.names,1,4), sep="")
+    {
+    cats@loc.names <- paste(1:length(cats@loc.names),"-",substr(cats@loc.names,1,4), sep="")
+ 
   cat("Loci names were not unique and therefore adjusted.\n")
-  }
-
+    }
+  levels(cats@loc.fac) <- cats@loc.names  #make sure levels and factors are the same
 #check if ind.names are unique!!!!
 #adjust if necessary and issue a notification
 if (length(unique(cats@ind.names))!=length(cats@ind.names)) 
