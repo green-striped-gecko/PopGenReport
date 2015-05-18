@@ -3,3 +3,4 @@
 .RData
 .Rbuildignore
 PopGenReport.Rproj
+inst/doc
