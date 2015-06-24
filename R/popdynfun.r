@@ -14,8 +14,47 @@
  return (exp(((x/d0)*log(p))))
  }
 
+################################################################################
+######landscape creation functions
+################################################################################
 
 
+#'Function to add lines to landscape
+#'
+#'@param r raster that represents the landscape
+#'@param x1 from coordinates
+#'@param x2 to coordinates
+#'@param val resistance value 1 is no resistance
+#'@param plot switch if landscape should be plotted
+#'@return returns modified raster layer
+#'@description adds a line from x1 to x2 to a raster layer
+
+addline <- function (r,x1,x2,val, plot=FALSE)
+{
+  ll <- Line(rbind(x1,x2))
+  S1 = Lines(list(ll), ID="a")
+  lin <- SpatialLines(list(S1))
+  r1 <-rasterize(lin, r, field=val, fun='last', background=NA,  mask=FALSE, update=T, updateValue='all', filename="", na.rm=TRUE)
+  if (plot==TRUE) plot(r1)
+  r1
+}
+
+#'Function to add a polygon to a landscape
+#'
+#'@param r raster that represents the landscape
+#'@param pol coordinates of the polygon
+#'@param val resistance value, One equals no resistance
+#'@param plot switch if landscape should be plotted
+#'@return returns modified raster layer
+#'@description adds a polygon to a raster layer
+
+addpoly <- function(r, pol, val, plot=T)
+{
+  addpoly <- SpatialPolygons(list(Polygons(list(Polygon(rbind(pol, pol[1,]))), 1)))
+  r1 <- rasterize(addpoly, r, field=val, update=TRUE, updateValue='all')
+  if (plot==T) plot(r1)
+  r1
+}
 
 ################################################################################
 ##### functions  of popdynamics
@@ -60,8 +99,17 @@ for (i in 1:nrow(mut.ind))
 x
 }
 
-
+####################################################################################
 #reprodution
+#'Function to execute reproduction on a pop data.frame
+#'
+#'@param x a pop object
+#'@param type type of density dependence K.limit only yet 
+#'@param K Kapacity of a subpoplation
+#'@param n.off number of offspring per female
+#'@param n.cov (number of covariates, default 3 )
+#'@return an updated pop object
+#'@description reproduction subprocess on single populations
 
 reproduction <- function(x, type="K.limit",K=n.ind, n.off, n.cov)
 {
@@ -124,7 +172,7 @@ offsprings <- data.frame(pop=popn, sex=off.sex , age=off.age, off.loci)
 
 #combine adults and offsprings
 x <- rbind(x, offsprings)
-#x<- rbindlist(list(x,offsprings))
+#x<- (rbindlist(list(x,offsprings)))
 
 #cut off at K
 
@@ -134,6 +182,8 @@ x<- x[sample(1:npop,K, replace=F),]
 } else x<- NULL    #return NULL if only males or only females....
 
 return(x)
+#return(data.frame(x))
+
 }
 
 
@@ -149,15 +199,20 @@ return(x)
 
 ################################################################################
 #emigration (for all populations at once xp=pops)
-emigration <- function(xp=pops,n.ind = n.ind, perc.mig=p.mig, emi.m=emis, emi.table=NULL)
+#'Function to execute emigration on a pops object
+#'
+#'@param xp all pops combined in a list
+#'@param perc.mig percentage if migrating individuals 
+#'@param emi.m emigration probability (normally based on cost dispersal distance)
+#'@param emi.table a fixed number of migrating individuals can be specified (overrides emi.m)
+#'@return a list, first entry are updated pops, second entry the number of disperserin a matrix
+#'@description emigration process on all population in one go
+
+emigration <- function(xp=pops, perc.mig=p.mig, emi.m=emis, emi.table=NULL)
 {
-
-
 n.pops = length(xp)
-
 migs <- matrix(0,nrow=n.pops, ncol=n.pops)
 migrants<- NA
-
 
 if (is.null(emi.table))
 {
@@ -171,8 +226,11 @@ if (!is.null(pop.size))
 migrants[i] <- sum(ifelse(runif(pop.size)<perc.mig,1,0))
 #where do they go to (depends on emis)
 fromto <- table(sample(1:n.pops,migrants[i],replace=T, prob=emi.m[,i]))
+
 to <- as.numeric(names(fromto))
 for (ii in 1:length(to)) migs[i,to[ii ]] <- migs[i,to[ii ]] + fromto[ii]
+#migs[i, unique(to)] <- migs[i,unique(to)] + table(to)
+
 }
 }
 } else migs <- emi.table #end emi.type
@@ -203,48 +261,45 @@ for (to in 1:n.pops)
 #output number of migrants to a population
 #diag(migs) <- 0
 #cat(paste("Migrants: ",colSums(migs),"\n"))
-
 results <- list(xp, migs)
 return(results)
-
 }
 
-
-#combine all pops into a single genind object.
-
 ################################################################################
-pops2genind <- function(x, prop, locs=NULL, n.cov)
+#combines all pops into a single genind object.
+#'Function converts pops to a genind object
+#'
+#'@param x pops object (a list of pop)
+#'@param locs named coordinates of locations
+#'@param n.cov number of covariates (defaults to 3)
+#'@return a spatial genind object
+#'@description converts pops into genind (to calculate Fst etc.)
+
+pops2genind <- function(x, locs=NULL, n.cov=3)
 {         
-
-
 n.pops <- length(x)
 n.loci <- (ncol(x[[1]])-n.cov )/2 #only diploid currently
-
 noffset <- n.cov
 
 ##### convert pops to data.frame
 #combine <-do.call(rbind.data.frame,x)
-combine <- do.call(rbind.data.frame,x)
-#combine <- data.frame(rbindlist(x))
+#combine <- do.call(rbind.data.frame,x)
+combine <- as.data.frame(rbindlist(x))
 
 #convert to genind
 allele <-combine[,-(1:noffset)]
-
 pop.size <- table(combine[,"pop"] )
-
 res <- data.frame(matrix(NA, nrow=nrow(allele), ncol=n.loci))#rep(NA,sum(pop.size)))
-        for (i in seq(1, 2*n.loci, 2))
+for (i in seq(1, 2*n.loci, 2))
             res[, ceiling(i/2)] <- paste(allele[, i], allele[, i + 1], sep = "/")
-
-pops.genind <- df2genind(res,pop=combine$pop, sep="/")
-
+pops.genind <- df2genind(res,pop=combine$pop, sep="/", ind.names= rownames(res))
 #add locations
 if (!is.null(locs))
   {
   x <- rep(locs[,1], pop.size)
   y <- rep(locs[,2], pop.size)
   pops.genind@other$xy <- cbind(x=x,y=y)
-  pops.genind@pop.names <- row.names(locs)
+  popNames(pops.genind) <- row.names(locs)
   }
 return(pops.genind)
 }
@@ -254,22 +309,29 @@ return(pops.genind)
 ################################################################################
 ### sim functions
 ################################################################################
-
-#     run simulation a number of steps (generations)
-run.popgensim <- function(simpops, steps, cost.mat, n.offspring , n.ind,  mig.rate, disp.max, disp.rate, mut.rate, n.cov, rec = "none", emi.table=NULL)
+#'Run forward step generations a popgen simulation
+#'
+#'@param simpops pops object (a list of pop)
+#'@param steps the number of steps (generations)
+#'@param cost.mat a cost matrix (e.g. calculated via costDistance)
+#'@param n.offspring number of offsprings per female
+#'@param n.ind number of individuals
+#'@param mig.rate migration rate
+#'@param disp.max maximal dispersal distance of disp.rate individuals
+#'@param disp.rate percentage of individuals achieving disp.max
+#'@param mut.rate mutation rate
+#'@param n.cov number of covariates (defaults to 3)
+#'@param rec switch if emigration matrix should be recorded, either "none" or "emi"
+#'@param emi.table a emigration matrix, if provide a fixed number of migration events will take place otherwise based on disp.max, mig.rate and disp.rate, events occuring are (in that order, emigration, reproduction, mutation)
+#'@return an updated simpops object after steps steps
+#'@description performs a time-forward, agent-based and spatiallly explicit genetic population simulation 
+run.popgensim <- function(simpops, steps, cost.mat, n.offspring , n.ind,  mig.rate, disp.max, disp.rate, mut.rate, n.cov=3, rec = "none", emi.table=NULL)
 {
-
-
 pops <- simpops
-
-
 distances <- cost.mat
 disdis <- p2p(distances,d0=disp.max, p=disp.rate)
-
 stdemi.table= disdis/rep(colSums(disdis), each=ncol(disdis))
 emi.tableint=NULL
-
-
 #cl<- makePSOCKcluster(6)
 
 for (year in 1:steps)
@@ -284,7 +346,7 @@ if (!is.null(emi.table))
 
 
 #emigration
-emi<- emigration(pops, n.ind, mig.rate, emi.m=disdis, emi.table=emi.tableint)
+emi<- emigration(pops, mig.rate, emi.m=disdis, emi.table=emi.tableint)
 pops <- emi[[1]]
 #emi[[2]] table of migrants....
 
@@ -309,11 +371,21 @@ return (out)
 
 ################################################################################
 #initialise populations
+################################################################################
+#'Initialise a pops object fo a  a popgen simulation
+#'
+#'@param n.pops number of subpopulations
+#'@param n.ind number of individuals per subpopulation
+#'@param sex.ratio sex ratio of males and females
+#'@param n.loci number of loci
+#'@param n.alleles number of alleles per loci
+#'@param locs coordinates of the subpopulations
+#'@param n.cov number of covariates (defaults to 3)
+#'@return a simpops object (to be used in run.popgensim )
+#'@description initialises a time-forward, agent-based and spatiallly explicit genetic population simulation 
 init.popgensim <- function(n.pops, n.ind, sex.ratio, n.loci, n.allels, locs, n.cov)
 {
-
 noffset <- n.cov #number of covariates before the loci
-
 #initialise populations
 empty.loci <- matrix(NA,ncol=n.loci*2,nrow=n.ind)
 colnames(empty.loci) <-paste("locus", rep(seq(1,n.loci,1),each=2),rep(c("A","B"),n.loci),sep="")
@@ -334,8 +406,6 @@ pops[[i]][,(noffset+1):(n.loci*2+noffset) ]  <- sample(1:n.allels,n.loci*2*n.ind
 }
 
 names(pops) <- row.names(locs)   #or from genind object....
-#gpops <- pops2genind(x=pops, prop=1 , locs=locs, n.cov=noffset)
-
 return (pops)
 }
 
@@ -343,7 +413,15 @@ return (pops)
 ################################################################################
 ### #function to create cost.mat from landscape and populations coordinates
 ################################################################################
-
+################################################################################
+#'Calculates cost distances for a given landscape (resistance matrix)
+#'
+#'@param landscape a raster object coding the resistance of the landscape
+#'@param locs coordinates of the subpopulations
+#'@param method defines the type of cost distance, types are "least-cost", "rSPDistance" or "commute (Circuitscape type)"
+#'@param NN number of next neighbours recommendation is 8
+#'@return a costdistance matrix between all pairs of locs
+#'@description calculates a cost distance matrix, to be used with run.popgensim
 
 costdistances <- function(landscape, locs, method, NN)
 {
@@ -365,56 +443,44 @@ return (cd.mat)
 }
 
 ################################################################################
-### barallel pairwise fst
+### faster pairwise fst
 ################################################################################
+#'Calculates pairwise fsts using a genind object (very fast)
+#'
+#'@param gsp a genind object
+#'@return a pairwise fst matrix (same as hierfstat pairwise.fst)
+#'@description for simulation the original pairwise.fst was much to slow. The fast version works only without NAs and diploid data (so do not use it on non-simulated data)
 
-
-  pairwise.fstb <- function (x, pop = NULL, res.type = c("dist", "matrix"), truenames = TRUE)
+pairwise.fstb <- function(gsp)
 {
-#    require(doSNOW)
-#require(foreach)
-#cl<-makeCluster(6) #change the 2 to your number of CPU cores
-#registerDoSNOW(cl)
-#
-    res.type <- match.arg(res.type)
-    f1 <- function(pop1, pop2) {
-        n1 <- nrow(pop1@tab)
-        n2 <- nrow(pop2@tab)
-        temp <- repool(pop1, pop2)
-        b <- weighted.mean(Hs(temp), c(n1, n2))
-        pop(temp) <- NULL
-        a <- Hs(temp)
-        return((a - b)/a)
-    }
-    lx <- seppop(x, treatOther = FALSE)
-    temp <- pop(x)
-    levPop <- levels(temp)
-    allPairs <- combn(1:length(levPop), 2)
-    if (!is.matrix(allPairs)) {
-        allPairs <- matrix(allPairs, nrow = 2)
-    }
-    vecRes <- numeric()
+n.pops <- length(popNames(gsp))
+allPairs <- combn(1:n.pops, 2)
+gen.mat2<- matrix(0, nrow=n.pops, ncol=n.pops)
+allfreq <- function (x) 1-sum((x/2)^2)
 
-    #for (i in 1:ncol(allPairs)) {
-    vecRes <- foreach(i=1:ncol(allPairs), .combine=cbind, .packages='adegenet') %dopar% {
-        #vecRes[i] <- f1(lx[[allPairs[1, i]]], lx[[allPairs[2,
-         #   i]]])
-         f1(lx[[allPairs[1, i]]], lx[[allPairs[2, i]]])
-    }
-    squelres <- dist(1:length(levPop))
-    res <- as.numeric(vecRes)
-    attributes(res) <- attributes(squelres)
-    if (res.type == "matrix") {
-        res <- as.matrix(res)
-        if (truenames) {
-            lab <- x@pop.names
-        }
-        else {
-            lab <- names(x@pop.names)
-        }
-        colnames(res) <- rownames(res) <- lab
-    }
-#    stopCluster(cl)
-    return(res)
+for (i in 1:ncol(allPairs)){
+
+np1 <- allPairs[1,i]
+np2 <- allPairs[2,i]
+p1 <- gsp@tab[gsp@pop==popNames(gsp)[np1],]
+p2 <- gsp@tab[gsp@pop==popNames(gsp)[np2],]
+p12 <- rbind(p1,p2)
+
+lf <- gsp@loc.fac
+
+n1 <- nrow(p1)
+n2 <- nrow(p2)
+n12 <- nrow(p12)
+
+Hs1 <- mean( tapply(colSums(p1)/n1, lf, allfreq))
+Hs2 <- mean( tapply(colSums(p2)/n2, lf, allfreq))
+Hs12 <- mean( tapply(colSums(p12)/n12, lf, allfreq))
+fst <- (Hs12-weighted.mean(c(Hs1, Hs2), c(n1,n2))) / Hs12
+gen.mat2[np1,np2] <- fst
+gen.mat2[np2,np1] <- fst
+
 }
-
+la <- popNames(gsp)
+colnames(gen.mat2) <- rownames(gen.mat2) <- la
+return(gen.mat2)
+}

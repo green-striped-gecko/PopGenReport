@@ -21,6 +21,6 @@ mutation(x, n.allels, mutrate, mtype = "n.all", n.cov)
 a dispersal probability matrix
 }
 \description{
-converts cost distances to probabilities: to reach a certain patch[ d0 average distance of p of all individuals, for example d0=100, p =0.5 -> 50\% procent of all
+mutation subprocess on single populations
 }
 
