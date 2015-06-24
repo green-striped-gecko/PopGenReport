@@ -6,9 +6,9 @@ allele.dist<-function(population, mk.figures=TRUE){
   }
 
   # initial steps...
-  numloci<-length(population@loc.nall)  # this gets the total number of loci across all pops
-  numpops<-length(population@pop.names) # this gets the total number of pops
-  popnumallele<-population@loc.nall     # this is a list of the population wide number of alleles at each pop
+  numloci<-length(locNames(population))  # this gets the total number of loci across all pops
+  numpops<-length(popNames(population)) # this gets the total number of pops
+  popnumallele<-population@loc.n.all     # this is a list of the population wide number of alleles at each pop
   lociname<-attributes(popnumallele)[[1]] # this is a list of the locinames (just L01, L02, L03,...)
   subdivpops<-seppop(population)
 
@@ -17,10 +17,10 @@ allele.dist<-function(population, mk.figures=TRUE){
   fralleletable<-vector("list",numloci)
   for(i in 1:numloci){
     alleletable[[i]]<-matrix(nrow=popnumallele[[i]],ncol=numpops)
-    colnames(alleletable[[i]])<-population@pop.names
+    colnames(alleletable[[i]])<-popNames(population)
     rownames(alleletable[[i]])<-population@all.names[[i]]
     fralleletable[[i]]<-matrix(nrow=popnumallele[[i]],ncol=numpops)
-    colnames(fralleletable[[i]])<-population@pop.names
+    colnames(fralleletable[[i]])<-popNames(population)
     rownames(fralleletable[[i]])<-population@all.names[[i]]
   }
 
@@ -62,8 +62,8 @@ allele.dist<-function(population, mk.figures=TRUE){
     breaks<-seq(0,1,0.05)
     color.palette  <- colorRampPalette(c("yellow", "red"))(length(breaks) - 1)
     for (i in 1:numloci){
-      if(unname(population@loc.nall[i])>1){
-        figlabel<-paste("Loci: ",population@loc.names[i]," List # ",i,sep="")
+      if(unname(population@loc.n.all[i])>1){
+        figlabel<-paste("Loci: ",locNames(population)[i]," List # ",i,sep="")
         dat <- t(fralleletable[[i]])
         dat <- dat[,seq(ncol(dat),1,-1)]
         image( dat, col=color.palette, axes=FALSE, main=figlabel, zlim=c(0,1))
@@ -75,7 +75,7 @@ allele.dist<-function(population, mk.figures=TRUE){
         co <- expand.grid(seq(0,1,len=nrow(dat)),seq(0,1,len=ncol(dat)))
         text(co[,1], co[,2],round(dat*100), cex=max(0.5,min(1-nrow(dat)/100, 1-ncol(dat)/100)))
       } else {
-        message("Locus ",unname(population@loc.names[i])," has only ",unname(population@loc.nall[i])," allele, figure not made \n")
+        message("Locus ",unname(locNames(population)[i])," has only ",unname(population@loc.n.all[i])," allele, figure not made \n")
       }
     }
   }
@@ -100,7 +100,7 @@ allele.dist<-function(population, mk.figures=TRUE){
       locus.private[[i]]<-NA
     }
   }
-  names(locus.private)<-population@loc.names
+  names(locus.private)<-locNames(population)
   
   alleletables<-list(count=alleletable, frequency=fralleletable, private.alleles=locus.private)
   return(alleletables)

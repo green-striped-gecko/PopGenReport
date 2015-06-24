@@ -2,7 +2,7 @@
 \subsection{Allele frequency plots for all subpopulations and loci}
 
 <<echo=FALSE, results='hide',warning=FALSE>>=
-numloci<-length(cats@loc.names)
+numloci<-length(locNames(cats))
 freq_alleles<-allele.dist(cats, mk.figures=FALSE)
 breaks<-seq(0,1,.05)
 color.palette  <- colorRampPalette(c("yellow", "red"))(length(breaks) - 1)
@@ -15,7 +15,7 @@ for (i in 1:numloci)
 {
     nr <- nrow(freq_alleles[[2]][[i]])
     nc <- ncol(freq_alleles[[2]][[i]])
-    mp<-  barplot(freq_alleles[[2]][[i]], beside=TRUE, border=NA, ylim=c(0,1.1), main=paste("Loci: ",cats@loc.names[i]," # ",i,sep=""), col=rainbow(nrow(freq_alleles[[2]][[i]])), axes=FALSE, space=c(0,2), names.arg=rep(NA,nc), las=2, cex.axis=0.8 )
+    mp<-  barplot(freq_alleles[[2]][[i]], beside=TRUE, border=NA, ylim=c(0,1.1), main=paste("Loci: ",locNames(cats)[i]," # ",i,sep=""), col=rainbow(nrow(freq_alleles[[2]][[i]])), axes=FALSE, space=c(0,2), names.arg=rep(NA,nc), las=2, cex.axis=0.8 )
     # axis(1, labels=TRUE, tick=FALSE, las=2)
     text(colMeans(mp, na.rm=TRUE),rep(1.05,nc),colnames(freq_alleles[[2]][[i]]))
     labs <- rownames(freq_alleles[[2]][[i]] )
@@ -39,11 +39,11 @@ axis(1, seq(0,20,1), seq(0,100, 5))
 \FloatBarrier
 <<heatmap, warning=FALSE, echo=FALSE,  fig.width=7, fig.height=5, fig.path=fig.path, dev=dev, dpi=dpi>>=
 
-numloci<-length(cats@loc.names)
+numloci<-length(locNames(cats))
 for (i in 1:numloci)
 {
-  if(unname(cats@loc.nall[i])>1){
-    figlabel<-paste("Loci: ",cats@loc.names[i]," # ",i,sep="")
+  if(unname(cats@loc.n.all[i])>1){
+    figlabel<-paste("Loci: ",locNames(cats)[i]," # ",i,sep="")
     dat <- t(freq_alleles[[2]][[i]])
     dat <- dat[,seq(ncol(dat),1,-1)]
     counts <- t(freq_alleles[[1]][[i]])
@@ -68,7 +68,7 @@ for (i in 1:numloci)
 #   axis(2, at = seq(0,1,len=ncol(dat)),labels=cn , las=2, cex.axis= max(1-ncol(dat)/100,0.5), line=FALSE)
   } else 
     {
-    warning("Locus ",unname(cats@loc.names[i])," has only ",unname(cats@loc.nall[i])," allele, figure not made \n")
+    warning("Locus ",unname(locNames(cats)[i])," has only ",unname(cats@loc.n.all[i])," allele, figure not made \n")
   }
 }
 @
@@ -84,21 +84,21 @@ for(i in 1:length(pa)){
  noprivate.allel=FALSE
     if(tempcount==0){
       if(is.null(dim(pa[[i]]))){
-        patemp<-cbind(unname(cats@loc.names)[i],as.matrix(t(pa[[i]])))
+        patemp<-cbind(unname(locNames(cats))[i],as.matrix(t(pa[[i]])))
         colnames(patemp)[1]<-"Locus"
         privall<-patemp
       } else if (!is.null(dim(pa[[i]]))){
-        patemp<-cbind(unname(cats@loc.names)[i],pa[[i]])
+        patemp<-cbind(unname(locNames(cats))[i],pa[[i]])
         colnames(patemp)[1]<-"Locus"
         privall<-patemp
       }
     } else if (tempcount>0){
       if(is.null(dim(pa[[i]]))){
-        patemp<-cbind(unname(cats@loc.names)[i],as.matrix(t(pa[[i]])))
+        patemp<-cbind(unname(locNames(cats))[i],as.matrix(t(pa[[i]])))
         colnames(patemp)[1]<-"Locus"
         privall<-rbind(privall,patemp)
       } else if (!is.null(dim(pa[[i]]))){
-        patemp<-cbind(unname(cats@loc.names)[i],pa[[i]])
+        patemp<-cbind(unname(locNames(cats))[i],pa[[i]])
         colnames(patemp)[1]<-"Locus"
         privall<-rbind(privall,patemp)
       }      

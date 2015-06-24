@@ -25,11 +25,11 @@ landgenreport <- function(cats,
                           mk.complete=FALSE,    # create a full report)  
                           mk.pdf=TRUE)
 {
-  if (class(cats)!="genind") {cat("You did not provide a valid genind object! Script stopped!\n"); return;}
+  if (class(cats)!="genind") {cat("You did not provide a valid catsnd object! Script stopped!\n"); return;}
   
   # Check for combinations of populations and loci with low numbers of individuals and alleles  
   npops<-length(levels(cats@pop))
-  nloci<-length(cats@loc.names)
+  nloci<-length(locNames(cats))
   
   # this splits bilby up into loci
   loci<-seploc(cats)
@@ -46,32 +46,32 @@ landgenreport <- function(cats,
   
   for(i in 1:dim(popsizes)[2]){
     numlow<-length(which(popsizes[,i]<3))
-    if(numlow>0) message("Population ",unname(cats@pop.names)[i]," has ",numlow," locus/loci with less than 3 genotypes. This may cause errors in some analyses. We advice to combine or drop populations with low numbers of genotypes. ")
+    if(numlow>0) message("Population ",unname(popNames(cats))[i]," has ",numlow," locus/loci with less than 3 genotypes. This may cause errors in some analyses. We advice to combine or drop populations with low numbers of genotypes. ")
   }
   
   
   #cut down length of loci names to  6  and make sure they are unique
-  cats@loc.names <- substr(cats@loc.names,1,6)   
-  if (length(unique(cats@loc.names))!= length(cats@loc.names)) 
+  locNames(cats) <- substr(locNames(cats),1,6)   
+  if (length(unique(locNames(cats)))!= length(locNames(cats))) 
     {
-    cats@loc.names <- paste(1:length(cats@loc.names),"-",substr(cats@loc.names,1,4), sep="")
+    locNames(cats) <- paste(1:length(locNames(cats)),"-",substr(locNames(cats),1,4), sep="")
  
   cat("Loci names were not unique and therefore adjusted.\n")
     }
-  levels(cats@loc.fac) <- cats@loc.names  #make sure levels and factors are the same
-#check if ind.names are unique!!!!
+  levels(cats@loc.fac) <- locNames(cats)  #make sure levels and factors are the same
+#check if indnames are unique!!!!
 #adjust if necessary and issue a notification
-if (length(unique(cats@ind.names))!=length(cats@ind.names)) 
-  {cats@ind.names <- paste(1:length(cats@ind.names),"-",substr(cats@ind.names,1,8),sep="")
+if (length(unique(indNames(cats)))!=length(indNames(cats))) 
+  {indNames(cats) <- paste(1:length(indNames(cats)),"-",substr(indNames(cats),1,8),sep="")
   cat("Individual names were not unique and therefore adjusted.\n")
   }
 
 
 #check if pop.names are unique!!!!
 #adjust if necessary and issue a notification  
-if (length(unique(cats@pop.names))!=length(cats@pop.names)) 
+if (length(unique(popNames(cats)))!=length(popNames(cats))) 
   {
-  cats@pop.names <- paste(1:length(cats@pop.names),"-",substr(cats@pop.names,1,6),sep="")
+  popNames(cats) <- paste(1:length(popNames(cats)),"-",substr(popNames(cats),1,6),sep="")
   cat("Subpopulation names were not unique and therefore adjusted.\n")
   }
 
@@ -103,7 +103,7 @@ if (is.null(NN) & pathtype=="leastcost")
   # coordinates must be in xy !!!!!
   coords=FALSE
   if (is.null(cats@other$xy)) coords=FALSE 
-  if ( nrow(cats@other$xy) == length(cats@ind.names) ) coords=TRUE
+  if ( nrow(cats@other$xy) == length(indNames(cats)) ) coords=TRUE
  
   # give cats a filename that can be seen in the snw chunks
   cats@other$filename<- fname
@@ -120,14 +120,19 @@ if (is.null(NN) & pathtype=="leastcost")
   cats@other$mapzoom=mapzoom
   
   }  
-  
 ###################################
 ##### create a new environment to run knitr in it
- pgr <- new.env()
- assign("cats",cats,envir=pgr)
-
+pgr <- new.env()
+assign("cats",cats,envir=pgr)
+assign("gen.distance",gen.distance,envir=pgr)
+assign("fric.raster",fric.raster,envir=pgr)
+assign("NN",NN,envir=pgr)
+assign("pathtype",pathtype,envir=pgr)
+assign("theta",theta,envir=pgr)
+assign("plotpath",plotpath,envir=pgr)
 
 ###################################
+
 
 
 
@@ -160,13 +165,6 @@ if ((mk.resistance==TRUE | mk.complete==TRUE)  & (coords & !is.null(fric.raster)
   {
     cat("- Landscape genetic analysis using resistance matrices...\n")  
  #   fr.raster<<-fric.raster
-    assign("gen.dist",gen.distance,envir=pgr)
-    assign("fr.raster",fric.raster,envir=pgr)
-    assign("NN",NN,envir=pgr)
-    assign("pathtype",pathtype,envir=pgr)
-    assign("theta",theta,envir=pgr)
-    assign("plotpath",plotpath,envir=pgr)
-    
  #   gen.dist <<- gen.distance
     pmantel<-  readLines(paste(path,"pmantel.snw",sep=""))
     compl<-c(compl,pmantel)

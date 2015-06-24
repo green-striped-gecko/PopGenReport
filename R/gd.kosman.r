@@ -6,7 +6,7 @@ gd.kosman <- function(population){
   }
   
   # getting the number of loci
-  n <- length(population@loc.names) 
+  n <- length(locNames(population)) 
   
   # getting the ploidy of an animal....
   ploidy <- population@ploidy 
@@ -22,13 +22,13 @@ gd.kosman <- function(population){
   
   
   loci.used<-(n-Reduce("+", missing))
-  colnames(loci.used) <- population@ind.names
-  rownames(loci.used) <- population@ind.names
+  colnames(loci.used) <- indNames(population)
+  rownames(loci.used) <- indNames(population)
   
   # This sums the values across lists and then divides by the number of loci compared less loci with missing numbers  
   d.fast<-(Reduce("+", replaced)/loci.used)
-  colnames(d.fast) <- population@ind.names
-  rownames(d.fast) <- population@ind.names
+  colnames(d.fast) <- indNames(population)
+  rownames(d.fast) <- indNames(population)
   
   # clean up matrices for export
   d.fast[upper.tri(d.fast, diag = FALSE)] <- NA

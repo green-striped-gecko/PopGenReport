@@ -20,7 +20,7 @@ for (i in 1:length(obs.ho)) {
   rownames(obs.val)<-seq(1:length(obs.ho[[i]]))
   obs.val<-melt(t(obs.val))
   print(
-    ggplot(data=boot.dist,aes(as.factor(X2),value)) +geom_boxplot(fill="grey")+theme_classic()+geom_point(data=obs.val,aes(as.factor(X2),value, colour="red"),size=3)+ylab("Number of homozygotes")+xlab("Allele")+ scale_x_discrete(labels=unname(cats@all.names[[1]]))+ggtitle(cats@loc.names[i])+ theme(legend.position="none")
+    ggplot(data=boot.dist,aes(as.factor(X2),value)) +geom_boxplot(fill="grey")+theme_classic()+geom_point(data=obs.val,aes(as.factor(X2),value, colour="red"),size=3)+ylab("Number of homozygotes")+xlab("Allele")+ scale_x_discrete(labels=unname(cats@all.names[[1]]))+ggtitle(locNames(cats)[i])+ theme(legend.position="none")
   )
 }  
 @
@@ -60,7 +60,7 @@ write.csv(nullalleles$homozygotes$probability.obs, paste(cats@other$filename,"-n
 \subsubsection{Determined using Chakraborty et al. (1992)}
 <<echo=FALSE,results='hide'>>=
 method1.boot<-nullalleles$null.allele.freq$bootstrap$method1
-colnames(method1.boot)<-cats@loc.names
+colnames(method1.boot)<-locNames(cats)
 method1.boot<-melt(method1.boot)
 method1.obs<-melt(nullalleles$null.allele.freq$summary1[1,])
 method1.obs$names <- rownames(method1.obs)
@@ -68,7 +68,7 @@ method1.obs$names <- rownames(method1.obs)
 
 <<null_all_Chakraborty, echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi>>=
 
-   ggplot(data=method1.boot,aes(X2,value)) +geom_boxplot(fill="grey")+theme_classic()+geom_point(data=method1.obs,aes(names,value, colour="red"),size=3)+ylab("Frequency of null alleles")+xlab("Locus")+ scale_x_discrete(labels=unname(cats@loc.names))+ggtitle("Null allele frequency - Chakraborty et al. (1992)")+ theme(legend.position="none")+geom_hline(yintercept=0,colour="lightgrey")
+   ggplot(data=method1.boot,aes(X2,value)) +geom_boxplot(fill="grey")+theme_classic()+geom_point(data=method1.obs,aes(names,value, colour="red"),size=3)+ylab("Frequency of null alleles")+xlab("Locus")+ scale_x_discrete(labels=unname(locNames(cats)))+ggtitle("Null allele frequency - Chakraborty et al. (1992)")+ theme(legend.position="none")+geom_hline(yintercept=0,colour="lightgrey")
 @
 
 <<echo=FALSE,results='hide'>>=
@@ -82,14 +82,14 @@ write.csv(nullalleles$null.allele.freq$summary2, paste(cats@other$filename,"-nul
 \subsubsection{Determined using Brookfield (1996)}
 <<echo=FALSE,results='hide'>>=
 method2.boot<-nullalleles$null.allele.freq$bootstrap$method2
-colnames(method2.boot)<-cats@loc.names
+colnames(method2.boot)<-locNames(cats)
 method2.boot<-melt(method2.boot)
 method2.obs<-melt(nullalleles$null.allele.freq$summary2[1,])
 method2.obs$names <- rownames(method2.obs)
 @
 
 <<null_all_Brookfield, echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi>>=
-ggplot(data=method2.boot,aes(X2,value)) +geom_boxplot(fill="grey")+theme_classic()+geom_point(data=method2.obs,aes(names,size=3))+ylab("Frquency of null alleles")+xlab("Locus")+ scale_x_discrete(labels=unname(cats@loc.names))+ggtitle("Null allele frequency - Brookfield (1996)")+ theme(legend.position="none")+geom_hline(yintercept=0,colour="lightgrey")
+ggplot(data=method2.boot,aes(X2,value)) +geom_boxplot(fill="grey")+theme_classic()+geom_point(data=method2.obs,aes(names,size=3))+ylab("Frquency of null alleles")+xlab("Locus")+ scale_x_discrete(labels=unname(locNames(cats)))+ggtitle("Null allele frequency - Brookfield (1996)")+ theme(legend.position="none")+geom_hline(yintercept=0,colour="lightgrey")
 @
 
 

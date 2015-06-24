@@ -30,9 +30,11 @@ cc<-cc+2
 
 if (plot==TRUE)
 {
-plot(density(mant1), main=paste("Gen ~",names(mats)[i]," | ", names(mats)[j],sep=""), cex.main=0.6)
-plot(density(mant2), main=paste("Gen ~",names(mats)[j]," | ", names(mats)[i],sep=""), cex.main=0.6)
+x<- densityplot(permustats(mant1),main=paste("Gen ~",names(mats)[i]," | ", names(mats)[j],sep=""), cex.main=0.6)
+print(x)
 
+x<- densityplot(permustats(mant2), main=paste("Gen ~",names(mats)[j]," | ", names(mats)[i],sep=""), cex.main=0.6)
+print(x)
 }
 
 }

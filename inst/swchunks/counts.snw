@@ -4,14 +4,14 @@ cat(paste("This analysis looks at ",sumcats$N," individuals.",sep=""))
 @
 
 \noindent
-\newline The mean number of alleles per locus (across all locations): \Sexpr{round(mean(sumcats$loc.nall),1)}
+\newline The mean number of alleles per locus (across all locations): \Sexpr{round(mean(sumcats$loc.n.all),1)}
 
 
 \noindent
 \newline The percentage of missing data was \Sexpr{round(sumcats$NA.perc,1)}\%.
 
 <<n_alleles_per_locus, echo=FALSE, fig.width=6, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi>>=
-barplot(sumcats$loc.nall,ylab="Number of alleles", main="Number of alleles per locus",xlab="Locus",ylim=c(0,round((5+max(sumcats$loc.nall)),digits=-1)),las=3,names.arg=cats@loc.names, cex.names=0.8)
+barplot(sumcats$loc.n.all,ylab="Number of alleles", main="Number of alleles per locus",xlab="Locus",ylim=c(0,round((5+max(sumcats$loc.n.all)),digits=-1)),las=3,names.arg=locNames(cats), cex.names=0.8)
 @
 \FloatBarrier
 
@@ -23,7 +23,7 @@ barplot(sumcats$loc.nall,ylab="Number of alleles", main="Number of alleles per l
 indlist<-as.data.frame(samplocnum)
 colnames(indlist)<-"Number"
 #t(indlist)
-popallelecnt<-sum(sumcats$loc.nall)
+popallelecnt<-sum(sumcats$loc.n.all)
 indlist.out<-data.frame(Locations=rownames(indlist),Number=indlist[,1])
 colnames(indlist.out)<-c("Location","Number")
 write.csv(indlist.out, file=paste(filename,"-num_samp_by_loc.csv", sep=""), row.names=FALSE)
@@ -40,7 +40,7 @@ brtab(indlist, capt="Number of individuals per population", c("population","# in
 
 <<echo=FALSE, results='hide'>>=
 numallelespop<-as.data.frame(sumcats$pop.nall)
-rownames(numallelespop)<-cats@pop.names
+rownames(numallelespop)<-popNames(cats)
 colnames(numallelespop)<-"Total number of alleles"
 #t(numallelespop)
 numallelespop.out<-data.frame(Locations=rownames(numallelespop),numallelespop[,1])
@@ -58,8 +58,8 @@ textxy(sumcats$pop.eff,sumcats$pop.nall,(names(sumcats$pop.eff)),cex=0.6)
 \noindent
 \newline The number of alleles per locus (across all subpopulations):
 <<echo=FALSE, results='asis'>>=
-numatall<-as.data.frame(t(sumcats$loc.nall))
-colnames(numatall)<-cats@loc.names
+numatall<-as.data.frame(t(sumcats$loc.n.all))
+colnames(numatall)<-locNames(cats)
 rownames(numatall)<-"# of alleles"
 
 row1<-c("Locus",colnames(numatall))
@@ -76,7 +76,7 @@ brtab((t(numatall)),"Number of alleles per locus across all subpopulations",c("l
 
 
 <<echo=FALSE,results='hide'>>=
-allresults$counts<-list(N=sumcats$N, numbypop=t(indlist),totalleles=popallelecnt, nallelesbypop=t(numallelespop), nallelesbyloc=numatall, meanalleles=round(mean(sumcats$loc.nall),1),missing=round(sumcats$NA.perc,1))
+allresults$counts<-list(N=sumcats$N, numbypop=t(indlist),totalleles=popallelecnt, nallelesbypop=t(numallelespop), nallelesbyloc=numatall, meanalleles=round(mean(sumcats$loc.n.all),1),missing=round(sumcats$NA.perc,1))
 @
 
 \FloatBarrier

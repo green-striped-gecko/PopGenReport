@@ -9,7 +9,7 @@ null.all<-function(population)
   # divide the genind object into individual loci
   split<-seploc(population)
   ninds<-dim(population@tab)[1]
-  maxalleles<-max(population@loc.nall)
+  maxalleles<-max(population@loc.n.all)
   
   per.results<-matrix(NA,nrow=length(split),ncol=maxalleles)
   list.obs.ho.cnt<-list()
@@ -57,7 +57,7 @@ null.all<-function(population)
     list.obs.ho.cnt[[i]]<-obs_ho_cnt
     list.exp.ho[[i]]<-numho
   }
-  rownames(per.results)<-unname(population@loc.names)
+  rownames(per.results)<-unname(locNames(population))
   suffix<-seq(1:maxalleles)
   colnames(per.results)<-paste("Allele-",suffix,sep="")
   
@@ -68,19 +68,19 @@ null.all<-function(population)
   
   distr1<-matrix(NA,nrow=1000,ncol=length(split))
   distr2<-matrix(NA,nrow=1000,ncol=length(split))
-  morethan1<-unname(population@loc.nall)>1
+  morethan1<-unname(population@loc.n.all)>1
   for(k in 1:length(morethan1)){
-    if (!morethan1[k]) warning("Locus ",unname(population@loc.names[k])," has only 1 allele and null allele frequency will not be estimated for it")
+    if (!morethan1[k]) warning("Locus ",unname(locNames(population)[k])," has only 1 allele and null allele frequency will not be estimated for it")
   }
   for (i in 1:999){
     for (j in 1:length(split)){
       if (morethan1[j]){
         tempalleles<-split[[j]]@tab[sample(1:ninds,ninds,replace=TRUE),]
-        allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE)*population@ploidy
+        allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE)*population@ploidy[1]
         allelefreq<-allelecnt/sum(allelecnt)
         exphz<-1-sum(allelefreq^2)
         ho_cnt<-melt(table(tempalleles))
-        numhz<-sum(ho_cnt[ho_cnt[,1]>0 & ho_cnt[,1]<1,2],na.rm=TRUE)/population@ploidy
+        numhz<-sum(ho_cnt[ho_cnt[,1]>0 & ho_cnt[,1]<1,2],na.rm=TRUE)/population@ploidy[1]
         numho<-ho_cnt[ho_cnt[,1]==1,2]
         obshz<-1-numho/(numho+numhz)
         distr1[i,j]<-(exphz-obshz)/(exphz+obshz)
@@ -91,11 +91,11 @@ null.all<-function(population)
   for (k in 1:length(split)){
     if(morethan1[j]){
       tempalleles<-split[[k]]@tab
-      allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE)*population@ploidy
+      allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE)*population@ploidy[1]
       allelefreq<-allelecnt/sum(allelecnt)
       exphz<-1-sum(allelefreq^2)
       ho_cnt<-melt(table(tempalleles))
-      numhz<-sum(ho_cnt[ho_cnt[,1]>0 & ho_cnt[,1]<1,2],na.rm=TRUE)/population@ploidy
+      numhz<-sum(ho_cnt[ho_cnt[,1]>0 & ho_cnt[,1]<1,2],na.rm=TRUE)/population@ploidy[1]
       numho<-ho_cnt[ho_cnt[,1]==1,2]
       obshz<-1-numho/(numho+numhz)
       distr1[1000,k]<-(exphz-obshz)/(exphz+obshz)
@@ -121,8 +121,8 @@ null.all<-function(population)
   
   rownames(method1)<-c("Observed frequency","Median frequency","2.5th percentile","97.5th percentile")
   rownames(method2)<-c("Observed frequency","Median frequency","2.5th percentile","97.5th percentile")
-  colnames(method1)<-unname(population@loc.names)
-  colnames(method2)<-unname(population@loc.names)
+  colnames(method1)<-unname(locNames(population))
+  colnames(method2)<-unname(locNames(population))
   
   null.allele.freq<-list(summary1=method1,summary2=method2,bootstrap=null.allele.boot.dist)
   results.null.alleles<-list(homozygotes=homozygotes,null.allele.freq=null.allele.freq)

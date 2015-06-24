@@ -9,7 +9,7 @@ This function converts genetic data provided in a tabular 'comma separated value
 \usage{
 read.genetable(filename, pop = NULL, ind = NULL, lat = NULL, long = NULL,  
 x = NULL, y = NULL, other.min = NULL, other.max = NULL, oneColPerAll,  
-missing = NA, sep = NULL, ncode = NULL, ploidy=2)
+NA.char = NA, sep = NULL, ncode = NULL, ploidy=2)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -45,7 +45,7 @@ if your data has some additional data (e.g. gender, size etc.) then you can conv
   \item{oneColPerAll}{
 needs to be specified. If your data is coded as a single column per allele
 }
-  \item{missing}{
+  \item{NA.char}{
 can be NA, 0 or mean. See details section.
 }
   \item{sep}{

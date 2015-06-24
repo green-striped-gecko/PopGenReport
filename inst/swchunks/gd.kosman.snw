@@ -18,7 +18,7 @@ allresults$gd.kosman<-list(geneticdist=genedist,geogdist=geodist,lociused=loci.u
 @
 <<Kosman-dist, echo=FALSE, fig.width=6, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi, fig.cap="Genetic Dissimilarity (Kosman and Leonard 2005) vs Geographic Distance. The line represents the running average.">>=
 
-  xyplot(genedist~geodist,pch=20,xlab="Geographic Distance",ylab="Genetic Dissimilarity", col=rgb(0,0,0.8,0.5), type=c("p", "smooth"), lwd=4,ylim=c(-0.05,1.05),xlim=c((0-0.02*max(geodist,na.rm=TRUE)),(1.05*max(geodist,na.rm=TRUE))))
+  xyplot(genedist~geodist,pch=20,xlab="Geographic Distance",ylab="Genetic Dissimilarity", col=rgb(0,0,0.8,0.5), type=c("p", "smooth"), lwd=4,ylim=c(-0.05,1.1),xlim=c((0-0.02*max(geodist,na.rm=TRUE)),(1.05*max(geodist,na.rm=TRUE))))
 
 @
 

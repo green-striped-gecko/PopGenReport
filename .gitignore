@@ -4,3 +4,4 @@
 .Rbuildignore
 PopGenReport.Rproj
 inst/doc
+todo.r

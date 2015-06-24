@@ -8,14 +8,14 @@ This function calculates the pairwise distances (Euclidean, cost path distances 
 The genind object needs to have coordinates in the same projected coordinate system as the friction matrix. The friction matrix can be either a single raster of a stack of several layers. If a stack is provided the specified cost distance is calculated for each layer in the stack. The output of this function can be used with the functions \code{\link{wassermann}} or \code{\link{lgrMMRR}} to test for the significance of a layer on the genetic structure.
 }
 \usage{
-genleastcost(cats, fr.raster, gen.dist, NN=NULL, pathtype="leastcost", plotpath=TRUE,theta=1)
+genleastcost(cats, fric.raster, gen.distance, NN=NULL, pathtype="leastcost", plotpath=TRUE,theta=1)
 }
 \arguments{
   \item{cats}{a spatial genind object. see ?popgenreport how to provide coordinates in genind objects
 }
-  \item{fr.raster}{a friction matrix
+  \item{fric.raster}{a friction matrix
 }
-  \item{gen.dist}{specification which genetic distance method should be used to calculate pairwise genetic distances between populations ( "D", "Gst.Nei", "Gst.Hedrick") or individuals ("Smouse", "Kosman", "propShared")}                  
+  \item{gen.distance}{specification which genetic distance method should be used to calculate pairwise genetic distances between populations ( "D", "Gst.Nei", "Gst.Hedrick") or individuals ("Smouse", "Kosman", "propShared")}                  
   \item{NN}{Number of neighbours used when calculating the cost distance (possible values 4,8 or 16). As the default is NULL a value has to be provided if pathtype='leastcost'. NN=8 is most commonly used. Be aware that linear structures may cause artefacts in the least-cost paths, therefore inspect the actual least-cost paths in the provided output.  } 
   \item{pathtype}{Type of cost distance to be calculated (based on function in the \code{\link{gdistance}} package. Available distances are 'leastcost', 'commute' or 'rSPDistance'. See functions in the gdistance package for futher explanations. If the path type is set to 'leastcost' then paths and also pathlength are returned.}
   \item{plotpath}{switch if least cost paths should be plotted (works only if pathtype='leastcost'. Be aware this slows down the computation, but it is recommended to do this to check least cost paths visually.}

@@ -7,8 +7,8 @@ The following pages show simple maps of the resistance matrices. In case of the 
 
 <<frictionmap, echo=FALSE, results='hide' ,fig.path=fig.path, dev=dev, dpi=dpi>>=
 
-ncost <- dim(fr.raster)[3]
-glc<- genleastcost(cats=cats, fr.raster=fr.raster, gen.dist=gen.dist, pathtype=pathtype, NN=NN, theta=theta )
+ncost <- dim(fric.raster)[3]
+glc<- genleastcost(cats=cats, fric.raster=fric.raster, gen.distance=gen.distance, pathtype=pathtype, NN=NN, theta=theta )
 
 @
 
@@ -64,14 +64,14 @@ if (dim(p)[1]<8)   print( pairpathtab,include.rownames=TRUE, add.to.row=list(lis
 
 
 \FloatBarrier
-\subsection{Pairwise genetic distances (\Sexpr{gen.dist})}
+\subsection{Pairwise genetic distances (\Sexpr{gen.distance})}
 
 
 <<echo=FALSE,results='asis'>>=
 #write gendist.mat
-  pairdiff<-paste("Pairwise genetic distance (",gen.dist,")",sep="") 
+  pairdiff<-paste("Pairwise genetic distance (",gen.distance,")",sep="") 
   pairgentab<-xtable(glc$gen.mat, cap=pairdiff, digits=3)
-  write.csv(glc$gen.mat, paste(cats@other$filename,"-pairwise_",gen.dist,".csv", sep=""), row.names=TRUE)
+  write.csv(glc$gen.mat, paste(cats@other$filename,"-pairwise_",gen.distance,".csv", sep=""), row.names=TRUE)
 
 if (dim(glc$gen.mat)[1]<8)   print( pairgentab,include.rownames=TRUE, add.to.row=list(list(seq(1,nrow(glc$gen.mat),2)),"\\rowcolor[gray]{0.9} "))  else  print( pairgentab,include.rownames=TRUE, floating.environment='sidewaystable', scalebox=max(1-(dim(glc$gen.mat)[1]-15)/50,0.2), add.to.row=list(list(seq(1,nrow(glc$gen.mat),2)),"\\rowcolor[gray]{0.9} "))
 @

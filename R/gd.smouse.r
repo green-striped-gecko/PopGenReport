@@ -7,7 +7,7 @@ gd.smouse <- function(population, verbose=TRUE){
   
   # get initial estimates of number of individuals and the maximnum number of loci
   initmaxind<-(dim(population@tab))[1]
-  maxloci<-length(population@loc.names)
+  maxloci<-length(locNames(population))
   
   # create a local matrix with the genomes so we can make changes if necessary and not affect other parts of script
   genomes<-population@tab
@@ -22,7 +22,7 @@ gd.smouse <- function(population, verbose=TRUE){
   popsgone<-c()
   
   # need to find the intervals for each loci...
-  cs <- cumsum(population@loc.nall) # this determines the end of each loci frame for each ind's genotype
+  cs <- cumsum(population@loc.n.all) # this determines the end of each loci frame for each ind's genotype
   cs.l <- c(1,cs[-length(cs)]+1) # this determine the beginning of each loci frame for each ind's genotype
 
   # check to see that the populations have more than one individual (probably need to make it more 
@@ -173,13 +173,13 @@ gd.smouse <- function(population, verbose=TRUE){
 
   if(length(indsrmv)>0){
     # put names on the rows and columns on d.fast (!!!!make sure to use only non-removed individuals)
-    colnames(smoused)<-population@ind.names[indsrmv]
-    rownames(smoused)<-population@ind.names[indsrmv]
+    colnames(smoused)<-indNames(population)[indsrmv]
+    rownames(smoused)<-indNames(population)[indsrmv]
     # calculate geographical distance
     #geodist<-as.matrix(dist(population@other$utm[indsrmv,]))/1000
   } else if(is.null(indsrmv)){
-    colnames(smoused)<-population@ind.names
-    rownames(smoused)<-population@ind.names
+    colnames(smoused)<-indNames(population)
+    rownames(smoused)<-indNames(population)
   }
 
   # force upper triangle to NA

@@ -4,17 +4,17 @@
 
 <<echo=FALSE, results='hide'>>=
 # fixed error in harmonic mean due to low sample size!!!!
-pgrharmonic_mean<-    function (x) 
-{
-    if (sum(is.na(x)>0)) return(NA) else
-    {
-    if (!all(x >= 0)) {
-        return(NA)
-    }
-    return(1/mean(1/x))
-    }
-}
- reassignInPackage("harmonic_mean", pkgName="mmod", pgrharmonic_mean)
+# pgrharmonic_mean<-    function (x) 
+# {
+#     if (sum(is.na(x)>0)) return(NA) else
+#     {
+#     if (!all(x >= 0)) {
+#         return(NA)
+#     }
+#     return(1/mean(1/x))
+#     }
+# }
+#  reassignInPackage("harmonic_mean", pkgName="mmod", pgrharmonic_mean)
 
 differentiate<-diff_stats(cats)
 difftitle1<-"Hs and Ht based estimates of differentiation: Gst, Gst and Dest for each locus"
@@ -34,27 +34,95 @@ print(diffglobal,include.rownames=FALSE, ,add.to.row=list(list(seq(1,nrow(diffgl
 @
 
 <<echo=FALSE,results='hide'>>=
+
+
+pairwise_D2 <- 
+function (x, linearized = FALSE) 
+{
+    pops <- seppop(x)
+    n.pops <- length(pops)
+    allP <- utils::combn(1:n.pops, 2)
+    pair <- function(index.a, index.b) {
+        a <- pops[[index.a]]
+        b <- pops[[index.b]]
+        temp <- repool(a, b)
+        return(D_Jost(temp)$global.het)
+    }
+    res <- sapply(1:dim(allP)[2], function(i) pair(allP[, i][1], 
+        allP[, i][2]))
+    attributes(res) <- list(class = "dist", Diag = FALSE, Upper = FALSE, 
+        Labels = popNames(x), Size = n.pops)
+    if (linearized) {
+        return(res/(1 - res))
+    }
+    else (return(res))
+}
+
+pairwise_Gst_Hedrick2 <-
+function (x, linearized = FALSE) 
+{
+    pops <- seppop(x)
+    n.pops <- length(pops)
+    allP <- utils::combn(1:n.pops, 2)
+    pair <- function(index.a, index.b) {
+        a <- pops[[index.a]]
+        b <- pops[[index.b]]
+        temp <- repool(a, b)
+        return(Gst_Hedrick(temp)$global)
+    }
+    res <- sapply(1:dim(allP)[2], function(i) pair(allP[, i][1], 
+        allP[, i][2]))
+    attributes(res) <- list(class = "dist", Diag = FALSE, Upper = FALSE, 
+        Labels = popNames(x), Size = n.pops)
+    if (linearized) {
+        return(res/(1 - res))
+    }
+    return(res)
+}
+
+pairwise_Gst_Nei2 <-
+function (x, linearized = FALSE) 
+{
+    pops <- seppop(x)
+    n.pops <- length(pops)
+    allP <- utils::combn(1:n.pops, 2)
+    pair <- function(index.a, index.b) {
+        a <- pops[[index.a]]
+        b <- pops[[index.b]]
+        temp <- repool(a, b)
+        return(Gst_Nei(temp)$global)
+    }
+    res <- sapply(1:dim(allP)[2], function(i) pair(allP[, i][1], 
+        allP[, i][2]))
+    attributes(res) <- list(class = "dist", Diag = FALSE, Upper = FALSE, 
+        Labels = popNames(x), Size = n.pops)
+    if (linearized) {
+        return(res/(1 - res))
+    }
+    return(res)
+}
+
 if (length(levels(cats@pop))>2){
-  pairD<-pairwise_D(cats)
+  pairD<-pairwise_D2(cats)
   pairDmat<-as.matrix(pairD)
   pairDmat[upper.tri(pairDmat,diag=TRUE)]<-NA
-  colnames(pairDmat)<-cats@pop.names
-  rownames(pairDmat)<-cats@pop.names
+  colnames(pairDmat)<-popNames(cats)
+  rownames(pairDmat)<-popNames(cats)
  # pairDmat<-pairDmat[-1,]
 
-  pairGstH<-pairwise_Gst_Hedrick(cats)
+  pairGstH<-pairwise_Gst_Hedrick2(cats)
   pairGstHmat<-as.matrix(pairGstH)
   pairGstHmat[upper.tri(pairGstHmat,diag=TRUE)]<-NA
-  colnames(pairGstHmat)<-cats@pop.names
-  rownames(pairGstHmat)<-cats@pop.names
+  colnames(pairGstHmat)<-popNames(cats)
+  rownames(pairGstHmat)<-popNames(cats)
  # pairGstHmat<-pairGstHmat[-1,]
 
 
-  pairGstN<-pairwise_Gst_Nei(cats)
+  pairGstN<-pairwise_Gst_Nei2(cats)
   pairGstNmat<-as.matrix(pairGstN)
   pairGstNmat[upper.tri(pairGstNmat,diag=TRUE)]<-NA
-  colnames(pairGstNmat)<-cats@pop.names
-  rownames(pairGstNmat)<-cats@pop.names
+  colnames(pairGstNmat)<-popNames(cats)
+  rownames(pairGstNmat)<-popNames(cats)
  # pairGstNmat<-pairGstNmat[-1,]
 
   pairdiff1<-"mmod Jost's D pairwise"

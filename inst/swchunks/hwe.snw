@@ -5,9 +5,9 @@
 
 <<echo=FALSE, results='hide', warning=FALSE>>=
 # see if there is a significant departure from HWE for each popxloc
-testhw<-HWE.test.genind(cats,res="matrix")
+testhw<-hw.test(cats,res="matrix")
 denom<-dim(testhw)[1]*dim(testhw)[2]
-rownames(testhw)<-cats@pop.names
+rownames(testhw)<-popNames(cats)
 testhw<-round(testhw,digits=4)
 # this step rotates the HWE table based on which dimension is bigger in order to better fit the page
 if (dim(testhw)[1]>dim(testhw)[2]){
@@ -46,7 +46,7 @@ idx<-which(testhw<(0.05/denom),TRUE)
 if (dim(idx)[1]>0) {
   row.names(idx)<-NULL
   idx<-as.data.frame(idx)
-  sig_hwe<-data.frame(col1=cats@pop.names[idx$row],col2=cats@loc.names[idx$col],col3=testhw[cbind(idx$row,idx$col)],row.names=NULL)
+  sig_hwe<-data.frame(col1=popNames(cats)[idx$row],col2=locNames(cats)[idx$col],col3=testhw[cbind(idx$row,idx$col)],row.names=NULL)
   colnames(sig_hwe)<-c("Population","Locus","p-value")
   ordered_sig_hwe<-sig_hwe[order(sig_hwe$Locus,sig_hwe$Population),]
   numrows<-dim(ordered_sig_hwe)[1]

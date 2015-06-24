@@ -44,7 +44,7 @@ popgenreport <- function(cats=NULL,
   
   # Check for combinations of populations and loci with low numbers of individuals and alleles  
   npops<-length(levels(cats@pop))
-  nloci<-length(cats@loc.names)
+  nloci<-length(locNames(cats))
   
   # this splits bilby up into loci
   loci<-seploc(cats)
@@ -61,29 +61,29 @@ popgenreport <- function(cats=NULL,
   
   for(i in 1:dim(popsizes)[2]){
     numlow<-length(which(popsizes[,i]<3))
-    if(numlow>0) message("Population ",unname(cats@pop.names)[i]," has ",numlow," locus/loci with less than 3 genotypes. This may cause errors in some analyses. We advice to combine or drop populations with low numbers of genotypes. ")
+    if(numlow>0) message("Population ",unname(popNames(cats))[i]," has ",numlow," locus/loci with less than 3 genotypes. This may cause errors in some analyses. We advice to combine or drop populations with low numbers of genotypes. ")
   }
   
   
   #cut down length of loci names to  6  and make sure they are unique
-  cats@loc.names <- substr(cats@loc.names,1,6)   
-  if (length(unique(cats@loc.names))!= length(cats@loc.names)) 
-  {cats@loc.names <- paste(1:length(cats@loc.names),"-",substr(cats@loc.names,1,4), sep="")
+  locNames(cats) <- substr(locNames(cats),1,6)   
+  if (length(unique(locNames(cats)))!= length(locNames(cats))) 
+  {locNames(cats) <- paste(1:length(locNames(cats)),"-",substr(locNames(cats),1,4), sep="")
   cat("Loci names were not unique and therefore adjusted.\n")
   }
-  levels(cats@loc.fac) <- cats@loc.names  #make sure levels and factors are the same
-#check if pop.names, ind.names are unique!!!!
+  levels(cats@loc.fac) <- locNames(cats)  #make sure levels and factors are the same
+#check if pop.names, indnames are unique!!!!
 #adjust if necessary and issue a notification
-if (length(unique(cats@ind.names))!=length(cats@ind.names)) 
-  {cats@ind.names <- paste(1:length(cats@ind.names),"-",substr(cats@ind.names,1,8),sep="")
+if (length(unique(indNames(cats)))!=length(indNames(cats))) 
+  {indNames(cats) <- paste(1:length(indNames(cats)),"-",substr(indNames(cats),1,8),sep="")
   cat("Individual names were not unique and therefore adjusted.\n")
   }
 
 
   
-if (length(unique(cats@pop.names))!=length(cats@pop.names)) 
+if (length(unique(popNames(cats)))!=length(popNames(cats))) 
   {
-  cats@pop.names <- paste(1:length(cats@pop.names),"-",substr(cats@pop.names,1,6),sep="")
+  popNames(cats) <- paste(1:length(popNames(cats)),"-",substr(popNames(cats),1,6),sep="")
   cat("Subpopulation names were not unique and therefore adjusted.\n")
   }
 
@@ -115,7 +115,7 @@ if (length(unique(cats@pop.names))!=length(cats@pop.names))
   if (!is.null(cats@other$latlong)) cats@other$xy <- Mercator(cats@other$latlong[,c(2,1)])
   if (!is.null(cats@other$xy)) cats@other$latlong <- Mercator(cats@other$xy, inverse=TRUE)[,c(2,1)]  
   
-  if ((nrow(cats@other$latlong) == length(cats@ind.names)) & (nrow(cats@other$xy) == length(cats@ind.names) )) coords=TRUE
+  if ((nrow(cats@other$latlong) == length(indNames(cats))) & (nrow(cats@other$xy) == length(indNames(cats)) )) coords=TRUE
   
 
 
@@ -190,7 +190,7 @@ if (is.null(path)) {cat("Could not find snw files in the PopGenReport library fo
   
   if (mk.allele.dist | mk.complete){
     cat("- Allelic distances ...\n")  
-    numloci<-length(cats@loc.nall)
+    numloci<-length(cats@loc.n.all)
     alleledistn <- readLines(paste(path,"allele.dist.snw",sep=""))
     compl<-c(compl,alleledistn)
 }

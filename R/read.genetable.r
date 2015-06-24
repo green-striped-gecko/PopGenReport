@@ -1,6 +1,6 @@
 
 #must provide a filename and if pop, ind and in 2 or two columns per allele
-read.genetable <- function(filename, pop=NULL, ind=NULL,lat=NULL, long=NULL, x=NULL, y=NULL, other.min=NULL, other.max=NULL,oneColPerAll, missing=NA,  sep=NULL, ncode=NULL ,ploidy=2 )
+read.genetable <- function(filename, pop=NULL, ind=NULL,lat=NULL, long=NULL, x=NULL, y=NULL, other.min=NULL, other.max=NULL,oneColPerAll,NA.char=NA,  sep=NULL, ncode=NULL ,ploidy=2 )
 {
 gfile <-read.csv(filename)
 
@@ -71,7 +71,7 @@ genes <- res
 
   
   
-  df <- df2genind(genes, pop=pops, ind.names=inds, missing=missing,     ncode=ncode,loc.names=colnames(genes), sep=sep, ploidy=ploidy)
+  df <- df2genind(genes, pop=pops, ind.names=inds, NA.char=NA.char,     ncode=ncode,loc.names=colnames(genes), sep=sep, ploidy=ploidy)
   
   if (!is.null(lat) & !is.null(long))
   df@other$latlong <- data.frame(lat=gfile[,lat], long=gfile[,long])

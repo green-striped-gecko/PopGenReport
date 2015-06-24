@@ -5,13 +5,13 @@
 <<echo=FALSE, results='hide'>>=
 het_obs<-as.data.frame(t(sumcats$Hobs))
 rownames(het_obs)<-"Observed"
-colnames(het_obs)<-cats@loc.names
+colnames(het_obs)<-locNames(cats)
 het_obs<-as.data.frame(t(het_obs))
 het_obs$Locus<-rownames(het_obs)
 
 het_exp<-as.data.frame(t(sumcats$Hexp))
 rownames(het_exp)<-"Expected"
-colnames(het_exp)<-cats@loc.names
+colnames(het_exp)<-locNames(cats)
 het_exp<-as.data.frame(t(het_exp))
 het_exp$Locus<-rownames(het_exp)
 
