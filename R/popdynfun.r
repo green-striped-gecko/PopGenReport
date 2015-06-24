@@ -208,7 +208,7 @@ return(x)
 #'@return a list, first entry are updated pops, second entry the number of disperserin a matrix
 #'@description emigration process on all population in one go
 
-emigration <- function(xp=pops, perc.mig=p.mig, emi.m=emis, emi.table=NULL)
+emigration <- function(xp, perc.mig, emi.m, emi.table=NULL)
 {
 n.pops = length(xp)
 migs <- matrix(0,nrow=n.pops, ncol=n.pops)

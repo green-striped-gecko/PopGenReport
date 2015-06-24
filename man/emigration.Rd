@@ -4,7 +4,7 @@
 \alias{emigration}
 \title{Function to execute emigration on a pops object}
 \usage{
-emigration(xp = pops, perc.mig = p.mig, emi.m = emis, emi.table = NULL)
+emigration(xp, perc.mig, emi.m, emi.table = NULL)
 }
 \arguments{
 \item{xp}{all pops combined in a list}
