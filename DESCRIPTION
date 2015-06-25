@@ -1,6 +1,6 @@
 Package: PopGenReport
 Type: Package
-Title: PopGenReport: A simple way to analyse population genetic data
+Title: A Simple Framework to Analyse Population Genetic Data
 Version: 2.2
 Date: 2015-06-24
 Authors@R: c(
@@ -11,6 +11,6 @@ License: GPL
 LazyData: true
 Depends: R (>= 3.0.0), knitr, adegenet, raster
 Imports: lattice, RgoogleMaps, gap, calibrate, xtable, plyr, dismo,
-        reshape, ggplot2, R.utils, ade4, pegas, genetics, rgdal, gdistance, vegan, sp, mmod, GGally
+        reshape, ggplot2, R.utils, ade4, pegas, genetics, rgdal, gdistance, vegan, sp, mmod, GGally, data.table
 VignetteBuilder: knitr
 Suggests: 

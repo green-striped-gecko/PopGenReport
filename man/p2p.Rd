@@ -11,7 +11,7 @@ p2p(x, d0, p)
 
 \item{d0}{dispersal distance}
 
-\item{of}{p of all individuals in a population}
+\item{p}{of all individuals in a population}
 }
 \value{
 a dispersal probability matrix

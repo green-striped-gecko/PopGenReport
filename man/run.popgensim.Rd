@@ -5,7 +5,8 @@
 \title{Run forward step generations a popgen simulation}
 \usage{
 run.popgensim(simpops, steps, cost.mat, n.offspring, n.ind, mig.rate, disp.max,
-  disp.rate, mut.rate, n.cov = 3, rec = "none", emi.table = NULL)
+  disp.rate, n.allels, mut.rate, n.cov = 3, rec = "none",
+  emi.table = NULL)
 }
 \arguments{
 \item{simpops}{pops object (a list of pop)}
@@ -23,6 +24,8 @@ run.popgensim(simpops, steps, cost.mat, n.offspring, n.ind, mig.rate, disp.max,
 \item{disp.max}{maximal dispersal distance of disp.rate individuals}
 
 \item{disp.rate}{percentage of individuals achieving disp.max}
+
+\item{n.allels}{number of maximal alleles at a loci}
 
 \item{mut.rate}{mutation rate}
 

@@ -3,10 +3,10 @@
 \alias{PopGen}
 \docType{package}
 \title{
-Analysing population genetic data within a standardised framework
+Analysing population genetic data within a simple framework
 }     
 \description{
-This package aims to deliver a standardised framework for analysing population genetic data (at this stage only microsatellite data). The framework is open and meant to be user friendly, so R and its capabilities can be used by non-programmers. We encourage contributions and extensions of the package to allow for more sophisticated analyses of spatial populaiton genetic data. This packages draws heavily on already existing packages such as adegenet, mmod, pegas and others and we would like to thank the creators of those packages for their work in developing those packages.
+Provides a simple framework for analysing population genetic data (microsatellite data and snp data). The framework is open and meant to be user friendly, so R and its capabilities can be used by non-programmers. We encourage contributions and extensions of the package to allow for more sophisticated analyses of spatial populaiton genetic data. This packages draws heavily on already existing packages such as adegenet, mmod, pegas and others and we would like to thank the creators of those packages for their work in developing those packages.
 }
 \details{
 \tabular{ll}{

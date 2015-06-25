@@ -5,7 +5,7 @@
 #'
 #'@param x Cost (Euclidean) distance matrix
 #'@param d0 dispersal distance
-#'@param of p of all individuals in a population
+#'@param p of all individuals in a population
 #'@return a dispersal probability matrix
 #'@description converts cost distances to probabilities: to reach a certain patch[ d0 average distance of p of all individuals, for example d0=100, p =0.5 -> 50\% procent of all migrating individuals go up to 100 m.
 
@@ -319,13 +319,14 @@ return(pops.genind)
 #'@param mig.rate migration rate
 #'@param disp.max maximal dispersal distance of disp.rate individuals
 #'@param disp.rate percentage of individuals achieving disp.max
+#'@param n.allels number of maximal alleles at a loci
 #'@param mut.rate mutation rate
 #'@param n.cov number of covariates (defaults to 3)
 #'@param rec switch if emigration matrix should be recorded, either "none" or "emi"
 #'@param emi.table a emigration matrix, if provide a fixed number of migration events will take place otherwise based on disp.max, mig.rate and disp.rate, events occuring are (in that order, emigration, reproduction, mutation)
 #'@return an updated simpops object after steps steps
 #'@description performs a time-forward, agent-based and spatiallly explicit genetic population simulation 
-run.popgensim <- function(simpops, steps, cost.mat, n.offspring , n.ind,  mig.rate, disp.max, disp.rate, mut.rate, n.cov=3, rec = "none", emi.table=NULL)
+run.popgensim <- function(simpops, steps, cost.mat, n.offspring , n.ind,  mig.rate, disp.max, disp.rate, n.allels, mut.rate, n.cov=3, rec = "none", emi.table=NULL)
 {
 pops <- simpops
 distances <- cost.mat
@@ -378,7 +379,7 @@ return (out)
 #'@param n.ind number of individuals per subpopulation
 #'@param sex.ratio sex ratio of males and females
 #'@param n.loci number of loci
-#'@param n.alleles number of alleles per loci
+#'@param n.allels number of maximal alleles per loci
 #'@param locs coordinates of the subpopulations
 #'@param n.cov number of covariates (defaults to 3)
 #'@return a simpops object (to be used in run.popgensim )

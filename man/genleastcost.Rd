@@ -8,7 +8,8 @@ This function calculates the pairwise distances (Euclidean, cost path distances 
 The genind object needs to have coordinates in the same projected coordinate system as the friction matrix. The friction matrix can be either a single raster of a stack of several layers. If a stack is provided the specified cost distance is calculated for each layer in the stack. The output of this function can be used with the functions \code{\link{wassermann}} or \code{\link{lgrMMRR}} to test for the significance of a layer on the genetic structure.
 }
 \usage{
-genleastcost(cats, fric.raster, gen.distance, NN=NULL, pathtype="leastcost", plotpath=TRUE,theta=1)
+genleastcost(cats, fric.raster, gen.distance, NN=NULL, pathtype="leastcost", 
+             plotpath=TRUE,theta=1)
 }
 \arguments{
   \item{cats}{a spatial genind object. see ?popgenreport how to provide coordinates in genind objects

@@ -15,11 +15,11 @@ init.popgensim(n.pops, n.ind, sex.ratio, n.loci, n.allels, locs, n.cov)
 
 \item{n.loci}{number of loci}
 
+\item{n.allels}{number of maximal alleles per loci}
+
 \item{locs}{coordinates of the subpopulations}
 
 \item{n.cov}{number of covariates (defaults to 3)}
-
-\item{n.alleles}{number of alleles per loci}
 }
 \value{
 a simpops object (to be used in run.popgensim )
