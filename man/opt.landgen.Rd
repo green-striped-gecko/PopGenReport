@@ -16,7 +16,9 @@ opt.landgen(landscape, nlocations, mindist = 0, fixed = NULL, method,
 
 \item{fixed}{n fixed locations, provided as a data.frame with dimenstions nx2}
 
-\item{method}{least cost path algorithm provided by the gdistance package. Options are "leastcost", "SPDistance" and "commute". see function \link{\code{costdistances}}.}
+\item{method}{least cost path algorithm provided by the gdistance package. Options are "leastcost", "SPDistance" and "commute". see function costdistances.}
+
+\item{NN}{number of next neighboring cells to be used, default is 8. see function costdistances.}
 
 \item{iter}{number of iterations that should be used to find an optimised design. Try initially the default and if it runs fast (depends on the type of costdistance an d dimenstions of landscape), increase to higher values.}
 
@@ -25,8 +27,6 @@ opt.landgen(landscape, nlocations, mindist = 0, fixed = NULL, method,
 \item{mask}{a raster object that masks positions which are not available. Areas which are not to be used for locations are coded as NA (not available), all other values are treated as suitable for placing locations.}
 
 \item{plot}{if true, some plots are presented that show the histogramm, ecdf of the best (and the worst scenario).}
-
-\item{number}{of next neighboring cells to be used, default is 8. see function \link{\code{costdistances}}.}
 }
 \value{
 a list object with two slots. The first slot is called opt and contains iter optimisation values (sd.detour and sd.cost) in a iter x 2 dimenstional data.frame. The second slot is called scenario and contains the corrosponding 1:iter scenarios, given as coordinates in a data.frame of dimensions nlocations x 2. Both slots are ordered in decreasing order of sd.detour values. So the best scenario is at 1 and the worst is at position iter.
