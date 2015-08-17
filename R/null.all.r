@@ -18,13 +18,13 @@ null.all<-function(population)
   # for each locus...
   for(i in 1:length(split)){
     # for each allele, count the number of that type seen
-    allelecnt<-2*apply(split[[i]]@tab,2,sum,na.rm=TRUE)
+    allelecnt<-apply(split[[i]]@tab,2,sum,na.rm=TRUE)
     
     # get the number of observed homozygotes for each allele
     obs_ho<-alply(split[[i]]@tab,2,table)
     obs_ho_cnt<-rep(NA,length(obs_ho))
     for (j in 1:length(obs_ho)){
-      find1s<-which(names(obs_ho[[j]])=="1")
+      find1s<-which(names(obs_ho[[j]])=="2") # if this was changed to ploidy, could be generic...
       if(length(find1s)==0) {
         obs_ho_cnt[j]<-0
       } else {
@@ -37,8 +37,8 @@ null.all<-function(population)
     
     # get the expected counts of homozygotes for each allele
     numho<-matrix(NA,nrow=1000,ncol=length(allelefreq))
-    for (k in 1:999){
-      tempgenotype<-matrix(sample(1:length(allelecnt),sum(allelecnt),replace=TRUE,prob=allelefreq),ncol=2)
+    for (k in 1:999){ # this is looping over replicates....
+      tempgenotype<-matrix(sample(1:length(allelecnt),sum(allelecnt),replace=TRUE,prob=allelefreq),ncol=2)# generating sets of genotypes
       allelepairtab<-table(tempgenotype[,1],tempgenotype[,2])
       allelepairlong<-melt(allelepairtab)
       for(l in 1:length(allelecnt)){
@@ -75,13 +75,13 @@ null.all<-function(population)
   for (i in 1:999){
     for (j in 1:length(split)){
       if (morethan1[j]){
-        tempalleles<-split[[j]]@tab[sample(1:ninds,ninds,replace=TRUE),]
-        allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE)*population@ploidy[1]
+        tempalleles<-split[[j]]@tab[sample(1:ninds,ninds,replace=TRUE),]  # this is randomly drawing individuals from the population that have been sampled
+        allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE) # counting the number of each allele type
         allelefreq<-allelecnt/sum(allelecnt)
         exphz<-1-sum(allelefreq^2)
         ho_cnt<-melt(table(tempalleles))
-        numhz<-sum(ho_cnt[ho_cnt[,1]>0 & ho_cnt[,1]<1,2],na.rm=TRUE)/population@ploidy[1]
-        numho<-ho_cnt[ho_cnt[,1]==1,2]
+        numhz<-ninds-ho_cnt$value[ho_cnt$temp==2]
+        numho<-ho_cnt$value[ho_cnt$temp==2]
         obshz<-1-numho/(numho+numhz)
         distr1[i,j]<-(exphz-obshz)/(exphz+obshz)
         distr2[i,j]<-(exphz-obshz)/(1+obshz)  
@@ -89,14 +89,14 @@ null.all<-function(population)
     }
   }
   for (k in 1:length(split)){
-    if(morethan1[j]){
+    if(morethan1[k]){
       tempalleles<-split[[k]]@tab
-      allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE)*population@ploidy[1]
+      allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE)
       allelefreq<-allelecnt/sum(allelecnt)
       exphz<-1-sum(allelefreq^2)
       ho_cnt<-melt(table(tempalleles))
-      numhz<-sum(ho_cnt[ho_cnt[,1]>0 & ho_cnt[,1]<1,2],na.rm=TRUE)/population@ploidy[1]
-      numho<-ho_cnt[ho_cnt[,1]==1,2]
+      numhz<-ninds-ho_cnt$value[ho_cnt$tempalleles==2]
+      numho<-ho_cnt$value[ho_cnt$tempalleles==2]  # this is where I need to start tomorrow
       obshz<-1-numho/(numho+numhz)
       distr1[1000,k]<-(exphz-obshz)/(exphz+obshz)
       distr2[1000,k]<-(exphz-obshz)/(1+obshz)  
