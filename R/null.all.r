@@ -6,6 +6,14 @@ null.all<-function(population)
     return
   }
   
+  allploidies<-as.numeric(names(table(population@ploidy)))
+  
+  if(any(allploidies!=2,na.rm=TRUE)){
+    message("One or more populations has a ploidy other than 2! Script stopped!")
+    return
+  } 
+  
+  
   # divide the genind object into individual loci
   split<-seploc(population)
   ninds<-dim(population@tab)[1]
@@ -14,6 +22,8 @@ null.all<-function(population)
   per.results<-matrix(NA,nrow=length(split),ncol=maxalleles)
   list.obs.ho.cnt<-list()
   list.exp.ho<-list()
+  locus_ho_dist<-matrix(NA,nrow=1000,ncol=length(split))
+  obs_tot_count<-rep(NA,length(split))
   
   # for each locus...
   for(i in 1:length(split)){
@@ -32,11 +42,16 @@ null.all<-function(population)
       }
     }
     
+    # get the observed number of homozygotes across alleles at a locus
+    obs_tot_count[i]<-sum(obs_ho_cnt,na.rm=TRUE)
+    
     # calculate the allele frequencies
     allelefreq<-allelecnt/sum(allelecnt)
     
     # get the expected counts of homozygotes for each allele
+    # this is assuming HWE...
     numho<-matrix(NA,nrow=1000,ncol=length(allelefreq))
+    
     for (k in 1:999){ # this is looping over replicates....
       tempgenotype<-matrix(sample(1:length(allelecnt),sum(allelecnt),replace=TRUE,prob=allelefreq),ncol=2)# generating sets of genotypes
       allelepairtab<-table(tempgenotype[,1],tempgenotype[,2])
@@ -51,8 +66,10 @@ null.all<-function(population)
           numho[k,l]<-allelepairlong[matching,3]
         }      
       }
+      locus_ho_dist[k,i]<-sum(numho[k,],na.rm=TRUE)
     }
     numho[1000,]<-obs_ho_cnt
+    locus_ho_dist[1000,i]<-obs_tot_count[i]
     per.results[i,1:length(obs_ho_cnt)]<-sapply(1:dim(numho)[2],function(x,obs_ho_cnt,numho) sum(numho[,x]>obs_ho_cnt[x])/1000, obs_ho_cnt,numho)
     list.obs.ho.cnt[[i]]<-obs_ho_cnt
     list.exp.ho[[i]]<-numho
@@ -61,7 +78,7 @@ null.all<-function(population)
   suffix<-seq(1:maxalleles)
   colnames(per.results)<-paste("Allele-",suffix,sep="")
   
-  homozygotes<-list(observed=list.obs.ho.cnt,bootstrap=list.exp.ho,probability.obs=per.results)
+  homozygotes<-list(observed=list.obs.ho.cnt,bootstrap=list.exp.ho,probability.obs=per.results,overall=list(observed=obs_tot_count,distribution=locus_ho_dist))
   
   
   # calculate null allele frequencies...
@@ -75,12 +92,15 @@ null.all<-function(population)
   for (i in 1:999){
     for (j in 1:length(split)){
       if (morethan1[j]){
-        tempalleles<-split[[j]]@tab[sample(1:ninds,ninds,replace=TRUE),]  # this is randomly drawing individuals from the population that have been sampled
-        allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE) # counting the number of each allele type
+        # randomly draw individuals from the population that have been sampled
+        tempalleles<-split[[j]]@tab[sample(1:ninds,ninds,replace=TRUE),]  
+        # counting the number of each allele type
+        allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE) 
         allelefreq<-allelecnt/sum(allelecnt)
         exphz<-1-sum(allelefreq^2)
         ho_cnt<-melt(table(tempalleles))
-        numhz<-ninds-ho_cnt$value[ho_cnt$temp==2]
+        # for numhz, have to subtract number of homozygotes and missing from ninds
+        numhz<-ninds-ho_cnt$value[ho_cnt$temp==2]-sum(is.na(tempalleles[,1]))
         numho<-ho_cnt$value[ho_cnt$temp==2]
         obshz<-1-numho/(numho+numhz)
         distr1[i,j]<-(exphz-obshz)/(exphz+obshz)
@@ -90,13 +110,14 @@ null.all<-function(population)
   }
   for (k in 1:length(split)){
     if(morethan1[k]){
+      # last observation is for the actual dataset
       tempalleles<-split[[k]]@tab
       allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE)
       allelefreq<-allelecnt/sum(allelecnt)
       exphz<-1-sum(allelefreq^2)
       ho_cnt<-melt(table(tempalleles))
-      numhz<-ninds-ho_cnt$value[ho_cnt$tempalleles==2]
-      numho<-ho_cnt$value[ho_cnt$tempalleles==2]  # this is where I need to start tomorrow
+      numhz<-ninds-ho_cnt$value[ho_cnt$tempalleles==2]-sum(is.na(tempalleles[,1]))
+      numho<-ho_cnt$value[ho_cnt$tempalleles==2]
       obshz<-1-numho/(numho+numhz)
       distr1[1000,k]<-(exphz-obshz)/(exphz+obshz)
       distr2[1000,k]<-(exphz-obshz)/(1+obshz)  
