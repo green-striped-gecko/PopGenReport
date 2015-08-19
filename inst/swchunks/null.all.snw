@@ -19,7 +19,7 @@ tot.dist.ho<-nullalleles$homozygotes$overall$distribution
 tot.dist.ho<-melt(tot.dist.ho)
 
 
-print(ggplot(data=tot.dist.ho,aes(x=factor(x2),y=value))+geom_boxplot()+theme_classic()+xlab("Locus")+ylab("Number of homozygotes")+scale_x_discrete(labels=names(cats@loc.n.all))+geom_point(aes(x=factor(1:length(tot.obs.ho)),y=tot.obs.ho),colour="red"))
+print(ggplot(data=tot.dist.ho,aes(x=factor(X2),y=value))+geom_boxplot()+theme_classic()+xlab("Locus")+ylab("Number of homozygotes")+scale_x_discrete(labels=names(cats@loc.n.all))+geom_point(aes(x=factor(1:length(tot.obs.ho)),y=tot.obs.ho),colour="red"))
 
 @
 
