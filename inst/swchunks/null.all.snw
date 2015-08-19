@@ -1,11 +1,6 @@
 \section{Testing for null alleles}
 
-\subsection{Comparison of the observed number of homozygotes vs. expected}
-Boxplots show the bootstrap distribution of the expected number of homozygotes for each allele with the boxes showing the 25th (lower edge), 50th (solid line), and 75th (upper edge) percentiles of the distribution and the whiskers showing 1.5 * the inter-quartile range. Solid black dots indicate outliers while red dots indicate the observed number of homozygotes for the allele. If the red dot is above the end of the whisker it suggests that there is an excess of homozygotes for that allele. 
-\newline
-\newline The probability of the observed number of homozygotes for each allele is available in the results object using null.all\$homozygotes\$probability.obs
 
-\noindent
 <<echo=FALSE, results='hide', message=FALSE>>=
 nullalleles<-null.all(cats)  
 obs.ho<-nullalleles$homozygotes$observed
@@ -14,7 +9,10 @@ tot.obs.ho<-nullalleles$homozygotes$overall$observed
 tot.dist.ho<-nullalleles$homozygotes$overall$distribution
 @
 
-
+\subsection{Comparison of the observed number of homozygotes vs. expected - overall}
+Boxplots show the bootstrap distribution of the expected number of homozygotes for each allele with the boxes showing the 25th (lower edge), 50th (solid line), and 75th (upper edge) percentiles of the distribution and the whiskers showing 1.5 * the inter-quartile range. Solid black dots indicate outliers while red dots indicate the observed number of homozygotes for the allele. If the red dot is above the end of the whisker it suggests that there is an excess of homozygotes for that locus.  
+\newline
+\newline The probability of the observed number of homozygotes for each locus is available in the results object using null.all\$homozygotes\$overall
 <<null_all_overall_ho, echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi, fig.cap="Number of observed homozygotes at each locus (red dots) compared to the distribution of the expected number of homozygotes assuming HWE (boxplots)">>=
 tot.dist.ho<-melt(tot.dist.ho)
 
@@ -23,7 +21,12 @@ print(ggplot(data=tot.dist.ho,aes(x=factor(X2),y=value))+geom_boxplot()+theme_cl
 
 @
 
+\subsection{Comparison of the observed number of homozygotes vs. expected - by locus}
+Boxplots show the bootstrap distribution of the expected number of homozygotes for each allele with the boxes showing the 25th (lower edge), 50th (solid line), and 75th (upper edge) percentiles of the distribution and the whiskers showing 1.5 * the inter-quartile range. Solid black dots indicate outliers while red dots indicate the observed number of homozygotes for the allele. If the red dot is above the end of the whisker it suggests that there is an excess of homozygotes for that allele. 
+\newline
+\newline The probability of the observed number of homozygotes for each allele is available in the results object using null.all\$homozygotes\$probability.obs
 
+\noindent
 <<null_all, echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi>>=
 for (i in 1:length(obs.ho)) {
   boot.dist<-melt(boot.ho[[i]])
