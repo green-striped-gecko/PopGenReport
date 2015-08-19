@@ -22,6 +22,7 @@ suppressPackageStartupMessages(library(raster))
 suppressPackageStartupMessages(library(GGally))
 suppressPackageStartupMessages(library(hierfstat))
 suppressPackageStartupMessages(library(data.table))
+suppressPackageStartupMessages(library(reshape2))
 options(width = 80)
 
 #global functions and parameters....
