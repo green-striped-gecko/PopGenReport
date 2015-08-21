@@ -92,16 +92,21 @@ null.all<-function(population)
   for (i in 1:999){
     for (j in 1:length(split)){
       if (morethan1[j]){
+        #message("i = ",i," j = ",j)
         # randomly draw individuals from the population that have been sampled
         tempalleles<-split[[j]]@tab[sample(1:ninds,ninds,replace=TRUE),]  
         # counting the number of each allele type
         allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE) 
         allelefreq<-allelecnt/sum(allelecnt)
         exphz<-1-sum(allelefreq^2)
-        ho_cnt<-melt(table(tempalleles))
+        ho_cnt<-reshape::melt(table(tempalleles))
+        if(length(ho_cnt$value[ho_cnt$temp==2])==0) {
+          numho<-0
+        } else if(length(ho_cnt$value[ho_cnt$temp==2])>0){
+          numho<-ho_cnt$value[ho_cnt$temp==2]
+        }
         # for numhz, have to subtract number of homozygotes and missing from ninds
-        numhz<-ninds-ho_cnt$value[ho_cnt$temp==2]-sum(is.na(tempalleles[,1]))
-        numho<-ho_cnt$value[ho_cnt$temp==2]
+        numhz<-ninds-numho-sum(is.na(tempalleles[,1]))
         obshz<-1-numho/(numho+numhz)
         distr1[i,j]<-(exphz-obshz)/(exphz+obshz)
         distr2[i,j]<-(exphz-obshz)/(1+obshz)  
@@ -116,8 +121,12 @@ null.all<-function(population)
       allelefreq<-allelecnt/sum(allelecnt)
       exphz<-1-sum(allelefreq^2)
       ho_cnt<-melt(table(tempalleles))
-      numhz<-ninds-ho_cnt$value[ho_cnt$tempalleles==2]-sum(is.na(tempalleles[,1]))
-      numho<-ho_cnt$value[ho_cnt$tempalleles==2]
+      if(length(ho_cnt$value[ho_cnt$tempalleles==2])==0){
+        numho<-0
+      } else if(length(ho_cnt$value[ho_cnt$tempalleles==2])>0){
+        numho<-ho_cnt$value[ho_cnt$tempalleles==2]
+      }
+      numhz<-ninds-numho-sum(is.na(tempalleles[,1]))
       obshz<-1-numho/(numho+numhz)
       distr1[1000,k]<-(exphz-obshz)/(exphz+obshz)
       distr2[1000,k]<-(exphz-obshz)/(1+obshz)  
