@@ -3,7 +3,7 @@
 Principal coordinate analysis. This plot, using the first two axes, visualises genetic diversity among sampled individuals. Missing data are replaced by the mean of the allele frequencies.
 Colors indicate subpopulation if specified in the genetic data set.
 <<echo=FALSE,results='hide'>>=
-scale.cats <- scaleGen(cats)
+scale.cats <- scaleGen(cats, NA.method="mean")
 pca.cats <- dudi.pca(scale.cats, cent=FALSE, scale=FALSE, scannf=FALSE, nf=3)
 
 cols <- rainbow(length(levels(pop(cats))))

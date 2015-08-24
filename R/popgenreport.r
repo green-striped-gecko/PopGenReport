@@ -143,6 +143,8 @@ if (length(unique(popNames(cats)))!=length(popNames(cats)))
  #pgr <- new.env(parent=.GlobalEnv)
  pgr <- new.env()
  assign("cats",cats,envir=pgr)
+ #sumcats <- summary(cats, verbose=FALSE)
+ #assign("sumcats",sumcats, envir=pgr )
 ###################################
 
 

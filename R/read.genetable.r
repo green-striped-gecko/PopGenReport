@@ -71,7 +71,7 @@ genes <- res
 
   
   
-  df <- df2genind(genes, pop=pops, ind.names=inds, NA.char=NA.char,     ncode=ncode,loc.names=colnames(genes), sep=sep, ploidy=ploidy)
+  df <- df2genind(genes, pop=as.character(pops), ind.names=as.character(inds), NA.char=NA.char,     ncode=ncode,loc.names=colnames(genes), sep=sep, ploidy=ploidy)
   
   if (!is.null(lat) & !is.null(long))
   df@other$latlong <- data.frame(lat=gfile[,lat], long=gfile[,long])
