@@ -64,30 +64,30 @@ popgenreport <- function(cats=NULL,
     if(numlow>0) message("Population ",unname(popNames(cats))[i]," has ",numlow," locus/loci with less than 3 genotypes. This may cause errors in some analyses. We advice to combine or drop populations with low numbers of genotypes. ")
   }
   
-  
+### adjusting causes error with Adegenet 2.0 and it is controlled for when creating the object!!  
   #cut down length of loci names to  6  and make sure they are unique
-  locNames(cats) <- substr(locNames(cats),1,6)   
-  if (length(unique(locNames(cats)))!= length(locNames(cats))) 
-  {locNames(cats) <- paste(1:length(locNames(cats)),"-",substr(locNames(cats),1,4), sep="")
-  cat("Loci names were not unique and therefore adjusted.\n")
-  }
-  levels(cats@loc.fac) <- locNames(cats)  #make sure levels and factors are the same
+  #locNames(cats) <- substr(locNames(cats),1,6)   
+  #if (length(unique(locNames(cats)))!= length(locNames(cats))) 
+  #{locNames(cats) <- paste(1:length(locNames(cats)),"-",substr(locNames(cats),1,4), sep="")
+  #cat("Loci names were not unique and therefore adjusted.\n")
+  #}
+  #levels(cats@loc.fac) <- locNames(cats)  #make sure levels and factors are the same
 #check if pop.names, indnames are unique!!!!
 #adjust if necessary and issue a notification
-if (length(unique(indNames(cats)))!=length(indNames(cats))) 
-  {indNames(cats) <- paste(1:length(indNames(cats)),"-",substr(indNames(cats),1,8),sep="")
-  cat("Individual names were not unique and therefore adjusted.\n")
-  }
-
-
-  
-if (length(unique(popNames(cats)))!=length(popNames(cats))) 
-  {
-  popNames(cats) <- paste(1:length(popNames(cats)),"-",substr(popNames(cats),1,6),sep="")
-  cat("Subpopulation names were not unique and therefore adjusted.\n")
-  }
-
- 
+# if (length(unique(indNames(cats)))!=length(indNames(cats))) 
+#   {indNames(cats) <- paste(1:length(indNames(cats)),"-",substr(indNames(cats),1,8),sep="")
+#   cat("Individual names were not unique and therefore adjusted.\n")
+#   }
+# 
+# 
+#   
+# if (length(unique(popNames(cats)))!=length(popNames(cats))) 
+#   {
+#   popNames(cats) <- paste(1:length(popNames(cats)),"-",substr(popNames(cats),1,6),sep="")
+#   cat("Subpopulation names were not unique and therefore adjusted.\n")
+#   }
+# 
+#  
     #set directory where to save a file, defaults to tempdir (follow R policy)
   if (is.null(path.pgr)) 
   {
