@@ -16,7 +16,7 @@ Boxplots show the bootstrap distribution of the expected number of homozygotes f
 <<null_all_overall_ho, echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi, fig.cap="Number of observed homozygotes at each locus (red dots) compared to the distribution of the expected number of homozygotes assuming HWE (boxplots)">>=
 tot.dist.ho<-reshape2::melt(tot.dist.ho)
 toh <- data.frame(xx=tot.obs.ho)
-print(ggplot(data=tot.dist.ho, aes(x=factor(X2),y=tot.dist.ho$value))+geom_boxplot(fill="grey")+theme_classic()+xlab("Locus")+ylab("Number of homozygotes")+scale_x_discrete(labels=names(cats@loc.n.all))+geom_point(data=toh, aes(x=1:length(xx),y=xx),colour="red"),size=3)
+print(ggplot(data=tot.dist.ho, aes(x=factor(X2),y=value))+geom_boxplot(fill="grey")+theme_classic()+xlab("Locus")+ylab("Number of homozygotes")+scale_x_discrete(labels=names(cats@loc.n.all))+geom_point(data=toh, aes(x=1:length(xx),y=xx),colour="red"),size=3)
 @
 \FloatBarrier
 
