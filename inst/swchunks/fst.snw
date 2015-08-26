@@ -1,4 +1,4 @@
-
+\FloatBarrier
 \section{Calculation of F statistics for each locus across all sampling locations}
 <<echo=FALSE, results='hide'>>=
 # Calculate Fst values for each loci
