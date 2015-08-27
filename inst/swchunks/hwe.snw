@@ -5,24 +5,46 @@
 
 <<echo=FALSE, results='hide', warning=FALSE>>=
 # see if there is a significant departure from HWE for each popxloc
-testhw<-hw.test(cats,res="matrix")
-denom<-dim(testhw)[1]*dim(testhw)[2]
-rownames(testhw)<-popNames(cats)
-testhw<-round(testhw,digits=4)
-# this step rotates the HWE table based on which dimension is bigger in order to better fit the page
-if (dim(testhw)[1]>dim(testhw)[2]){
-  tabhw<-testhw
-} else{
-  tabhw<-t(testhw)
+# redoing this section as the function seems to have changed...
+
+# reorder dataset to calculate HWE without errors...
+tempcats<-cats
+reorderalleles<-rep(NA,dim(tempcats@tab)[2])
+tempcounter<-0
+for (i in 1:length(tempcats@all.names)){
+  message("i = ",i," tempcounter = ",tempcounter)
+  templocorder<-order(tempcats@all.names[[i]])
+  reorderalleles[(tempcounter+1):(length(templocorder)+tempcounter)]<-order(tempcats@all.names[[i]])+tempcounter
+  tempcats@all.names[[i]]<-tempcats@all.names[[i]][templocorder]
+  tempcounter<-tempcounter+length(templocorder)
+}
+tempcats@tab<-tempcats@tab[,reorderalleles]
+popcatstemp<-seppop(tempcats)
+
+if(length(popcatstemp)>=length(tempcats@loc.n.all)){
+  pvalhwe<-as.data.frame(matrix(NA,nrow=length(popcatstemp),ncol=length(tempcats@loc.n.all)))
+  for(i in 1:length(popcatstemp)){
+    temphwevals<-hw.test(popcatstemp[[i]])
+    pvalhwe[i,]<-temphwevals[,4]
+  }
+  colnames(pvalhwe)<-names(tempcats@loc.n.all)
+  rownames(pvalhwe)<-popNames(tempcats)
+} else if(length(popcatstemp)<length(tempcats@loc.n.all)){
+  pvalhwe<-matrix(NA,nrow=length(tempcats@loc.n.all),ncol=length(popcatstemp))
+  for(i in 1:length(popcatstemp)){
+    temphwevals<-hw.test(popcatstemp[[i]])
+    pvalhwe[,i]<-temphwevals[,4]
+  }
+  rownames(pvalhwe)<-names(tempcats@loc.n.all)
+  colnames(pvalhwe)<-popNames(tempcats)
 }
 
-if (dim(testhw)[1]>dim(testhw)[2]){
-  testhw
-} else{
-  t(testhw)
-}
+testhw<-round(pvalhwe,digits=4)
+denom<-dim(testhw)[1]*dim(testhw)[2]
+
+
 write.csv(testhw, paste(cats@other$filename,"-HWE_by_locus_location.csv", sep=""), row.names=TRUE)
-pop_hwe_table<-xtable(tabhw,caption="Chi-square test of HWE p-values for each combination of location and locus",digits=3)
+pop_hwe_table<-xtable(testhw,caption="Chi-square test of HWE p-values for each combination of location and locus",digits=3)
 @
 
 \noindent
