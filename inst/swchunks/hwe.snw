@@ -12,7 +12,7 @@ tempcats<-cats
 reorderalleles<-rep(NA,dim(tempcats@tab)[2])
 tempcounter<-0
 for (i in 1:length(tempcats@all.names)){
-  message("i = ",i," tempcounter = ",tempcounter)
+  #message("i = ",i," tempcounter = ",tempcounter)
   templocorder<-order(tempcats@all.names[[i]])
   reorderalleles[(tempcounter+1):(length(templocorder)+tempcounter)]<-order(tempcats@all.names[[i]])+tempcounter
   tempcats@all.names[[i]]<-tempcats@all.names[[i]][templocorder]
