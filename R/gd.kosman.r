@@ -12,7 +12,7 @@ gd.kosman <- function(population){
   ploidy <- population@ploidy 
   
   # this calculates the manhattan distance between each individual and adjusts for ploidy..
-  matrices <- lapply(seploc(population), function(l) as.matrix(dist(l@tab, "manhattan")/ploidy))
+  matrices <- lapply(seploc(population), function(l) as.matrix(dist(l@tab, "manhattan")/median(ploidy)))
   
   # if the value is missing, mark it with a 1, if it is real, mark it 0
   missing <- lapply(matrices, function(m) ifelse(is.na(m), 1, 0))
