@@ -77,7 +77,7 @@ gd.smouse <- function(population, verbose=TRUE){
 
   for (i in 1:numpops){   #numpops this is looping over pops
     for (j in i:numpops){ #numpops this is looping over pops
-      if(verbose) cat("\r","Comparing population ",population@pop.names[i]," with population ",population@pop.names[j])
+      if(verbose) cat("\r","Comparing population ",levels(population@pop)[i]," with population ",levels(population@pop)[j])
       pop1<-which(indpop==poplist[i]) # gets a list of individuals from pop1
       pop2<-which(indpop==poplist[j]) # gets a list of individuals from pop2
       smoused.loci<-array(NA,c(length(pop2),length(pop1),maxloci))
@@ -93,7 +93,7 @@ gd.smouse <- function(population, verbose=TRUE){
               i1 <- genomes[pop1[l],]
               i2 <- genomes[pop2[k],]          
               # calculate genetic distances between individuals using Smouse and Peakall 1999
-              pairdist<-(i1*2-i2*2)^2
+              pairdist<-(i1-i2)^2
               sdists<-sapply(1:maxloci, function(x,cs,cs.l,pairdist) sum(pairdist[cs.l[x]:cs[x]])*0.5  , cs, cs.l,pairdist)
               for (m in 1:maxloci){
                 if(is.na(sdists[m])) smoused.loci[k,l,m]<-(-99) else smoused.loci[k,l,m]<-sdists[m]    
@@ -112,7 +112,7 @@ gd.smouse <- function(population, verbose=TRUE){
             i1 <- genomes[pop1[k],]
             i2 <- genomes[pop2[l],]          
             # calculate genetic distances between individuals using Smouse and Peakall 1999
-            pairdist<-(i1*2-i2*2)^2
+            pairdist<-(i1-i2)^2
             sdists<-sapply(1:maxloci, function(x,cs,cs.l,pairdist) sum(pairdist[cs.l[x]:cs[x]])*0.5  , cs, cs.l,pairdist)
             for (m in 1:maxloci){
               if(is.na(sdists[m])) smoused.loci[l,k,m]<-(-99) else smoused.loci[l,k,m]<-sdists[m]    
