@@ -12,7 +12,9 @@ tot.dist.ho<-nullalleles$homozygotes$overall$distribution
 @
 
 \subsection{Comparison of the observed number of homozygotes vs. expected - overall}
-Boxplots show the bootstrap distribution of the expected number of homozygotes for each allele with the boxes showing the 25th (lower edge), 50th (solid line), and 75th (upper edge) percentiles of the distribution and the whiskers showing 1.5 * the inter-quartile range. Solid black dots indicate outliers while red dots indicate the observed number of homozygotes for the allele. If the red dot is above the end of the whisker it suggests that there is an excess of homozygotes for that locus.  
+Boxplots show the bootstrap distribution of the expected number of homozygotes for each allele with the boxes showing the 25th (lower edge), 50th (solid line), and 75th (upper edge) percentiles of the distribution and the whiskers showing 1.5 * the inter-quartile range. Solid black dots indicate outliers while red dots indicate the observed number of homozygotes for the allele. If the red dot is above the end of the whisker it suggests that there is an excess of homozygotes for that locus, 
+
+If your results suggest that there is an excess of homozygotes for one (or more) of your loci, you might have a null allele. On the other hand, it could also be incomplete mixing across populations. Try rerunning your analysis by subpopulation or region and see if that resolves the excess of homozygotes. If it doesn't, then you should consider taking more robust measures to check for null alleles. See for instance Girard's (2011) paper on a robust statistical method to detect null alleles.  
 \newline
 \newline The probability of the observed number of homozygotes for each locus is available in the results object using null.all\$homozygotes\$overall
 <<null_all_overall_ho, echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi, fig.cap="Number of observed homozygotes at each locus (red dots) compared to the distribution of the expected number of homozygotes assuming HWE (boxplots)">>=
