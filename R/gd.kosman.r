@@ -9,10 +9,20 @@ gd.kosman <- function(population){
   n <- length(locNames(population)) 
   
   # getting the ploidy of an animal....
-  ploidy <- population@ploidy 
+  uniqueploidy<-unique(population@ploidy)
+  if(length(uniqueploidy)==1){
+    ploidy<-uniqueploidy
+  } else if(uniqueploidy>1){
+    message("Your data set has multiple ploidies, please separate loci by ploidy")
+    message("Script stopped!")
+    return
+  } else if(uniqueploidy<=0){
+    message("Your dataset has an invalid ploidy (ploidy<=0). Script stopped!")
+    return
+  }
   
   # this calculates the manhattan distance between each individual and adjusts for ploidy..
-  matrices <- lapply(seploc(population), function(l) as.matrix(dist(l@tab, "manhattan")/median(ploidy)))
+  matrices <- lapply(seploc(population), function(l) as.matrix(dist(l@tab, "manhattan")/(2*ploidy)))
   
   # if the value is missing, mark it with a 1, if it is real, mark it 0
   missing <- lapply(matrices, function(m) ifelse(is.na(m), 1, 0))
