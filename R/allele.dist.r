@@ -31,10 +31,10 @@ allele.dist<-function(population, mk.figures=TRUE){
     # this loops over the loci
     for (j in 1:numloci){
     # this is the number of 
-      namevec<-as.numeric(names(s[[j]]$allele))
+      namevec<-(names(s[[j]]$allele))
       numnames<-length(namevec)
       # j<-2
-      tablenames<-as.numeric(rownames(alleletable[[j]]))
+      tablenames<-(rownames(alleletable[[j]]))
       for (k in 1:numnames){
         rownum<-which(tablenames==namevec[k])
         #  message("i = ",i," j = ",j," k = ",k," rownum = ",rownum)
