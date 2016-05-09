@@ -16,9 +16,9 @@ popsgone<-c()
 
 # first look for individuals who are the only ones in their pop
 # go through the list of populations
-for (i in 1:length(sumcats$pop.eff)){
+for (i in 1:length(sumcats$n.by.pop)){
   # find out who only has 1 individual
-  if (sumcats$pop.eff[i]<2){
+  if (sumcats$n.by.pop[i]<2){
     indrmv<-which(indpop==levels(cats@pop)[i])
     indsrmv<-c(indsrmv, indrmv)
     popsgone<-c(popsgone,i)

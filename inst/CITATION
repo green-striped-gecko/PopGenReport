@@ -1,33 +1,31 @@
-citHeader("To cite the PopGenReport package:")
+citHeader("To cite PopGenReport in publications use:")
  
 citEntry(
 	 entry = "Article",
-	 title = "PopGenReport: simplifying basic population genetic analyses in R",
-         author = "Aaron Adamack & Bernd Gruber",
-         year = "2014",
-         journal = "Methods in Ecology and Evolution",
-         volume = "5",
-         number = "4",
-         pages = "384-387",
-	 textVersion = "Adamack, A.T. and Gruber, B. (2014) PopGenReport: simplifying basic population genetic analyses in R. Methods in Ecology and Evolution, 5(4), 384-387."
+  author = "Aaron T Adamack, Bernd Gruber",
+  doi = "10.1111/2041-210X.12158",
+  journal = "Methods in Ecology and Evolution",
+  keywords = "bioinformatics,ecological genetics,individual pairwise genetic distances,population genetics,quantitative genetics,software",
+  number = "4",
+  pages = "384--387",
+  title = "PopGenReport: simplifying basic population genetic analyses in R",
+  
+  volume = "5",
+  year = "2014",
+	 textVersion = "Adamack, A.T. and Gruber, B. (2014). PopGenReport: simplifying basic population genetic analyses in R. Methods in Ecology and Evolution, 5(4), 384-387. doi:10.1111/2041-210X.12158."
 )
 
 
 citEntry(
 	 entry="Article",
-	 
-author = "Gruber, Bernd and Adamack, Aaron T.",
-        
+author = "Aaron T Adamack, Bernd Gruber",
  doi = "10.1111/1755-0998.12381",
-	 
-journal = "Molecular Ecology Resources",
-	 
-pages = "n/a--n/a",
-
 	 title = "Landgenreport: a new R function to simplify landscape genetic analysis using resistance surface layers",
-         
-url = "http://doi.wiley.com/10.1111/1755-0998.12381",
-	 
-year = "2015",
-	 textVersion = "Gruber, B. and Adamack, A.T. (2015). Landgenreport: a new R function to simplify landscape genetic analysis using resistance surface layers. Molecular Ecology Resources. doi:10.1111/1755-0998.12381."
+         year = "2015",
+         journal = "Molecular Ecology Resources",
+         volume = "15",
+         number = "5",
+         pages = "1172-1178",         
+
+	 textVersion = "Gruber, B. and Adamack, A.T. (2015). Landgenreport: a new R function to simplify landscape genetic analysis using resistance surface layers. Molecular Ecology Resources, 15(5), 1172-1178. doi:10.1111/1755-0998.12381."
 )

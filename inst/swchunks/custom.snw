@@ -11,7 +11,7 @@ Write your explanation using latex syntax.
 #write in your code to calculate something here. Your genind object is accessed via the name 'cats'. 
 
 #create your own analysis
-results <- summary(cats)$pop.eff
+results <- summary(cats)$n.by.pop
 
 #create your table and use this for the report
 #to print it as a table, it has to be a data.frame!!!

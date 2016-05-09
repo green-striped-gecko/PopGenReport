@@ -39,7 +39,7 @@ brtab(indlist, capt="Number of individuals per population", c("population","# in
 
 
 <<echo=FALSE, results='hide'>>=
-numallelespop<-as.data.frame(sumcats$pop.nall)
+numallelespop<-as.data.frame(sumcats$pop.n.all)
 rownames(numallelespop)<-popNames(cats)
 colnames(numallelespop)<-"Total number of alleles"
 #t(numallelespop)
@@ -51,8 +51,8 @@ write.csv(numallelespop.out, paste(filename,"-tot_alleles_by_loc.csv", sep=""),r
 brtab(numallelespop,"Number of alleles per population",c("population","# alleles"))
 @
 <<pop_sampsz_vs_alleles, echo=FALSE, fig.width=6, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi>>=
-plot(sumcats$pop.eff,sumcats$pop.nall,xlab="Location sample size",ylab="Number of alleles",main="Number of alleles vs location sample size",pch=19,ylim=c(0,round((5+max(sumcats$pop.nall)),digits=-1)))
-textxy(sumcats$pop.eff,sumcats$pop.nall,(names(sumcats$pop.eff)),cex=0.6)
+plot(sumcats$n.by.pop,sumcats$pop.n.all,xlab="Location sample size",ylab="Number of alleles",main="Number of alleles vs location sample size",pch=19,ylim=c(0,round((5+max(sumcats$pop.n.all)),digits=-1)))
+textxy(sumcats$n.by.pop,sumcats$pop.n.all,(names(sumcats$pop.n.all)),cex=0.6)
 @
 \FloatBarrier
 \noindent
