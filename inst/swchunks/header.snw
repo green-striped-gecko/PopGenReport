@@ -25,14 +25,14 @@ cat(paste("\\subtitle {using PopGenReport Ver.",ver,"}\n"))
 
 
 
-<<echo=FALSE, results='asis'>>=
-rref <- citation("PopGenReport")
-print(rref[1], style="latex")
-@
+%<<echo=FALSE, results='asis'>>=
+%rref <- citation("PopGenReport")
+%print(rref[1], style="latex")
+%@
   
-<<echo=FALSE, results='asis'>>=
-print(rref[2], style="latex")
-@
+%<<echo=FALSE, results='asis'>>=
+%print(rref[2], style="latex")
+%@
 
 \tableofcontents
 \newpage
