@@ -1,6 +1,6 @@
 \section{Counts}
 <<echo=FALSE,results='asis'>>=
-cat(paste("This analysis looks at ",sumcats$N," individuals.",sep=""))
+cat(paste("This analysis looks at ",sumcats$n," individuals.",sep=""))
 @
 
 \noindent
