@@ -6,15 +6,44 @@ Date: 2016-05-9
 Authors@R: c(
   person("Bernd", "Gruber", email="bernd.gruber@canberra.edu.au", role=c("aut","cre")),
   person("Aaron", "Adamack", email="aaron.adamack@canberra.edu.au", role="aut"))
-Description: Provides beginner friendly framework to analyse population genetic data. It uses 'knitr' to create comprehensive reports on spatial genetic data. For detailed information how to use the package refer to the comprehensive tutorials or visit www.popgenreport.org.
+Description: Provides beginner friendly framework to analyse population genetic
+    data. It uses 'knitr' to create comprehensive reports on spatial genetic data.
+    For detailed information how to use the package refer to the comprehensive
+    tutorials or visit www.popgenreport.org.
 License: GPL
 LazyData: true
-Depends: R (>= 3.0.0), knitr, adegenet (>= 2.0.0), raster
-Imports: lattice, RgoogleMaps, gap, calibrate, xtable, plyr, dismo,
-        reshape, ggplot2, R.utils, ade4, pegas, genetics, rgdal, gdistance, vegan, sp, 
-        mmod, GGally, data.table, graphics, grDevices, methods, stats, utils
+Depends:
+    R (>= 3.0.0),
+    knitr,
+    adegenet (>= 2.0.0),
+    raster
+Imports:
+    lattice,
+    RgoogleMaps,
+    gap,
+    calibrate,
+    xtable,
+    plyr,
+    dismo,
+    reshape,
+    ggplot2,
+    R.utils,
+    ade4,
+    pegas,
+    genetics,
+    rgdal,
+    gdistance,
+    vegan,
+    sp,
+    mmod,
+    GGally,
+    data.table,
+    graphics,
+    grDevices,
+    methods,
+    stats,
+    utils
 VignetteBuilder: knitr
 URL: https://github.com/green-striped-gecko/PopGenReport
-Suggests: 
-
-
+Suggests:
+RoxygenNote: 5.0.1
