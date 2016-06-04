@@ -18,7 +18,7 @@ ip <- installed.packages()
 ver <- ip[which(ip[,1]=="PopGenReport"),"Version"]
 @
 <<echo=FALSE, results='asis'>>=
-cat(paste("\\subtitle {using PopGenReport Ver.",ver,"}\n"))
+cat(paste("\\subtitle {using PopGenReport Version ",ver,"}\n"))
 @
 \author{Adamack \& Gruber}
 \maketitle
