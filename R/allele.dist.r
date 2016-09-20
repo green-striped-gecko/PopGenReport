@@ -18,10 +18,10 @@ allele.dist<-function(population, mk.figures=TRUE){
   for(i in 1:numloci){
     alleletable[[i]]<-matrix(nrow=popnumallele[[i]],ncol=numpops)
     colnames(alleletable[[i]])<-popNames(population)
-    rownames(alleletable[[i]])<-population@all.names[[i]]
+    rownames(alleletable[[i]])<-population@all.names[[i]][order(population@all.names[[i]])]
     fralleletable[[i]]<-matrix(nrow=popnumallele[[i]],ncol=numpops)
     colnames(fralleletable[[i]])<-popNames(population)
-    rownames(fralleletable[[i]])<-population@all.names[[i]]
+    rownames(fralleletable[[i]])<-population@all.names[[i]][order(population@all.names[[i]])]
   }
 
   # this is going to loop over all populations
