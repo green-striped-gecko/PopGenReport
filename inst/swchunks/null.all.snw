@@ -37,7 +37,7 @@ for (i in 1:length(obs.ho)) {
   rownames(obs.val)<-seq(1:length(obs.ho[[i]]))
   obs.val<-melt(t(obs.val))
   print(
-    ggplot(data=boot.dist,aes(as.factor(X2),value)) +geom_boxplot(fill="lightgrey")+theme_classic()+geom_point(data=obs.val,aes(as.factor(X2),value, colour="red"),size=3)+ylab("Number of homozygotes")+xlab("Allele")+ scale_x_discrete(labels=unname(cats@all.names[[1]]))+ggtitle(locNames(cats)[i])+ theme(legend.position="none")
+    ggplot(data=boot.dist,aes(as.factor(X2),value)) +geom_boxplot(fill="lightgrey")+theme_classic()+geom_point(data=obs.val,aes(as.factor(X2),value, colour="red"),size=3)+ylab("Number of homozygotes")+xlab("Allele")+ scale_x_discrete(labels=unname(cats@all.names[[i]]))+ggtitle(locNames(cats)[i])+ theme(legend.position="none")
   )
 }  
 @
