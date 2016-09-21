@@ -50,33 +50,33 @@ landgenreport <- function(cats,
   }
   
   
-  #cut down length of loci names to  6  and make sure they are unique
-  locNames(cats) <- substr(locNames(cats),1,6)   
-  if (length(unique(locNames(cats)))!= length(locNames(cats))) 
-    {
-    locNames(cats) <- paste(1:length(locNames(cats)),"-",substr(locNames(cats),1,4), sep="")
- 
-  cat("Loci names were not unique and therefore adjusted.\n")
-    }
-  levels(cats@loc.fac) <- locNames(cats)  #make sure levels and factors are the same
-#check if indnames are unique!!!!
-#adjust if necessary and issue a notification
-if (length(unique(indNames(cats)))!=length(indNames(cats))) 
-  {indNames(cats) <- paste(1:length(indNames(cats)),"-",substr(indNames(cats),1,8),sep="")
-  cat("Individual names were not unique and therefore adjusted.\n")
-  }
+#   #cut down length of loci names to  6  and make sure they are unique
+#   #locNames(cats) <- substr(locNames(cats),1,6)   
+#   # if (length(unique(locNames(cats)))!= length(locNames(cats))) 
+#   #   {
+#   #   locNames(cats) <- paste(1:length(locNames(cats)),"-",substr(locNames(cats),1,4), sep="")
+#   # 
+#   # cat("Loci names were not unique and therefore adjusted.\n")
+#   #   }
+#   # levels(cats@loc.fac) <- locNames(cats)  #make sure levels and factors are the same
+# #check if indnames are unique!!!!
+# #adjust if necessary and issue a notification
+# if (length(unique(indNames(cats)))!=length(indNames(cats))) 
+#   {indNames(cats) <- paste(1:length(indNames(cats)),"-",substr(indNames(cats),1,8),sep="")
+#   cat("Individual names were not unique and therefore adjusted.\n")
+#   }
+# 
+# 
+# #check if pop.names are unique!!!!
+# #adjust if necessary and issue a notification  
+# if (length(unique(popNames(cats)))!=length(popNames(cats))) 
+#   {
+#   popNames(cats) <- paste(1:length(popNames(cats)),"-",substr(popNames(cats),1,6),sep="")
+#   cat("Subpopulation names were not unique and therefore adjusted.\n")
+#   }
 
 
-#check if pop.names are unique!!!!
-#adjust if necessary and issue a notification  
-if (length(unique(popNames(cats)))!=length(popNames(cats))) 
-  {
-  popNames(cats) <- paste(1:length(popNames(cats)),"-",substr(popNames(cats),1,6),sep="")
-  cat("Subpopulation names were not unique and therefore adjusted.\n")
-  }
-
-
-if (is.null(NN) & pathtype=="leastcost") 
+if (is.null(NN)) 
 {
   cat("NN is not specified!\nPlease specify the number of nearest neighbour to use for the least-cost path calculations (NN=4 or NN=8). If linear features are tested you may want to consider NN=4 otherwise NN=8 is the most commonly used and prefered option. In any case check the actual least-cost paths for artefacts by inspecting the plot on least-cost paths.\n")
   return()
