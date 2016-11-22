@@ -1,8 +1,7 @@
 gd.smouse <- function(population, verbose=TRUE){
   # check to see if the passed data is of the right type
   if (class(population) != "genind") {
-    message("You did not provide a valid genind object! Script stopped!")
-    return
+    stop("You did not provide a valid genind object! Script stopped!")
   }
   
   # get initial estimates of number of individuals and the maximnum number of loci

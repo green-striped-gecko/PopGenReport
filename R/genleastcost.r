@@ -18,10 +18,9 @@ pairwise_D2 <- function (x, linearized = FALSE)
                                                      allP[, i][2]))
       attributes(res) <- list(class = "dist", Diag = FALSE, Upper = FALSE, 
                               Labels = popNames(x), Size = n.pops)
-      if (linearized) {
-        return(res/(1 - res))
-      }
-      else (return(res))
+
+      if (linearized) res <- res/(1 - res)
+      return(res)
 }
   
   pairwise_Gst_Hedrick2 <-
@@ -40,11 +39,9 @@ pairwise_D2 <- function (x, linearized = FALSE)
                                                      allP[, i][2]))
       attributes(res) <- list(class = "dist", Diag = FALSE, Upper = FALSE, 
                               Labels = popNames(x), Size = n.pops)
-      if (linearized) {
-        return(res/(1 - res))
-      }
+       if (linearized) res <- res/(1 - res)
       return(res)
-    }
+     }
   
   pairwise_Gst_Nei2 <-
     function (x, linearized = FALSE) 
@@ -62,9 +59,7 @@ pairwise_D2 <- function (x, linearized = FALSE)
                                                      allP[, i][2]))
       attributes(res) <- list(class = "dist", Diag = FALSE, Upper = FALSE, 
                               Labels = popNames(x), Size = n.pops)
-      if (linearized) {
-        return(res/(1 - res))
-      }
+      if (linearized) res <- res/(1 - res)
       return(res)
     }
   
@@ -74,8 +69,8 @@ pairwise_D2 <- function (x, linearized = FALSE)
   
   if (is.null(NN) & pathtype=="leastcost") 
   {
-    cat("NN is not specified!\nPlease specify the number of nearest neighbour to use for the least-cost path calculations (NN=4 or NN=8). If linear features are tested you may want to consider NN=4 otherwise NN=8 is the most commonly used and prefered option. In any case check the actual least-cost paths for artefacts by inspecting the plot on least-cost paths.\n")
-    return()
+    stop("NN is not specified!\nPlease specify the number of nearest neighbour to use for the least-cost path calculations (NN=4 or NN=8). If linear features are tested you may want to consider NN=4 otherwise NN=8 is the most commonly used and prefered option. In any case check the actual least-cost paths for artefacts by inspecting the plot on least-cost paths.\n")
+
   }
   
 dist.type<-NA
@@ -84,8 +79,8 @@ if (gen.distance=="D" || gen.distance=="Gst.Hedrick" || gen.distance=="Gst.Nei")
 if (gen.distance=="Kosman" || gen.distance=="Smouse" || gen.distance=="propShared") dist.type<- "ind" 
 
 if (is.na(dist.type)) 
-  {cat("No valid genetic distance type was provided. Please check ?landgenreport for valid options\n")
-   return(-1)
+  {stop("No valid genetic distance type was provided. Please check ?landgenreport for valid options\n")
+
 }
 
 if (dist.type=="pop")

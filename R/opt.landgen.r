@@ -97,7 +97,7 @@ opt.landgen <- function(landscape,  nlocations, mindist=0, fixed = NULL, method,
           cat(paste("No area left after ",i,"points at iteration",it,". I go back and try again.", retryc, "retries left...\n"))
           i <- 1
           r1 <- rback
-          if (retryc<1) {cat("Could not find any good combination, reduce mindist or increase retry or reduce number of fixed locations.\n");return(list(r1,xc,yc))}
+          if (retryc<1) {stop("Could not find any good combination, reduce mindist or increase retry or reduce number of fixed locations.\n")}
         }
       }
       xs <- xc
@@ -153,6 +153,6 @@ opt.landgen <- function(landscape,  nlocations, mindist=0, fixed = NULL, method,
   par(op)
   }
   ord <- order(opt$sd.detour, decreasing = TRUE)
-  list(opt=opt[ord,], scenario = scenario[ord])
+  return(list(opt=opt[ord,], scenario = scenario[ord]))
 }
 

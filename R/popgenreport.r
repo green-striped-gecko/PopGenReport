@@ -40,7 +40,7 @@ popgenreport <- function(cats=NULL,
                           mk.complete=FALSE,    # create a full report)  
                           mk.pdf=TRUE)
 {
-  if (class(cats)!="genind") {cat("You did not provide a valid genind object! Script stopped!\n"); return;}
+  if (class(cats)!="genind") {stop("You did not provide a valid genind object! Script stopped!\n")}
   
   # Check for combinations of populations and loci with low numbers of individuals and alleles  
   npops<-length(levels(cats@pop))
@@ -163,7 +163,7 @@ path <- NULL
   }
   
 }
-if (is.null(path)) {cat("Could not find snw files in the PopGenReport library folder. Please check if the package is installed correctly (e.g.  installed.packages()[\"PopGenReport\",2]). \n"); return;}
+if (is.null(path)) {stop("Could not find snw files in the PopGenReport library folder. Please check if the package is installed correctly (e.g.  installed.packages()[\"PopGenReport\",2]). \n")}
   #for testing:
   #path <- "d:\\bernd\\R\\popgenreport\\inst\\swchunks\\"
   #path<- "C:\\Aaron files\\popgenreport098\\PopGenReport_0.98\\PopGenReport\\swchunks\\"

@@ -25,8 +25,7 @@ landgenreport <- function(cats,
                           mk.complete=FALSE,    # create a full report)  
                           mk.pdf=TRUE)
 {
-  if (class(cats)!="genind") {cat("You did not provide a valid catsnd object! Script stopped!\n"); return;}
-  
+  if (class(cats)!="genind") {stop("You did not provide a valid catsnd object! Script stopped!\n")}
   # Check for combinations of populations and loci with low numbers of individuals and alleles  
   npops<-length(levels(cats@pop))
   nloci<-length(locNames(cats))
@@ -78,8 +77,7 @@ landgenreport <- function(cats,
 
 if (is.null(NN)) 
 {
-  cat("NN is not specified!\nPlease specify the number of nearest neighbour to use for the least-cost path calculations (NN=4 or NN=8). If linear features are tested you may want to consider NN=4 otherwise NN=8 is the most commonly used and prefered option. In any case check the actual least-cost paths for artefacts by inspecting the plot on least-cost paths.\n")
-  return()
+  stop("NN is not specified!\nPlease specify the number of nearest neighbour to use for the least-cost path calculations (NN=4 or NN=8). If linear features are tested you may want to consider NN=4 otherwise NN=8 is the most commonly used and prefered option. In any case check the actual least-cost paths for artefacts by inspecting the plot on least-cost paths.\n")
 }
 
 
@@ -150,7 +148,7 @@ path <- NULL
   }
   
 }
-if (is.null(path)) {cat("Could not find snw files in the PopGenReport library folder. Please check if the package is installed correctly [e.g.  installed.packages() ]. \n"); return;}
+if (is.null(path)) {stop("Could not find snw files in the PopGenReport library folder. Please check if the package is installed correctly [e.g.  installed.packages() ]. \n")}
   #for testing:
   #path <- "d:\\bernd\\R\\popgenreport\\inst\\swchunks\\"
   #path<- "C:\\Aaron files\\popgenreport098\\PopGenReport_0.98\\PopGenReport\\swchunks\\"

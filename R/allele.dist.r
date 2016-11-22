@@ -1,9 +1,8 @@
 allele.dist<-function(population, mk.figures=TRUE){
   # package require adegenet and pegas
   if (class(population) != "genind") {
-    message("You did not provide a valid genind object! Script stopped!")
-    return
-  }
+    stop("You did not provide a valid genind object! Script stopped!")
+   }
 
   # initial steps...
   numloci<-length(locNames(population))  # this gets the total number of loci across all pops

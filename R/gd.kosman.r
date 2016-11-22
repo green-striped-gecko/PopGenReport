@@ -1,8 +1,7 @@
 gd.kosman <- function(population){
   # check to see if the function was passed a genind object
   if (class(population) != "genind") {
-    message("You did not provide a valid genind object! Script stopped!")
-    return
+    stop("You did not provide a valid genind object! Script stopped!")
   }
   
   # getting the number of loci
@@ -14,11 +13,11 @@ gd.kosman <- function(population){
     ploidy<-uniqueploidy
   } else if(uniqueploidy>1){
     message("Your data set has multiple ploidies, please separate loci by ploidy")
-    message("Script stopped!")
-    return
+    stop("Script stopped!")
+
   } else if(uniqueploidy<=0){
-    message("Your dataset has an invalid ploidy (ploidy<=0). Script stopped!")
-    return
+    stop("Your dataset has an invalid ploidy (ploidy<=0). Script stopped!")
+
   }
   
   # this calculates the manhattan distance between each individual and adjusts for ploidy..

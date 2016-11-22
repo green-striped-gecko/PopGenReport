@@ -2,15 +2,15 @@ null.all<-function(population)
 {
   # Confirm that the function has been provided with a genind object
   if (class(population) != "genind"){
-    message("You did not provide a valid genind object! Script stopped!")
-    return
+    stop("You did not provide a valid genind object! Script stopped!")
+
   }
   
   allploidies<-as.numeric(names(table(population@ploidy)))
   
   if(any(allploidies!=2,na.rm=TRUE)){
-    message("One or more populations has a ploidy other than 2! Script stopped!")
-    return
+    stop("One or more populations has a ploidy other than 2! Script stopped!")
+
   } 
   
   
