@@ -15,7 +15,7 @@
 #'@param plot if true, some plots are presented that show the histogramm, ecdf of the best (and the worst scenario).
 #'@return a list object with two slots. The first slot is called opt and contains iter optimisation values (sd.detour and sd.cost) in a iter x 2 dimenstional data.frame. The second slot is called scenario and contains the corrosponding 1:iter scenarios, given as coordinates in a data.frame of dimensions nlocations x 2. Both slots are ordered in decreasing order of sd.detour values. So the best scenario is at 1 and the worst is at position iter. 
 #'@description opt.landgen places iter times nlocations in a given landscape. For each scenario the pairwise costdistances and Euclidean distances are calculated and the standard deviation of detour (see Gruber et al. in prep) is calculated. This metric evaluates the scenerio in their ability to find a significant effect for the given resistance layer on population structure (based on the causal modelling approach of Cushman et al.). To allow for more realistic designs previously locations, a minimal distance between locations and a mask that indicates "forbidden" areas can be specified.  
-
+#' @export
 opt.landgen <- function(landscape,  nlocations, mindist=0, fixed = NULL, method, NN=8, iter =100, retry=10, mask=NULL, plot=TRUE)
 {
   scenario <- list()

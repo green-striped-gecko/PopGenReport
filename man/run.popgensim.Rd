@@ -2,7 +2,7 @@
 % Please edit documentation in R/popdynfun.r
 \name{run.popgensim}
 \alias{run.popgensim}
-\title{Run forward step generations a popgen simulation}
+\title{Run a time-forward popgen simulation}
 \usage{
 run.popgensim(simpops, steps, cost.mat, n.offspring, n.ind, mig.rate, disp.max,
   disp.rate, n.allels, mut.rate, n.cov = 3, rec = "none",
@@ -21,7 +21,7 @@ run.popgensim(simpops, steps, cost.mat, n.offspring, n.ind, mig.rate, disp.max,
 
 \item{mig.rate}{migration rate}
 
-\item{disp.max}{maximal dispersal distance of disp.rate individuals}
+\item{disp.max}{dispersal distance of disp.rate individuals}
 
 \item{disp.rate}{percentage of individuals achieving disp.max}
 
@@ -33,12 +33,39 @@ run.popgensim(simpops, steps, cost.mat, n.offspring, n.ind, mig.rate, disp.max,
 
 \item{rec}{switch if emigration matrix should be recorded, either "none" or "emi"}
 
-\item{emi.table}{a emigration matrix, if provide a fixed number of migration events will take place otherwise based on disp.max, mig.rate and disp.rate, events occuring are (in that order, emigration, reproduction, mutation)}
+\item{emi.table}{a emigration matrix, if provide a fixed number of migration events will take place otherwise based on disp.max, mig.rate and disp.rate,}
 }
 \value{
-an updated simpops object after steps steps
+an updated pops object after steps time steps or a list that includes the pops object and the emigration matrix [rec="emi"].
 }
 \description{
 performs a time-forward, agent-based and spatiallly explicit genetic population simulation
+}
+\details{
+A pops object created via \code{init.popgensim} is used as input. The function simulates time forward individual-based spatially explicit population dynamics. Subpopulations are linked by dispersal that can be specified via a pairwise distance matrix between subpopulations [cost.mat]. Distances are converted to a probability. Currenlty the function used is the p2p function, where dispersal is modeled using an exponential function, that can be specified via disp.max and disp.rate. disp.max specifies the maximal distance that are achieved by the proportion of disp.rate individuals in a subpopulation. The number of dispersers per generation is set to round(mig.rate * n.ind). A simple mutation rate can be specified (the probability of a mutation per loci) using mut.rate. The maximal allowed number of alleles per loci need to be specified. Currently the mutation model is a simple Kmax-allele model [n.alleles]. As before n.cov is the number if covariates in the data.frame (currenlty fixed to n.cov=3). To track emigration events between subpopulations (be aware output is then a list instead of a simple pops object) rec can be set to "emi", which provides a matrix that shows the actual emigrations between subpopulations during the simulation. Emigration can also be determistic (instead of using disp.max and disp.rate) to a specified number of dispersal events per subpopulations. Over each generation events are occuring in that order: 1. dispersal, 2. reproduction, 3. mutation. For convinience the simulation can be run a specified number of generations [steps]. In case extra dynamics need to be modelled (e.g. one population is increased in number be a managment action or population are affected by environmental factors) simulations can also run only in single time steps [steps=1]. See example.
+}
+\examples{
+\dontrun{
+set.seed(1)
+locs <- cbind(x=round(runif(5,5,45)), y=round(runif(5,5,45)) )
+cm <- as.matrix(dist(locs))
+pops <- init.popgensim(n.pops = 5, n.ind=20, sex.ratio = 0.25, n.loci = 5, n.allels = 10, n.cov = 3)
+#run pops 
+pops <- run.popgensim(pops, steps = 200, cost.mat= cm, n.offspring = 2, n.ind = 20, 
+mig.rate = 0.125, disp.max = 30, disp.rate =0.1, n.allels = 10, mut.rate = 0)
+#convert to genind object
+pops.gi <-pops2genind(pops)
+#calculate pairwise fsts using pairwise.fstb
+fsts <- pairwise.fstb(pops.gi)
+#plot
+plot(locs, xlim=c(0,50), ylim=c(0,50), pch=16,cex=4, col="darkgrey")
+for (i in 1:4) 
+for (ii in (i+1):5) 
+lines(c(locs[i,1], locs[ii,1]), c(locs[i,2], locs[ii,2]), lwd=fsts[i,ii]*30, col="darkgreen")
+text(locs+0.5, labels=1:5, col="white", font=2)
+}
+}
+\seealso{
+\code{\link{init.popgensim}}
 }
 

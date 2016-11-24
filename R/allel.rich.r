@@ -1,3 +1,54 @@
+#' Calculates the allelic richness for a genind object
+#' 
+#' The function calculates the allelic richness for each combination of
+#' population and locus for a genind object. To account for differences in
+#' sample sizes and genotyping success, rarefication is used in the
+#' calculation. The sample size for each combination of population and locus
+#' was set equal to the smallest number of alleles seen in a sample across all
+#' combinations of population and locus. Allelic richness was calculated using
+#' the methods of Mousadik and Petit (1996) which are in turn based upon the
+#' work of Hurlbert (1971).
+#' 
+#' This function is similar to the allelic.richness function in hiefstat. The
+#' main differences between the two packages are that allel.rich works on a
+#' genind object while allelic richness works on a data frame and allel.rich is
+#' capable of determining allelic richness for species with most ploidies while
+#' allelic.richness only works for haploid and diploid species.
+#' 
+#' 
+#' @param population a \code{\link{genind}} object (from package adegenet)
+#' @param min.alleles the minimum number of alleles that will be sampled for
+#' calculating allelic richness. If min.alleles is set to NULL the min.alleles
+#' sampled will be determined automatically (see description)
+#' @return Returns a list with the following entries:
+#' 
+#' all.richness is the allelic richness for each combination of population and
+#' locus sum.richness is the sum of the allelic richnesses for each population
+#' mean.richness is the mean allelic richness across all loci alleles.sampled
+#' is the smallest number of individuals sampled across all combinations of
+#' population and locus multiplied by the ploidy of the species.  pop.sizes is
+#' a matrix with the total number of alleles counted for each combination of
+#' population and locus.
+#' @author Aaron Adamack, aaron.adamack@@canberra.edu.au
+#' @seealso \code{\link{popgenreport}}
+#' @references El Mousadik A, Petit RJ. (1996) High level of genetic
+#' differentiation for allelic richness among populations of the argan tree
+#' [Argania spinosa (L.) Skeels] endemic to Morocco
+#' @examples
+#' 
+#'  #not run:
+#'  #data(bilby)
+#'  #here we use only the first 50 individuals to speep up the example
+#'  #popgenreport(bilby, mk.allel.rich=TRUE, mk.pdf=FALSE)
+#'  
+#' #to get a pdf output you need to have a running Latex version installed on your system.
+#' #popgenreport(bilby, mk.allel.rich=TRUE, mk.pdf=TRUE)
+#' 
+#' #data(bilby)
+#' #allel.rich(bilby)
+#' @export
+
+
 allel.rich<-function(population,min.alleles=NULL)
 {
   

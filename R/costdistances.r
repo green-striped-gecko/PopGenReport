@@ -10,6 +10,7 @@
 #'@param NN number of next neighbours recommendation is 8
 #'@return a costdistance matrix between all pairs of locs
 #'@description calculates a cost distance matrix, to be used with run.popgensim
+#' @export
 
 costdistances <- function(landscape, locs, method, NN)
 {

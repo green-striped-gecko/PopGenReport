@@ -1,0 +1,7 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage{pdfpages}
+%\VignetteIndexEntry{Tutorial Optimizer}
+%\VignetteEngine{knitr::knitr}
+\begin{document}
+\includepdf[pages={-}]{./figures/Tutorial_optimizer.pdf}
+\end{document}

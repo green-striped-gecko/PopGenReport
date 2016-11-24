@@ -1,3 +1,190 @@
+#' This is the main function of the package. It analyses an object of class
+#' \code{\link{genind}} and then creates a report containing the results of the
+#' analysis. There are several routines that can be optionally included in the
+#' analysis and there are multiple output options including a PDF with the
+#' report, R-code and an object (\code{fname.results}) containing all of the
+#' results, which can be used for further analyses.
+#' 
+#' This function is used to analyse population genetic data. The main idea is
+#' to provide a framework for analysing microsatellite and also SNP genetic
+#' data (if not too many loci, say below 1000) using a mix of existing and new
+#' functions. The function works on an object of class \code{genind}. There are
+#' several ways to convert data into a \code{\link{genind}} object using
+#' existing functions provided by the \code{adegenet} package (
+#' \code{\link{import2genind}},
+#' \code{\link{df2genind}},\code{\link{read.fstat}},
+#' \code{\link{read.structure}}, \code{\link{read.genetix}}
+#' ,\code{\link{read.genepop}}) or refer to \code{read.genetable} how to import
+#' data from an EXCEL (csv) document. The function performs a number of
+#' different genetic analyses (e.g. counts of indivuals and alleles across
+#' sub-populations, tests for heterozygosity and Hardy-Weinberg Equilibrium,
+#' differentiation statistics Fst, G'st, Jost's D, and genetic distance between
+#' individuals and populations), with users having the option to select which
+#' analysis routines are included in the report. To select a routine, the user
+#' simply turns on a switch e.g. mk.map=TRUE returns a map with the sampling
+#' location for each individual (if coordinates are provided). \cr Coordinates
+#' need to specified within the genind object. As a standard genind object does
+#' not require spatial coordinates, we extended it by using the \code{other}
+#' slot in the genind object. The easiest way to provide spatial coordinates is
+#' to use the read.genetable function and use the \code{lat}, \code{long} or
+#' \code{x}, \code{y} arguments for WGS1984 projected data or mercator
+#' projected data respectively. To calculate distances the data are internally
+#' reprojected using the \code{\link{Mercator}} function in package
+#' \code{\link{dismo}}), which is the projection used by google maps. Or you
+#' can add data manually to your \code{genind} object using the mentioned (e.g.
+#' \code{genindobject@other$latlong <- yourlatlong data} or
+#' \code{genindobject@other$xy <- your_xy_data}). If you have your data in a
+#' different projection you need to reproject them into either WGS1984 or the
+#' google maps Mercator projection. If you use a different projection distance
+#' calculation may be wrong and probably the map will not be correct. See the
+#' manual for an example how to project and add spatial coordinates to your
+#' genetic data.\cr Names for alleles (\code{genindobject@loc.names}) are
+#' truncated if longer than six characters. If truncated Captial letters linked
+#' by a hyphen are added to guarentee they are unique. You can rename them by
+#' providing new names by accessing the \code{genind@loc.names} slot prior to
+#' running \code{popgenreport}.\cr Note that the popgenreport function can take
+#' a long time to run if the options mk.complete, mk.gd.kosman, or mk.gd.smouse
+#' are set to \code{TRUE}. For example, running popgenreport with
+#' \code{mk.complete=TRUE} on a dataset with 500 individuals with 36 loci will
+#' take 14 to 15 minutes on a PC with a 3.5 Ghz processor and nearly 3 hours
+#' for a dataset with ~3200 individuals.
+#' 
+#' 
+#' @param cats this is the \code{\link{genind}} object the analysis will be
+#' based on.
+#' @param mk.counts switch is to provide overview counts of the number of
+#' individuals sampled, numbers of individuals and alleles sampled per
+#' sub-population, number of alleles per locus, mean number of alleles per
+#' locus and the percentatge of missing data.
+#' @param mk.map switch to produce a map with the sampling location of each
+#' individual marked. This switch requires individual coordinates (latitudes
+#' and longitudes in WGS1984) be provided (under cats@other$latlong or see
+#' \code{read.genetable} on how to import them from a table of genetic data).
+#' An error message will be generated if you turn this routine on, but do not
+#' provide the coordinates in the right format. If the coordinates are provided
+#' in a seperate file, they must be attached to the genind object in the slot
+#' \cr\code{yourgenindobject@other$latlong <- yourlatlongdata}.\cr
+#' \code{yourlatlongdata} needs to be a data frame that has the same number and
+#' order of individuals per row as the population genetic data. Note that an
+#' internet connection is required to connect to the Google Maps server which
+#' provides the basemap for this routine.
+#' @param maptype Defines the type of map. Default is 'satellite'. Other
+#' options are: 'roadmap', 'mobile', 'terrain', 'hybrid'.
+#' @param mapdotcolor Color of dots for each individual on the map. Default is
+#' 'blue'.
+#' @param mapdotsize Size of dots for each individual. Default is 1.
+#' @param mapdotalpha Transparency of dots. 1 is invisible, 0 is no
+#' transparency. Default is 0.4.
+#' @param mapdottype Defines the type of the symbol. For explanation see pch
+#' under \code{\link{par}}. Default is 19 - a filled circle.
+#' @param mapzoom Zoom level of the map. If not specified the default zoom of
+#' Google maps are used. Please be aware if you set the zoom level to high, the
+#' map may not show all sample locations.
+#' @param mk.locihz switch to test for population heterozygosity
+#' @param mk.hwe switch to test for Hardy-Weinberg equilibrium for each loci
+#' and population
+#' @param mk.fst switch to calculate Fst values for each loci and pairwise Fst
+#' (Nei's 1973) over subpopulations
+#' @param mk.gd.smouse Individual pairwise genetic distances based on Smouse
+#' and Peakall (1999). Refer to \code{gd_smouse}. Spatial coordinates need to
+#' be provided to be able to run this analysis.
+#' @param mk.gd.kosman Individual pairwise genetic distances based on Kosman &
+#' Leonhard (2005). Refer to \code{gd_kosman}. Spatial coordinates need to be
+#' provided to be able to run this analysis.
+#' @param mk.pcoa Principal component analysis following Jombart et al. 2009.
+#' Spatial coordinates need to be provided to be able to run this analysis.
+#' Refer to vignettes within \code{adegenet}.
+#' @param mk.spautocor Spatial autocorrelation analysis following Smouse &
+#' Peakall 1999. Spatial coordinates need to be provided to be able to run this
+#' analysis. Refer to \code{spautocor} for more information.
+#' @param mk.allele.dist switch to look at allele distributions by loci and
+#' subpopulation
+#' @param mk.null.all check for null alleles
+#' @param mk.allel.rich calculation of allelic richness
+#' @param mk.differ.stats switch to look at population differentiation
+#' statistics (Nei's Gst, Hedrick's Gst, and Jost's D)
+#' @param mk.custom edit custom.snw to include your own function to a report.
+#' @param fname filename for the output files. Defauts to PopGenReport. Note
+#' that using a filename which includes a space in the name will result in the
+#' filename for each figure being printed out in the PDF report for each
+#' figure. Replacing the space with an underscore should prevent this from
+#' happening.
+#' @param foldername name of folder, where files are stored. Defaults to
+#' 'results'
+#' @param path.pgr Folder where the output files are stored. Defaults to the
+#' temporary directory (\code{tempdir()}). If you want to store the output in
+#' another directory, simply provide the path here. e.g.
+#' \code{path.pgr=getwd()} saves it in your current working directory.
+#' @param mk.Rcode switch to get the full R script that is used to generate the
+#' report. A great way to get a very detailed insight on the kind of analysis
+#' and also an easy way to generate a script which you can customize for your
+#' analytical needs.
+#' @param mk.complete switch to create a full report using all of the routines
+#' (all switches are set to \code{TRUE}, except \code{mk.subgroups}).
+#' @param mk.pdf switch to create a shiny pdf output. You need a working
+#' \bold{latex} version running on your system (e.g. MikTex (Windows) or
+#' Texmaker (Linux, MacOSX). For more information how to install latex on your
+#' system refer to the \url{www.popgenreport.org} and to the manuals of the
+#' \code{\link{knitr}} package and its manuals.
+#' @return The function returns an object (e.g. res) that has all of the
+#' results produced by this function in it. The structure of the object can be
+#' accessed via \code{str(res)}. The main slots in this object (if you ran a
+#' full report) are:\cr \code{dataoverview, PopHet, Alleledist, Fst,
+#' HsHtdifferentiate, HWEresults,} \cr\code{subgroups, GDKosman, GDSmouse}
+#' 
+#' Additional ouput is provided in the form of a PDF (if mk.pdf=TRUE),which
+#' will be saved to the specified subfolder (via foldername) in your current
+#' working directory, and maps and figures which will be placed in this folder
+#' as well. This folder will be generated automatically in your current working
+#' directory. If you do not specify a working directory via \code{path.pgr}
+#' then the temporary working directory of R will be used (\code{tempdir()}).
+#' If \code{mk.Rcode=T} is set, an R file named fname.R will be saved to your
+#' specified subfolder.
+#' @author Aaron Adamack & Bernd Gruber, aaron.adamack@@canberra.edu.au,
+#' bernd.gruber@@canberra.edu.au
+#' @seealso \code{\link{adegenet}}, \code{\link{pegas}}, \code{\link{mmod}}
+#' @references Kosman E., Leonard K.J. 2005. Similarity coefficients for
+#' molecular markers in studies of genetic relationships between individuals
+#' for haploid, diploid, and polyploidy species. Molecular Ecology 14:415-424
+#' 
+#' Peakall R., Smouse P. 2012. GenAlEx 6.5: Genetic analysis in Excel.
+#' Population genetic software for teaching and research - an update.
+#' Bioinformatics 28:2537-2539
+#' 
+#' %%Adamack & Gruber (2012)
+#' @examples
+#' 
+#' #not run:
+#' #data(bilby) # a generated data set
+#' #res <- popgenreport(bilby, mk.counts=TRUE, mk.map=TRUE, mk.pdf=FALSE)
+#' #check results via res or use created tables in the results folder.
+#' 
+#' ### RUN ONLY with a working Latex version installed
+#' # res <- popgenreport(bilby, mk.counts=TRUE, mk.map=TRUE, mk.pdf=TRUE, path.pgr="c:/temp")
+#' # for a full report in a single pdf set mk.complete to TRUE
+#' # res <- popgenreport(bilby, mk.complete=TRUE)
+#' @importFrom ggplot2 ggplot 
+#' @importFrom dismo Mercator 
+#' @importFrom xtable xtable 
+#' @importFrom RgoogleMaps GetMap.bbox PlotOnStaticMap 
+#' @importFrom calibrate textxy 
+#' @importFrom genetics HWE.test HWE.chisq HWE.exact 
+#' @importFrom ade4 dudi.pca s.class add.scatter 
+#' @importFrom rgdal project 
+#' @import mmod 
+#' @import R.utils 
+#' @import gap 
+#' @import knitr 
+#' @import adegenet 
+#' @importFrom raster raster extent rasterize crs values buffer values<- crs<- 
+#' @importFrom GGally ggpairs
+#' @importFrom graphics abline axis box hist image lines par points text
+#' @importFrom grDevices col2rgb colorRampPalette rainbow rgb 
+#' @importFrom methods as 
+#' @importFrom stats as.dist dist ecdf lm median quantile rbinom resid runif sd weighted.mean 
+#' @importFrom utils combn flush.console read.csv 
+#' @export
+
 popgenreport <- function(cats=NULL,
                           
                             mk.counts=TRUE,   # this switch is to provide a population overview

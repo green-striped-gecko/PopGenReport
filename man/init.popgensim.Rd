@@ -2,9 +2,10 @@
 % Please edit documentation in R/popdynfun.r
 \name{init.popgensim}
 \alias{init.popgensim}
-\title{Initialise a pops object fo a  a popgen simulation}
+\title{Initialise a spatial meta-population for a popgen simulation}
 \usage{
-init.popgensim(n.pops, n.ind, sex.ratio, n.loci, n.allels, locs, n.cov)
+init.popgensim(n.pops, n.ind, sex.ratio, n.loci, n.allels, locs = NULL,
+  n.cov = 3)
 }
 \arguments{
 \item{n.pops}{number of subpopulations}
@@ -17,14 +18,23 @@ init.popgensim(n.pops, n.ind, sex.ratio, n.loci, n.allels, locs, n.cov)
 
 \item{n.allels}{number of maximal alleles per loci}
 
-\item{locs}{coordinates of the subpopulations}
+\item{locs}{coordinates of the subpopulations, provided as a row named data.frame(x=, y=) with n.pops rows.[Only used to name the subpopulations by row.names(locs). If not provided subpopulations are simply numbered.}
 
-\item{n.cov}{number of covariates (defaults to 3)}
+\item{n.cov}{number of covariates (currenlty do not change, defaults to 3. In future versions covariates such as age etc. will be implemented)}
 }
 \value{
-a simpops object (to be used in run.popgensim )
+a simpops object (to be used in run.popgensim ), which is a list of subpopulations. Each subpopulation consists of a data.frame with a row for each individual (coding the covariates and genetic make-up).
 }
 \description{
-initialises a time-forward, agent-based and spatiallly explicit genetic population simulation
+This functions initialises a time-forward, agent-based and spatiallly explicit genetic meta-population simulation
+}
+\details{
+To set up a population we have to specify the following parameters: n.pops defines the number of subpopulations and n.ind the number of individuals within subpopulations (carrying capacity). In the current implementaiton all subpopulations have the same number of individuals. sex.ratio determines the proportion of females in a subpopulation. finaly the number of loci and number of alleles need to be specified. locs is used to name the populations. For simplicity the names are provided via a data.frame of x and y coordinates (as they normally come from a genind object)
+}
+\examples{
+init.popgensim(n.pops = 5, n.ind=8, sex.ratio = 0.25, n.loci = 4, n.allels = 7, n.cov = 3)
+}
+\seealso{
+\code{\link{run.popgensim}}
 }
 

@@ -1,4 +1,33 @@
-#calculate mantel tests
+#' Partial Mantel tests on costdistance matrices
+#' 
+#' This function implements the Causal modelling approach as suggested by
+#' Wassermann et al. 2010 and Cushman et al. 2010. It tests for the effect of
+#' landscape features using a cost distance matrix on the genetic structure of
+#' subpopulation/individuals.
+#' 
+#' see \code{\link{landgenreport}}
+#' 
+#' @param gen.mat pairwise genetic distance matrix
+#' @param cost.mats pairwise cost distance matrix
+#' @param eucl.mat pairwise Eukclidean distance matrix
+#' @param plot switch for control plots of the partial mantel test
+#' @param nperm number of permutations for the partial mantel test
+#' @return A table with the results of the partial mantel test. Using plot=TRUE
+#' results in diagnostic plots for the partial mantel tests.
+#' @author Bernd Gruber (bernd.gruber@@canberra.edu.au)
+#' @seealso \code{\link{popgenreport}}, \code{\link{genleastcost}},
+#' \code{\link{landgenreport}}, \code{\link{lgrMMRR}}
+#' @references Wassermann, T.N., Cushman, S. A., Schwartz, M. K. and Wallin, D.
+#' O. (2010). Spatial scaling and multi-model inference in landscape genetics:
+#' Martes americana in northern Idaho. Landscape Ecology, 25(10), 1601-1612.
+#' @examples
+#' 
+#' \dontrun{%
+#' glc <- genleastcost(landgen, fric.raster, "D", NN=8)
+#' wassermann(eucl.mat = glc$eucl.mat, cost.mats = glc$cost.mats, gen.mat = glc$gen.mat)
+#' }
+#' @importFrom lattice xyplot densityplot
+#' @export
 wassermann <- function(gen.mat, cost.mats, eucl.mat=NULL, plot=TRUE, nperm=999)
 {
 mats <- cost.mats

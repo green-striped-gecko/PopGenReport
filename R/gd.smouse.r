@@ -1,3 +1,44 @@
+#' Individual genetic distance calculation based on Smouse and Peakall 1999
+#' 
+#' Calculate pairwise genetic distances between all individuals using the
+#' individual genetic distance measure of Smouse and Peakall (1999). This
+#' function should produce the same results as the individual genetic distances
+#' calculated using GenAlEx and choosing the interpolate missing data option.
+#' Note that depending on your computers capabilities, you may run into memory
+#' errors when this function is used on datasets with large numbers of
+#' individuals (>1000). Additionally, the time for this function to run can be
+#' quite lengthy. Using a PC with a 3.5 GHz processor to calculate pairwise
+#' genetic distances between individuals with 36 diploid loci it took 2 seconds
+#' for 100 individuals, 51 seconds for 500 individuals, 200 seconds for 1000
+#' individuals, 836 seconds (~14 minutes) for 2000 individuals, and 1793
+#' seconds (~30 minutes) for 3000 individuals.  Please note that for each of
+#' your population groupings there must be at least one individual with
+#' genotyped alleles for each locus (it doesn't have to be the same individual
+#' for every locus). If a population doesn't meet this requirement, it will be
+#' dropped from the analysis and a warning message will be generated.
+#' 
+#' 
+#' @param population this is the \code{\link{genind}} object that the analysis
+#' will be based on.
+#' @param verbose information on progress. For large data sets this could be
+#' informative as it allows the user to estimate the amount of time remaining
+#' until the function is complete. The counter shows the number of the
+#' population for which genetic distances are currently being determined.
+#' @return Returns pairwise individual genetic distances for each individual
+#' within a population.
+#' @author Aaron Adamack, aaron.adamack@@canberra.edu.au
+#' @seealso \code{\link{popgenreport}}
+#' @references Smouse PE, Peakall R. 1999. Spatial autocorrelation analysis of
+#' individual multiallele and multilocus genetic structure. Heredity 82:
+#' 561-573.
+#' @examples
+#' 
+#' #not run:
+#' #data(bilby)
+#' #popgenreport(bilby, mk.gd.smouse = TRUE, mk.pdf=FALSE)
+#' #to get a pdf output you need to have a running Latex version installed on your system.
+#' #popgenreport(bilby, mk.gd.smouse = TRUE, mk.pdf=TRUE)
+#' @export
 gd.smouse <- function(population, verbose=TRUE){
   # check to see if the passed data is of the right type
   if (class(population) != "genind") {
