@@ -26,9 +26,13 @@ and 20 loci with up to 20 alleles per loci.
 
 data(landgen)
 summary(landgen)
-
 data(landgen)
 summary(landgen)
+}
+\author{
+Bernd Gruber \email{(bernd.gruber@canberra.edu.au}
+
+Bernd Gruber \email{(bernd.gruber@canberra.edu.au}
 }
 \seealso{
 \code{\link{landgenreport}}, \code{\link{genleastcost}}

@@ -12,6 +12,9 @@ bilby
 This is a synthetic sample data set (in \code{\link{genind}} format) of
 microsatellite data.
 }
+\author{
+Bernd Gruber \email{(bernd.gruber@canberra.edu.au}
+}
 \keyword{bilby}
 \keyword{data(bilby)}
 \keyword{datasets}
