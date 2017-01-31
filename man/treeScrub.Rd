@@ -12,7 +12,10 @@ treeScrub
 A raster file [proportion of treeScrub per cell in Hawke Bay, NZ]
 }
 \examples{
+\dontrun{
+library(raster)
 plot(treeScrub)
+}
 }
 \author{
 Bernd Gruber \email{(bernd.gruber@canberra.edu.au}
