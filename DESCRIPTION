@@ -9,7 +9,7 @@ Authors@R: c(
 Description: Provides beginner friendly framework to analyse population genetic
     data. Based on 'adegenet' objects it uses 'knitr' to create comprehensive reports on spatial genetic data. 
     For detailed information how to use the package refer to the comprehensive
-    tutorials or visit www.popgenreport.org.
+    tutorials or visit <http://www.popgenreport.org/>.
 License: GPL
 LazyData: true
 Depends:
