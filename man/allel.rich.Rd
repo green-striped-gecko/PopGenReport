@@ -54,9 +54,6 @@ allelic.richness only works for haploid and diploid species.
 #data(bilby)
 #allel.rich(bilby)
 }
-\author{
-Aaron Adamack, aaron.adamack@canberra.edu.au
-}
 \references{
 El Mousadik A, Petit RJ. (1996) High level of genetic
 differentiation for allelic richness among populations of the argan tree
@@ -65,4 +62,6 @@ differentiation for allelic richness among populations of the argan tree
 \seealso{
 \code{\link{popgenreport}}
 }
-
+\author{
+Aaron Adamack, aaron.adamack@canberra.edu.au
+}

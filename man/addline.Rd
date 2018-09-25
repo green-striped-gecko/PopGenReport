@@ -23,4 +23,3 @@ returns modified raster layer
 \description{
 adds a line from x1 to x2 to a raster layer
 }
-

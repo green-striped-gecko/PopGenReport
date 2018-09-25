@@ -37,9 +37,6 @@ glc <- genleastcost(landgen, fric.raster, "D", NN=8)
 wassermann(eucl.mat = glc$eucl.mat, cost.mats = glc$cost.mats, gen.mat = glc$gen.mat)
 }
 }
-\author{
-Bernd Gruber (bernd.gruber@canberra.edu.au)
-}
 \references{
 Wassermann, T.N., Cushman, S. A., Schwartz, M. K. and Wallin, D.
 O. (2010). Spatial scaling and multi-model inference in landscape genetics:
@@ -49,4 +46,6 @@ Martes americana in northern Idaho. Landscape Ecology, 25(10), 1601-1612.
 \code{\link{popgenreport}}, \code{\link{genleastcost}},
 \code{\link{landgenreport}}, \code{\link{lgrMMRR}}
 }
-
+\author{
+Bernd Gruber (bernd.gruber@canberra.edu.au)
+}

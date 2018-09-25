@@ -38,9 +38,6 @@ et al. 2008.
 #to get a pdf output you need to have a running Latex version installed on your system.
 #popgenreport(bilby[1:50], mk.spautocor=TRUE, mk.pdf=TRUE)
 }
-\author{
-Bernd Gruber, Bernd.Gruber@canberra.edu.au
-}
 \references{
 Smouse PE, Peakall R. 1999. Spatial autocorrelation analysis of
 individual multiallele and multilocus genetic structure. Heredity 82:
@@ -68,4 +65,6 @@ Molecular Ecology 17, 4346-4358.
 \seealso{
 \code{\link{popgenreport}}
 }
-
+\author{
+Bernd Gruber, Bernd.Gruber@canberra.edu.au
+}

@@ -21,4 +21,3 @@ a costdistance matrix between all pairs of locs
 \description{
 calculates a cost distance matrix, to be used with run.popgensim
 }
-

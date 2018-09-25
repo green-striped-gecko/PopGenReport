@@ -2,8 +2,9 @@
 % Please edit documentation in R/datasets.r
 \docType{data}
 \name{landgen}
-\alias{fric.raster}
 \alias{landgen}
+\alias{landgen}
+\alias{fric.raster}
 \title{A simulated genind data set with spatial coordinates}
 \format{An object of class \code{genind} of length 1.}
 \usage{
@@ -29,15 +30,14 @@ summary(landgen)
 data(landgen)
 summary(landgen)
 }
-\author{
-Bernd Gruber \email{(bernd.gruber@canberra.edu.au}
-
-Bernd Gruber \email{(bernd.gruber@canberra.edu.au}
-}
 \seealso{
 \code{\link{landgenreport}}, \code{\link{genleastcost}}
 
 \code{\link{landgenreport}}, \code{\link{genleastcost}}
 }
-\keyword{datasets}
+\author{
+Bernd Gruber \email{(bernd.gruber@canberra.edu.au}
 
+Bernd Gruber \email{(bernd.gruber@canberra.edu.au}
+}
+\keyword{datasets}

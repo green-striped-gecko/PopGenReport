@@ -67,13 +67,15 @@ addpoly <- function(r, pol, val, plot=T)
 #'Function to execute mutation on a pop data.frame
 #'
 #'@param x a pop object
-#'@param n.allels number of alleles 
+#'@param n.allels number of alleles
 #'@param mutrate the mutation rate
 #'@param mtype the mutation process (currently on n.all is implemented. (=Choose any allel from 1:n.allels))
 #'@param n.cov (number of covariates, default  )
 #'@return a dispersal probability matrix
 #'@description mutation subprocess on single populations
 #' @export
+#' 
+#'@author Bernd Gruber, Erin Peterson
 
 mutation <- function(x, n.allels, mutrate, mtype="n.all", n.cov)
 {
@@ -92,7 +94,7 @@ if (nrow(mut.ind)>0) #are there any mutations in this population?
 {
 for (i in 1:nrow(mut.ind))
   {
-  
+
   if (mtype=="n.all")
     {
     mf <- rbinom(1,1,0.5)
@@ -109,7 +111,7 @@ x
 #'Function to execute reproduction on a pop data.frame
 #'
 #'@param x a pop object
-#'@param type type of density dependence K.limit only yet 
+#'@param type type of density dependence K.limit only yet
 #'@param K Kapacity of a subpoplation
 #'@param n.off number of offspring per female
 #'@param n.cov (number of covariates, default 3 )
@@ -163,7 +165,7 @@ off.age <- 1
 all.seq<- NA
 
 for (i in seq(1,(2*n.loci-1),2))
-{ 
+{
 
 if (i==1) all.seq[i] <- 1 else all.seq[i] <- all.seq[i-2]+1
 all.seq[i+1] <- all.seq[i]+n.loci
@@ -183,7 +185,12 @@ x <- rbind(x, offsprings)
 #cut off at K
 
 npop <- nrow(x)
-x<- x[sample(1:npop,K, replace=F),]
+
+#######################################
+## Changed this to prevent error when npop drops below K
+if(npop > K) {
+    x<- x[sample(1:npop,K, replace=F),]}
+#######################################
 
 } else x<- NULL    #return NULL if only males or only females....
 
@@ -197,7 +204,7 @@ return(x)
 
 
 #survival   (cut of at K)
-#surv <- function(x, s=t.surv) { 
+#surv <- function(x, s=t.surv) {
 #
 #x<- x[runif(dim(x)[1])< s,]
 #}
@@ -208,7 +215,7 @@ return(x)
 #'Function to execute emigration on a pops object
 #'
 #'@param xp all pops combined in a list
-#'@param perc.mig percentage if migrating individuals 
+#'@param perc.mig percentage if migrating individuals
 #'@param emi.m emigration probability (normally based on cost dispersal distance)
 #'@param emi.table a fixed number of migrating individuals can be specified (overrides emi.m)
 #'@return a list, first entry are updated pops, second entry the number of disperserin a matrix
@@ -284,9 +291,10 @@ return(results)
 #' @export
 
 pops2genind <- function(x, locs=NULL, n.cov=3)
-{         
+{
 n.pops <- length(x)
-n.loci <- (ncol(x[[1]])-n.cov )/2 #only diploid currently
+##n.loci <- (ncol(x[[1]])-n.cov )/2 #only diploid currently
+n.loci <- (ncol(x[vapply(x, Negate(is.null), NA)][[1]]) - n.cov)/2
 noffset <- n.cov
 
 ##### convert pops to data.frame
@@ -319,7 +327,7 @@ return(pops.genind)
 ################################################################################
 #'Run a time-forward popgen simulation
 #'
-#'performs a time-forward, agent-based and spatiallly explicit genetic population simulation 
+#'performs a time-forward, agent-based and spatiallly explicit genetic population simulation
 #'
 #'A pops object created via \code{init.popgensim} is used as input. The function simulates time forward individual-based spatially explicit population dynamics. Subpopulations are linked by dispersal that can be specified via a pairwise distance matrix between subpopulations [cost.mat]. Distances are converted to a probability. Currenlty the function used is the p2p function, where dispersal is modeled using an exponential function, that can be specified via disp.max and disp.rate. disp.max specifies the maximal distance that are achieved by the proportion of disp.rate individuals in a subpopulation. The number of dispersers per generation is set to round(mig.rate * n.ind). A simple mutation rate can be specified (the probability of a mutation per loci) using mut.rate. The maximal allowed number of alleles per loci need to be specified. Currently the mutation model is a simple Kmax-allele model [n.alleles]. As before n.cov is the number if covariates in the data.frame (currenlty fixed to n.cov=3). To track emigration events between subpopulations (be aware output is then a list instead of a simple pops object) rec can be set to "emi", which provides a matrix that shows the actual emigrations between subpopulations during the simulation. Emigration can also be determistic (instead of using disp.max and disp.rate) to a specified number of dispersal events per subpopulations. Over each generation events are occuring in that order: 1. dispersal, 2. reproduction, 3. mutation. For convinience the simulation can be run a specified number of generations [steps]. In case extra dynamics need to be modelled (e.g. one population is increased in number be a managment action or population are affected by environmental factors) simulations can also run only in single time steps [steps=1]. See example.
 #'@param simpops pops object (a list of pop)
@@ -334,7 +342,7 @@ return(pops.genind)
 #'@param mut.rate mutation rate
 #'@param n.cov number of covariates (defaults to 3)
 #'@param rec switch if emigration matrix should be recorded, either "none" or "emi"
-#'@param emi.table a emigration matrix, if provide a fixed number of migration events will take place otherwise based on disp.max, mig.rate and disp.rate, 
+#'@param emi.table a emigration matrix, if provide a fixed number of migration events will take place otherwise based on disp.max, mig.rate and disp.rate,
 #'@return an updated pops object after steps time steps or a list that includes the pops object and the emigration matrix [rec="emi"].
 #'@seealso \code{\link{init.popgensim}}
 #'@examples
@@ -345,8 +353,8 @@ return(pops.genind)
 #'cm <- as.matrix(dist(locs))
 #initialise pops
 #'pops <- init.popgensim(n.pops = 5, n.ind=20, sex.ratio = 0.25, n.loci = 5, n.allels = 10, n.cov = 3)
-#'#run pops 
-#'pops <- run.popgensim(pops, steps = 200, cost.mat= cm, n.offspring = 2, n.ind = 20, 
+#'#run pops
+#'pops <- run.popgensim(pops, steps = 200, cost.mat= cm, n.offspring = 2, n.ind = 20,
 #'mig.rate = 0.125, disp.max = 30, disp.rate =0.1, n.allels = 10, mut.rate = 0)
 #'#convert to genind object
 #'pops.gi <-pops2genind(pops)
@@ -355,8 +363,8 @@ return(pops.genind)
 #'#plot
 #'plot(locs, xlim=c(0,50), ylim=c(0,50), pch=16,cex=4, col="darkgrey")
 
-#'for (i in 1:4) 
-#'for (ii in (i+1):5) 
+#'for (i in 1:4)
+#'for (ii in (i+1):5)
 #'lines(c(locs[i,1], locs[ii,1]), c(locs[i,2], locs[ii,2]), lwd=fsts[i,ii]*30, col="darkgreen")
 #'text(locs+0.5, labels=1:5, col="white", font=2)
 #'}
@@ -411,7 +419,7 @@ return (out)
 ################################################################################
 #'Initialise a spatial meta-population for a popgen simulation
 #'
-#'This functions initialises a time-forward, agent-based and spatiallly explicit genetic meta-population simulation 
+#'This functions initialises a time-forward, agent-based and spatiallly explicit genetic meta-population simulation
 #'
 #'To set up a population we have to specify the following parameters: n.pops defines the number of subpopulations and n.ind the number of individuals within subpopulations (carrying capacity). In the current implementaiton all subpopulations have the same number of individuals. sex.ratio determines the proportion of females in a subpopulation. finaly the number of loci and number of alleles need to be specified. locs is used to name the populations. For simplicity the names are provided via a data.frame of x and y coordinates (as they normally come from a genind object)
 #'@param n.pops number of subpopulations
@@ -423,7 +431,7 @@ return (out)
 #'@param n.cov number of covariates (currenlty do not change, defaults to 3. In future versions covariates such as age etc. will be implemented)
 #'@return a simpops object (to be used in run.popgensim ), which is a list of subpopulations. Each subpopulation consists of a data.frame with a row for each individual (coding the covariates and genetic make-up).
 #'@seealso \code{\link{run.popgensim}}
-#'@examples 
+#'@examples
 #'init.popgensim(n.pops = 5, n.ind=8, sex.ratio = 0.25, n.loci = 4, n.allels = 7, n.cov = 3)
 #' @export
 init.popgensim <- function(n.pops, n.ind, sex.ratio, n.loci, n.allels, locs=NULL, n.cov=3)

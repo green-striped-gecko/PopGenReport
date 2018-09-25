@@ -23,4 +23,6 @@ a dispersal probability matrix
 \description{
 mutation subprocess on single populations
 }
-
+\author{
+Bernd Gruber, Erin Peterson
+}

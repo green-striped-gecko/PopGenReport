@@ -45,9 +45,6 @@ dropped from the analysis and a warning message will be generated.
 #to get a pdf output you need to have a running Latex version installed on your system.
 #popgenreport(bilby, mk.gd.smouse = TRUE, mk.pdf=TRUE)
 }
-\author{
-Aaron Adamack, aaron.adamack@canberra.edu.au
-}
 \references{
 Smouse PE, Peakall R. 1999. Spatial autocorrelation analysis of
 individual multiallele and multilocus genetic structure. Heredity 82:
@@ -56,4 +53,6 @@ individual multiallele and multilocus genetic structure. Heredity 82:
 \seealso{
 \code{\link{popgenreport}}
 }
-
+\author{
+Aaron Adamack, aaron.adamack@canberra.edu.au
+}

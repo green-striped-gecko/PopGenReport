@@ -21,4 +21,3 @@ a list, first entry are updated pops, second entry the number of disperserin a m
 \description{
 emigration process on all population in one go
 }
-

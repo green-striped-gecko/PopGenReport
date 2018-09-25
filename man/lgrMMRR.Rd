@@ -45,10 +45,6 @@ glc <- genleastcost(landgen, fric.raster, "D", NN=4, path="leastcost")
 lgrMMRR(glc$gen.mat, glc$cost.mats, glc$eucl.mat, nperm=999)
 }
 }
-\author{
-Bernd Gruber (bernd.gruber@canberra.edu.au) using the
-implementation of Wang 2013.
-}
 \references{
 Legendre, P.; Lapointe, F. and Casgrain, P. 1994. Modeling brain
 evolution from behavior: A permutational regression approach. Evolution 48:
@@ -67,4 +63,7 @@ quantifying geographic and ecological isolation. Evolution: 67-12:
 \code{\link{genleastcost}}, \code{\link{landgenreport}},
 \code{\link{wassermann}}
 }
-
+\author{
+Bernd Gruber (bernd.gruber@canberra.edu.au) using the
+implementation of Wang 2013.
+}

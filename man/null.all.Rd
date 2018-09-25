@@ -56,9 +56,6 @@ significantly differ from zero.
 #to get a pdf output you need to have a running Latex version installed on your system.
 #popgenreport(bilby, mk.null.all=TRUE, mk.pdf=TRUE)
 }
-\author{
-Aaron Adamack, aaron.adamack@canberra.edu.au
-}
 \references{
 Brookfield JFY. (1996) A simple new method for estimating null
 allele frequency from heterozygote deficiency. Molecular Ecology 5:453-455
@@ -71,4 +68,6 @@ between loci in RFLP typing of DNA. American Journal of Human Genetics
 \seealso{
 \code{\link{popgenreport}}
 }
-
+\author{
+Aaron Adamack, aaron.adamack@canberra.edu.au
+}

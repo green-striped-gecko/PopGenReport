@@ -23,4 +23,3 @@ an updated pop object
 \description{
 reproduction subprocess on single populations
 }
-

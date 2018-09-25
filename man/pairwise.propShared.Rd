@@ -15,4 +15,3 @@ a matrix of proportion of shared alleles between populations
 \description{
 Calculates proportion of shared alleles per pairs of populations based on the minima of allele frequency for each allel (then summed and averaged over loci). Returns a similarity matrix (upper diagonal of the pairwise matrix.
 }
-

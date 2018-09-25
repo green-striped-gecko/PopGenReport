@@ -19,4 +19,3 @@ a spatial genind object
 \description{
 converts pops into genind (to calculate Fst etc.)
 }
-

@@ -36,10 +36,9 @@ each subpopulations and then produces a heatmap using that data.
 #to get a pdf output you need to have a running Latex version installed on your system.
 #popgenreport(bilby, mk.allele.dist=TRUE, mk.pdf=TRUE)
 }
-\author{
-Aaron Adamack, aaron.adamack@canberra.edu.au
-}
 \seealso{
 \code{\link{popgenreport}}
 }
-
+\author{
+Aaron Adamack, aaron.adamack@canberra.edu.au
+}

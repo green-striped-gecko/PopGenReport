@@ -42,9 +42,6 @@ individuals, 5 seconds for 500 individuals, 21 seconds for 1000 individuals,
 #to get a pdf output you need to have a running Latex version installed on your system.
 #popgenreport(bilby, mk.gd.kosman = TRUE, mk.pdf=TRUE)
 }
-\author{
-Aaron Adamack, aaron.adamack@canberra.edu.au
-}
 \references{
 Kosman E., Leonard K.J. 2005. Similarity coefficients for
 molecular markers in studies of genetic relationships between individuals
@@ -53,4 +50,6 @@ for haploid, diploid, and polyploidy species. Molecular Ecology 14:415-424.
 \seealso{
 \code{\link{popgenreport}}
 }
-
+\author{
+Aaron Adamack, aaron.adamack@canberra.edu.au
+}

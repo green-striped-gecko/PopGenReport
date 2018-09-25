@@ -37,4 +37,3 @@ init.popgensim(n.pops = 5, n.ind=8, sex.ratio = 0.25, n.loci = 4, n.allels = 7, 
 \seealso{
 \code{\link{run.popgensim}}
 }
-

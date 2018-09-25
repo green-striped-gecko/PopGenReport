@@ -196,10 +196,6 @@ for a dataset with ~3200 individuals.
 # for a full report in a single pdf set mk.complete to TRUE
 # res <- popgenreport(bilby, mk.complete=TRUE)
 }
-\author{
-Aaron Adamack & Bernd Gruber, aaron.adamack@canberra.edu.au,
-bernd.gruber@canberra.edu.au
-}
 \references{
 Kosman E., Leonard K.J. 2005. Similarity coefficients for
 molecular markers in studies of genetic relationships between individuals
@@ -214,4 +210,7 @@ Bioinformatics 28:2537-2539
 \seealso{
 \code{\link{adegenet}}, \code{\link{pegas}}, \code{\link{mmod}}
 }
-
+\author{
+Aaron Adamack & Bernd Gruber, aaron.adamack@canberra.edu.au,
+bernd.gruber@canberra.edu.au
+}

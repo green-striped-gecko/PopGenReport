@@ -40,4 +40,3 @@ opt.landgen(landscape = fric.raster, nlocations = 5, mindist = 3,
 method = "leastcost", NN = 8, iter = 10)
 }
 }
-

@@ -21,4 +21,3 @@ returns modified raster layer
 \description{
 adds a polygon to a raster layer
 }
-

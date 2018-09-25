@@ -107,9 +107,6 @@ lc<-landgenreport(cats=landgen, fric.raster=fric.raster, gen.distance="D", NN=4,
 names(lc$leastcost)
 }
 }
-\author{
-Bernd Gruber (bernd.gruber@canberra.edu.au)
-}
 \references{
 Cushman, S., Wasserman, T., Landguth, E. and Shirk, A. (2013).
 Re-Evaluating Causal Modeling with Mantel Tests in Landscape Genetics.
@@ -132,4 +129,6 @@ americana in northern Idaho. Landscape Ecology, 25(10), 1601-1612.
 \code{\link{popgenreport}}, \code{\link{wassermann}},
 \code{\link{genleastcost}}, \code{\link{lgrMMRR}}
 }
-
+\author{
+Bernd Gruber (bernd.gruber@canberra.edu.au)
+}

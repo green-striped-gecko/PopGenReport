@@ -15,4 +15,3 @@ a pairwise fst matrix (same as hierfstat pairwise.fst)
 \description{
 for simulation the original pairwise.fst was too slow. The fast version works only with genind objects without NAs and diploid data (so to be save do not use it on non-simulated data)
 }
-
