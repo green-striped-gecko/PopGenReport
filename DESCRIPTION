@@ -15,8 +15,7 @@ LazyData: true
 Depends:
     R (>= 3.0.0),
     knitr,
-    adegenet (>= 2.0.0),
-    raster
+    adegenet (>= 2.0.0)
 Imports:
     lattice,
     RgoogleMaps,
@@ -42,7 +41,8 @@ Imports:
     grDevices,
     methods,
     stats,
-    utils
+    utils, 
+    raster
 VignetteBuilder: knitr
 URL: https://github.com/green-striped-gecko/PopGenReport
 Suggests:
