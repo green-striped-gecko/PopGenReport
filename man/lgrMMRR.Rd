@@ -38,7 +38,6 @@ outlined in Legendre et al. 1994 and implemented by Wang 2013.
 \examples{
 
 \dontrun{\%
-require(raster)
 data(landgen)
 data(fric.raster)
 glc <- genleastcost(landgen, fric.raster, "D", NN=4, path="leastcost")

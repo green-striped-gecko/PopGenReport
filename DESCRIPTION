@@ -1,7 +1,7 @@
 Package: PopGenReport
 Type: Package
 Title: A Simple Framework to Analyse Population and Landscape Genetic Data
-Version: 3.0.2
+Version: 3.0.3
 Date: 2018-11-19
 Authors@R: c(
   person("Bernd", "Gruber", email="bernd.gruber@canberra.edu.au", role=c("aut","cre")),

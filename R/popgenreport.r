@@ -176,7 +176,7 @@
 #' @import gap 
 #' @import knitr 
 #' @import adegenet 
-#' @importFrom raster raster extent rasterize crs values buffer values<- crs<- 
+#' @importFrom raster raster extent rasterize crs values buffer values<- crs<- plot
 #' @importFrom GGally ggpairs
 #' @importFrom graphics abline axis box hist image lines par points text
 #' @importFrom grDevices col2rgb colorRampPalette rainbow rgb 

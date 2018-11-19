@@ -4,16 +4,12 @@
 \name{treeScrub}
 \alias{treeScrub}
 \title{A raster file [proportion of treeScrub per cell in Hawke Bay, NZ]}
-\format{raster file}
+\format{data}
 \usage{
 treeScrub
 }
 \description{
 A raster file [proportion of treeScrub per cell in Hawke Bay, NZ]
-}
-\examples{
-data(treeScrub)
-plot(treeScrub)
 }
 \references{
 Sarre, S.D., Aitken, N., Adamack, A.T., Macdonald, A.J., Gruber, B. & Cowan, P. (2014). Creating new evolutionary pathways through bioinvasion: The population genetics of brushtail possums in New Zealand. Molecular Ecology, 23, 3419-3433.
