@@ -121,7 +121,8 @@ specified.
 \donttest{
 library(raster)
 fric.raster <- readRDS(system.file("extdata","fric.raster.rdata", package="PopGenReport"))
-lc<-landgenreport(cats=landgen, fric.raster=fric.raster, gen.distance="D", NN=4, mk.resistance=TRUE)
+lc<-landgenreport(cats=landgen, fric.raster=fric.raster,
+gen.distance="D", NN=4, mk.resistance=TRUE, mk.pdf=FALSE)
 names(lc$leastcost)
 }
 }

@@ -122,7 +122,7 @@ opt.landgen <- function(landscape,  nlocations, mindist=0, fixed = NULL, method,
     eucl.mat <- as.matrix(dist(locs))
     
     sd.cost <- sd(as.dist(cost.mat))
-    sd.detour = sd(resid(lm(as.dist(cost.mat)~as.dist( eucl.mat))))
+    sd.detour = sd(resid(lm(as.numeric(as.dist(cost.mat))~as.numeric(as.dist( eucl.mat)))))
     #sd.detour2 <- sd(as.dist(cost.mat)-as.dist(eucl.mat))
     
     opt[it,] <-c(sd.cost, sd.detour)#, sd.detour2)
@@ -136,7 +136,7 @@ opt.landgen <- function(landscape,  nlocations, mindist=0, fixed = NULL, method,
   locs <- locs.opt
   cost.mat <- costdistances(landscape, locs, method, NN)
   eucl.mat <- as.matrix(dist(locs))
-  detour = resid(lm(as.dist(cost.mat)~as.dist( eucl.mat)))
+  detour = resid(lm(as.numeric(as.dist(cost.mat))~as.numeric(as.dist( eucl.mat))))
   
   hist(detour, main="Distrubtion of detour", col="darkgreen")
   

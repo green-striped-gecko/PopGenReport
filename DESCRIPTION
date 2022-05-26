@@ -37,7 +37,6 @@ Imports:
     sp,
     mmod,
     GGally,
-    data.table,
     graphics,
     grDevices,
     methods,
