@@ -9,7 +9,6 @@
 #'@return a dispersal probability matrix
 #'@description converts cost distances to probabilities: to reach a certain patch[ d0 average distance of p of all individuals, for example d0=100, p =0.5 -> 50\% procent of all migrating individuals go up to 100 m.
 #' @export
-#' @importFrom data.table rbindlist
 
  p2p <- function(x, d0, p)
  {
@@ -300,7 +299,7 @@ noffset <- n.cov
 ##### convert pops to data.frame
 #combine <-do.call(rbind.data.frame,x)
 #combine <- do.call(rbind.data.frame,x)
-combine <- as.data.frame(rbindlist(x))
+combine <- do.call("rbind", x)#as.data.frame(rbindlist(x))
 
 #convert to genind
 allele <-combine[,-(1:noffset)]

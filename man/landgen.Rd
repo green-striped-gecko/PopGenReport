@@ -22,6 +22,6 @@ summary(landgen)
 \code{\link{landgenreport}}, \code{\link{genleastcost}}
 }
 \author{
-Bernd Gruber \email{(bernd.gruber@canberra.edu.au}
+Bernd Gruber \email{bernd.gruber@canberra.edu.au}
 }
 \keyword{datasets}

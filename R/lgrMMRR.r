@@ -22,7 +22,7 @@
 #' Finally also the F-statistic and p-value for overall F-test for lack of fit.
 #' @author Bernd Gruber (bernd.gruber@@canberra.edu.au) using the
 #' implementation of Wang 2013.
-#' @seealso \link[ecodist]{MRM} in package ecodist, \code{\link{popgenreport}},
+#' @seealso \code{\link{popgenreport}},
 #' \code{\link{genleastcost}}, \code{\link{landgenreport}},
 #' \code{\link{wassermann}}
 #' @references Legendre, P.; Lapointe, F. and Casgrain, P. 1994. Modeling brain
