@@ -35,13 +35,12 @@
 #' differentiation for allelic richness among populations of the argan tree
 #' [Argania spinosa (L.) Skeels] endemic to Morocco
 #' @examples
-#' 
 #'  #not run:
 #'  #data(bilby)
 #'  #here we use only the first 50 individuals to speep up the example
 #'  #popgenreport(bilby, mk.allel.rich=TRUE, mk.pdf=FALSE)
-#'  
-#' #to get a pdf output you need to have a running Latex version installed on your system.
+#'  #to get a pdf output you need to have a running Latex version installed
+#'  #on your system.
 #' #popgenreport(bilby, mk.allel.rich=TRUE, mk.pdf=TRUE)
 #' 
 #' #data(bilby)

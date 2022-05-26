@@ -7,9 +7,10 @@
 landgenreport(cats, fric.raster, gen.distance = "Gst.Nei", NN = NULL,
   pathtype = "leastcost", plotpath = TRUE, theta = 1,
   mk.resistance = TRUE, mapdotcolor = "blue", mapdotsize = 1,
-  mapdotalpha = 0.4, mapdottype = 19, mapzoom = NULL, mk.custom = FALSE,
-  fname = "LandGenReport", foldername = "results", path.pgr = NULL,
-  mk.Rcode = FALSE, mk.complete = FALSE, mk.pdf = TRUE)
+  mapdotalpha = 0.4, mapdottype = 19, mapzoom = NULL,
+  mk.custom = FALSE, fname = "LandGenReport", foldername = "results",
+  path.pgr = NULL, mk.Rcode = FALSE, mk.complete = FALSE,
+  mk.pdf = TRUE)
 }
 \arguments{
 \item{cats}{a \code{genind} object with spatial coordinates in the other
@@ -102,7 +103,9 @@ specified.
 }
 \examples{
 
-\dontrun{\%
+\donttest{
+library(raster)
+fric.raster <- readRDS(system.file("extdata","fric.raster.rdata", package="PopGenReport"))
 lc<-landgenreport(cats=landgen, fric.raster=fric.raster, gen.distance="D", NN=4, mk.resistance=TRUE)
 names(lc$leastcost)
 }

@@ -4,7 +4,8 @@
 \alias{wassermann}
 \title{Partial Mantel tests on costdistance matrices}
 \usage{
-wassermann(gen.mat, cost.mats, eucl.mat = NULL, plot = TRUE, nperm = 999)
+wassermann(gen.mat, cost.mats, eucl.mat = NULL, plot = TRUE,
+  nperm = 999)
 }
 \arguments{
 \item{gen.mat}{pairwise genetic distance matrix}
@@ -32,7 +33,9 @@ see \code{\link{landgenreport}}
 }
 \examples{
 
-\dontrun{\%
+\donttest{
+library(raster)
+fric.raster <- readRDS(system.file("extdata","fric.raster.rdata", package="PopGenReport"))
 glc <- genleastcost(landgen, fric.raster, "D", NN=8)
 wassermann(eucl.mat = glc$eucl.mat, cost.mats = glc$cost.mats, gen.mat = glc$gen.mat)
 }

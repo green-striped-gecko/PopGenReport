@@ -85,7 +85,9 @@
 #' americana in northern Idaho. Landscape Ecology, 25(10), 1601-1612.
 #' @examples
 #' 
-#' \dontrun{%
+#' \donttest{
+#' library(raster)
+#' fric.raster <- readRDS(system.file("extdata","fric.raster.rdata", package="PopGenReport"))
 #' lc<-landgenreport(cats=landgen, fric.raster=fric.raster, gen.distance="D", NN=4, mk.resistance=TRUE)
 #' names(lc$leastcost)
 #' }

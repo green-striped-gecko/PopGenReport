@@ -37,9 +37,10 @@ outlined in Legendre et al. 1994 and implemented by Wang 2013.
 }
 \examples{
 
-\dontrun{\%
+\donttest{
 data(landgen)
-data(fric.raster)
+library(raster)
+fric.raster <- readRDS(system.file("extdata","fric.raster.rdata", package="PopGenReport"))
 glc <- genleastcost(landgen, fric.raster, "D", NN=4, path="leastcost")
 lgrMMRR(glc$gen.mat, glc$cost.mats, glc$eucl.mat, nperm=999)
 }

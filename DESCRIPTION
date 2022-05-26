@@ -1,8 +1,8 @@
 Package: PopGenReport
 Type: Package
 Title: A Simple Framework to Analyse Population and Landscape Genetic Data
-Version: 3.0.3
-Date: 2018-11-19
+Version: 3.0.4
+Date: 2019-02-04
 Authors@R: c(
   person("Bernd", "Gruber", email="bernd.gruber@canberra.edu.au", role=c("aut","cre")),
   person("Aaron", "Adamack", email="aaron.adamack@canberra.edu.au", role="aut"))
@@ -11,6 +11,7 @@ Description: Provides beginner friendly framework to analyse population genetic
     For detailed information how to use the package refer to the comprehensive
     tutorials or visit <http://www.popgenreport.org/>.
 License: GPL
+Encoding: UTF-8
 LazyData: true
 Depends:
     R (>= 3.0.0),
@@ -46,4 +47,4 @@ Imports:
 VignetteBuilder: knitr
 URL: https://github.com/green-striped-gecko/PopGenReport
 Suggests:
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

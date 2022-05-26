@@ -35,7 +35,9 @@ a list object with two slots. The first slot is called opt and contains iter opt
 opt.landgen places iter times nlocations in a given landscape. For each scenario the pairwise costdistances and Euclidean distances are calculated and the standard deviation of detour (see Gruber et al. in prep) is calculated. This metric evaluates the scenerio in their ability to find a significant effect for the given resistance layer on population structure (based on the causal modelling approach of Cushman et al.). To allow for more realistic designs previously locations, a minimal distance between locations and a mask that indicates "forbidden" areas can be specified.
 }
 \examples{
-\dontrun{
+\donttest{
+library(raster)
+fric.raster <- readRDS(system.file("extdata","fric.raster.rdata", package="PopGenReport"))
 opt.landgen(landscape = fric.raster, nlocations = 5, mindist = 3, 
 method = "leastcost", NN = 8, iter = 10)
 }

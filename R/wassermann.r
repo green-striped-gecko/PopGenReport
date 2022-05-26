@@ -22,7 +22,9 @@
 #' Martes americana in northern Idaho. Landscape Ecology, 25(10), 1601-1612.
 #' @examples
 #' 
-#' \dontrun{%
+#' \donttest{
+#' library(raster)
+#' fric.raster <- readRDS(system.file("extdata","fric.raster.rdata", package="PopGenReport"))
 #' glc <- genleastcost(landgen, fric.raster, "D", NN=8)
 #' wassermann(eucl.mat = glc$eucl.mat, cost.mats = glc$cost.mats, gen.mat = glc$gen.mat)
 #' }

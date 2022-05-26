@@ -346,7 +346,8 @@ return(pops.genind)
 #'@return an updated pops object after steps time steps or a list that includes the pops object and the emigration matrix [rec="emi"].
 #'@seealso \code{\link{init.popgensim}}
 #'@examples
-#'\dontrun{
+#'\donttest{
+#' library(raster)
 #'set.seed(1)
 #'locs <- cbind(x=round(runif(5,5,45)), y=round(runif(5,5,45)) )
 
