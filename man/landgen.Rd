@@ -4,7 +4,9 @@
 \name{landgen}
 \alias{landgen}
 \title{A simulated genind data set with spatial coordinates}
-\format{An object of class \code{genind} of length 1.}
+\format{
+An object of class \code{genind} of length 1.
+}
 \usage{
 landgen
 }
@@ -22,6 +24,6 @@ summary(landgen)
 \code{\link{landgenreport}}, \code{\link{genleastcost}}
 }
 \author{
-Bernd Gruber \email{bernd.gruber@canberra.edu.au}
+Bernd Gruber \email{(bernd.gruber@canberra.edu.au}
 }
 \keyword{datasets}

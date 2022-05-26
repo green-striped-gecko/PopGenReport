@@ -4,8 +4,18 @@
 \alias{opt.landgen}
 \title{Function for optimising a landscape genetic analysis based on resistance layers}
 \usage{
-opt.landgen(landscape, nlocations, mindist = 0, fixed = NULL, method,
-  NN = 8, iter = 100, retry = 10, mask = NULL, plot = TRUE)
+opt.landgen(
+  landscape,
+  nlocations,
+  mindist = 0,
+  fixed = NULL,
+  method,
+  NN = 8,
+  iter = 100,
+  retry = 10,
+  mask = NULL,
+  plot = TRUE
+)
 }
 \arguments{
 \item{landscape}{resistance layer as a raster object (if not projected dimensions are assumed to be in meters!!)}

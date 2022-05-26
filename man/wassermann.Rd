@@ -4,8 +4,7 @@
 \alias{wassermann}
 \title{Partial Mantel tests on costdistance matrices}
 \usage{
-wassermann(gen.mat, cost.mats, eucl.mat = NULL, plot = TRUE,
-  nperm = 999)
+wassermann(gen.mat, cost.mats, eucl.mat = NULL, plot = TRUE, nperm = 999)
 }
 \arguments{
 \item{gen.mat}{pairwise genetic distance matrix}

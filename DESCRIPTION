@@ -47,4 +47,4 @@ Imports:
 VignetteBuilder: knitr
 URL: https://github.com/green-striped-gecko/PopGenReport
 Suggests:
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.2

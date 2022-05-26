@@ -4,13 +4,28 @@
 \alias{landgenreport}
 \title{Create a landscape genetic report}
 \usage{
-landgenreport(cats, fric.raster, gen.distance = "Gst.Nei", NN = NULL,
-  pathtype = "leastcost", plotpath = TRUE, theta = 1,
-  mk.resistance = TRUE, mapdotcolor = "blue", mapdotsize = 1,
-  mapdotalpha = 0.4, mapdottype = 19, mapzoom = NULL,
-  mk.custom = FALSE, fname = "LandGenReport", foldername = "results",
-  path.pgr = NULL, mk.Rcode = FALSE, mk.complete = FALSE,
-  mk.pdf = TRUE)
+landgenreport(
+  cats,
+  fric.raster,
+  gen.distance = "Gst.Nei",
+  NN = NULL,
+  pathtype = "leastcost",
+  plotpath = TRUE,
+  theta = 1,
+  mk.resistance = TRUE,
+  mapdotcolor = "blue",
+  mapdotsize = 1,
+  mapdotalpha = 0.4,
+  mapdottype = 19,
+  mapzoom = NULL,
+  mk.custom = FALSE,
+  fname = "LandGenReport",
+  foldername = "results",
+  path.pgr = NULL,
+  mk.Rcode = FALSE,
+  mk.complete = FALSE,
+  mk.pdf = TRUE
+)
 }
 \arguments{
 \item{cats}{a \code{genind} object with spatial coordinates in the other

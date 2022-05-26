@@ -4,9 +4,21 @@
 \alias{run.popgensim}
 \title{Run a time-forward popgen simulation}
 \usage{
-run.popgensim(simpops, steps, cost.mat, n.offspring, n.ind, mig.rate,
-  disp.max, disp.rate, n.allels, mut.rate, n.cov = 3, rec = "none",
-  emi.table = NULL)
+run.popgensim(
+  simpops,
+  steps,
+  cost.mat,
+  n.offspring,
+  n.ind,
+  mig.rate,
+  disp.max,
+  disp.rate,
+  n.allels,
+  mut.rate,
+  n.cov = 3,
+  rec = "none",
+  emi.table = NULL
+)
 }
 \arguments{
 \item{simpops}{pops object (a list of pop)}

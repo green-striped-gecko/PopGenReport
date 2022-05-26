@@ -4,8 +4,15 @@
 \alias{init.popgensim}
 \title{Initialise a spatial meta-population for a popgen simulation}
 \usage{
-init.popgensim(n.pops, n.ind, sex.ratio, n.loci, n.allels, locs = NULL,
-  n.cov = 3)
+init.popgensim(
+  n.pops,
+  n.ind,
+  sex.ratio,
+  n.loci,
+  n.allels,
+  locs = NULL,
+  n.cov = 3
+)
 }
 \arguments{
 \item{n.pops}{number of subpopulations}

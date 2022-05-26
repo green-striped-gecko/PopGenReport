@@ -5,10 +5,22 @@
 \title{Function to convert textfiles into a \linkS4class{genind} object (the format
 required for popgenreport)}
 \usage{
-read.genetable(filename, pop = NULL, ind = NULL, lat = NULL,
-  long = NULL, x = NULL, y = NULL, other.min = NULL,
-  other.max = NULL, oneColPerAll, NA.char = NA, sep = NULL,
-  ncode = NULL, ploidy = 2)
+read.genetable(
+  filename,
+  pop = NULL,
+  ind = NULL,
+  lat = NULL,
+  long = NULL,
+  x = NULL,
+  y = NULL,
+  other.min = NULL,
+  other.max = NULL,
+  oneColPerAll,
+  NA.char = NA,
+  sep = NULL,
+  ncode = NULL,
+  ploidy = 2
+)
 }
 \arguments{
 \item{filename}{the name of your file in .csv file format}

@@ -59,7 +59,7 @@ quantifying geographic and ecological isolation. Evolution: 67-12:
 3403-3411.
 }
 \seealso{
-\link[ecodist]{MRM} in package ecodist, \code{\link{popgenreport}},
+\code{\link{popgenreport}},
 \code{\link{genleastcost}}, \code{\link{landgenreport}},
 \code{\link{wassermann}}
 }
