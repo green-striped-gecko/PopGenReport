@@ -32,7 +32,7 @@
 
 allele.dist<-function(population, mk.figures=TRUE){
   # package require adegenet and pegas
-  if (class(population) != "genind") {
+  if (!is(population,"genind")) {
     stop("You did not provide a valid genind object! Script stopped!")
    }
 

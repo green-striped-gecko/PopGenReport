@@ -41,7 +41,7 @@
 #' @export
 gd.smouse <- function(population, verbose=TRUE){
   # check to see if the passed data is of the right type
-  if (class(population) != "genind") {
+  if (!is(population,"genind")) {
     stop("You did not provide a valid genind object! Script stopped!")
   }
   

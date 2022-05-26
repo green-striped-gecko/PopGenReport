@@ -171,6 +171,7 @@
 #' @importFrom genetics HWE.test HWE.chisq HWE.exact 
 #' @importFrom ade4 dudi.pca s.class add.scatter 
 #' @importFrom rgdal project 
+#' @importFrom methods is
 #' @import mmod 
 #' @import R.utils 
 #' @import gap 
@@ -227,7 +228,7 @@ popgenreport <- function(cats=NULL,
                           mk.complete=FALSE,    # create a full report)  
                           mk.pdf=TRUE)
 {
-  if (class(cats)!="genind") {stop("You did not provide a valid genind object! Script stopped!\n")}
+  if (!is(cats,"genind")) {stop("You did not provide a valid genind object! Script stopped!\n")}
   
   # Check for combinations of populations and loci with low numbers of individuals and alleles  
   npops<-length(levels(cats@pop))

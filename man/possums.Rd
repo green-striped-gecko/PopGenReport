@@ -20,6 +20,6 @@ possums
 Sarre, S.D., Aitken, N., Adamack, A.T., Macdonald, A.J., Gruber, B. & Cowan, P. (2014). Creating new evolutionary pathways through bioinvasion: The population genetics of brushtail possums in New Zealand. Molecular Ecology, 23, 3419-3433.
 }
 \author{
-Bernd Gruber \email{(bernd.gruber@canberra.edu.au}
+Bernd Gruber \email{bernd.gruber@canberra.edu.au}
 }
 \keyword{datasets}

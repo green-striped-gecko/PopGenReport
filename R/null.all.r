@@ -60,7 +60,7 @@
 null.all<-function(population)
 {
   # Confirm that the function has been provided with a genind object
-  if (class(population) != "genind"){
+  if (!is(population,"genind")){
     stop("You did not provide a valid genind object! Script stopped!")
 
   }

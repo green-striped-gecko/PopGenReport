@@ -124,7 +124,7 @@ landgenreport <- function(cats,
                           mk.complete=FALSE,    # create a full report)  
                           mk.pdf=TRUE)
 {
-  if (class(cats)!="genind") {stop("You did not provide a valid catsnd object! Script stopped!\n")}
+  if (!is(cats,"genind")) {stop("You did not provide a valid catsnd object! Script stopped!\n")}
   # Check for combinations of populations and loci with low numbers of individuals and alleles  
   npops<-length(levels(cats@pop))
   nloci<-length(locNames(cats))

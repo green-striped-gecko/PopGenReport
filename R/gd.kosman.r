@@ -39,7 +39,7 @@
 #' @export
 gd.kosman <- function(population){
   # check to see if the function was passed a genind object
-  if (class(population) != "genind") {
+  if (!is(population,"genind")) {
     stop("You did not provide a valid genind object! Script stopped!")
   }
   

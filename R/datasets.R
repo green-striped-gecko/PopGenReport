@@ -6,7 +6,7 @@
 #' @name bilby
 #' @format genlight object
 #' @docType data
-#' @author Bernd Gruber \email{(bernd.gruber@@canberra.edu.au}
+#' @author Bernd Gruber \email{bernd.gruber@@canberra.edu.au}
 #' @keywords datasets
 #' data(bilby)
 #' bilby
@@ -24,7 +24,7 @@
 #' 
 #' @name landgen
 #' @docType data
-#' @author Bernd Gruber \email{(bernd.gruber@@canberra.edu.au}
+#' @author Bernd Gruber \email{bernd.gruber@@canberra.edu.au}
 #' @seealso \code{\link{landgenreport}}, \code{\link{genleastcost}}
 #' @keywords datasets
 #' @examples
@@ -38,7 +38,7 @@
 #' @name possums
 #' @format genind object
 #' @docType data
-#' @author Bernd Gruber \email{(bernd.gruber@@canberra.edu.au}
+#' @author Bernd Gruber \email{bernd.gruber@@canberra.edu.au}
 #' @keywords datasets
 #' @references 
 #' Sarre, S.D., Aitken, N., Adamack, A.T., Macdonald, A.J., Gruber, B. & Cowan, P. (2014). Creating new evolutionary pathways through bioinvasion: The population genetics of brushtail possums in New Zealand. Molecular Ecology, 23, 3419-3433.
