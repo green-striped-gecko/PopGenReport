@@ -71,11 +71,11 @@ opt.landgen <- function(landscape,  nlocations, mindist=0, fixed = NULL, method,
       {
         rd <- rasterize(fixed, r1,1)
         rd <- buffer(rd, mindist)
-        r1 <- sum(r1,rd, na.rm=T)
+        r1 <- sum(r1,rd, na.rm=TRUE)
         values(r1) <- ifelse(values(r1)>0,1,NA)
       }
       left <- sum(is.na(values(r1)))
-      if (left==0) {cat("There is no area left to place the required number of locations after placing the fixed locations. Reduce mindist or the amount of fixed locations.\n"); stop()}
+      if (left==0) {message("There is no area left to place the required number of locations after placing the fixed locations. Reduce mindist or the amount of fixed locations.\n"); stop()}
       xc <- NA
       yc <- NA
       i <- 1
@@ -95,13 +95,13 @@ opt.landgen <- function(landscape,  nlocations, mindist=0, fixed = NULL, method,
         #add new point to mask    
         rd <- rasterize(cbind(xs,ys), r1,1)
         rd <- buffer(rd, mindist)
-        r1 <- sum(r1,rd, na.rm=T)
+        r1 <- sum(r1,rd, na.rm=TRUE)
         values(r1) <- ifelse(values(r1)>0,1,NA)
         left <- sum(is.na(values(r1)))
         if (left==0 & i<=nadd) 
         {
           retryc <- retryc - 1
-          cat(paste("No area left after ",i,"points at iteration",it,". I go back and try again.", retryc, "retries left...\n"))
+          message(paste("No area left after ",i,"points at iteration",it,". I go back and try again.", retryc, "retries left...\n"))
           i <- 1
           r1 <- rback
           if (retryc<1) {stop("Could not find any good combination, reduce mindist or increase retry or reduce number of fixed locations.\n")}
@@ -130,7 +130,9 @@ opt.landgen <- function(landscape,  nlocations, mindist=0, fixed = NULL, method,
   } #end of iter loop
   if (plot)
   {
-  op <- par(mfrow=c(2,2), mai=c(0.5,0.5,0.2,0.2))
+  oldpar <- par(no.readonly = TRUE)
+  on.exit(par(oldpar))
+  par(mfrow=c(2,2), mai=c(0.5,0.5,0.2,0.2))
   opt.val <- which.max(opt$sd.detour)
   locs.opt <- scenario[[opt.val]]
   locs <- locs.opt
@@ -157,7 +159,7 @@ opt.landgen <- function(landscape,  nlocations, mindist=0, fixed = NULL, method,
   plot(landscape, main=paste("worst:",round(opt[opt.val,"sd.detour"],2) ))
   points(locs[,1], locs[,2], pch=16, cex=1.2,  col=c(rep("blue", specified), rep("black", nadd)))
   text(locs[,1],locs[,2], row.names(locs), cex=1)
-  par(op)
+  par(oldpar)
   }
   ord <- order(opt$sd.detour, decreasing = TRUE)
   return(list(opt=opt[ord,], scenario = scenario[ord]))

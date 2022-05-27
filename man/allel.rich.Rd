@@ -42,16 +42,15 @@ capable of determining allelic richness for species with most ploidies while
 allelic.richness only works for haploid and diploid species.
 }
 \examples{
- #not run:
- #data(bilby)
- #here we use only the first 50 individuals to speep up the example
- #popgenreport(bilby, mk.allel.rich=TRUE, mk.pdf=FALSE)
+ \donttest{
+ data(bilby)
+ popgenreport(bilby, mk.allel.rich=TRUE, mk.pdf=FALSE)
  #to get a pdf output you need to have a running Latex version installed
- #on your system.
+#on your system.
 #popgenreport(bilby, mk.allel.rich=TRUE, mk.pdf=TRUE)
-
-#data(bilby)
-#allel.rich(bilby)
+}
+data(bilby)
+allel.rich(bilby)
 }
 \references{
 El Mousadik A, Petit RJ. (1996) High level of genetic

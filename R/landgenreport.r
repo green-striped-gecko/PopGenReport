@@ -154,14 +154,14 @@ landgenreport <- function(cats,
 #   #   {
 #   #   locNames(cats) <- paste(1:length(locNames(cats)),"-",substr(locNames(cats),1,4), sep="")
 #   # 
-#   # cat("Loci names were not unique and therefore adjusted.\n")
+#   # message("Loci names were not unique and therefore adjusted.\n")
 #   #   }
 #   # levels(cats@loc.fac) <- locNames(cats)  #make sure levels and factors are the same
 # #check if indnames are unique!!!!
 # #adjust if necessary and issue a notification
 # if (length(unique(indNames(cats)))!=length(indNames(cats))) 
 #   {indNames(cats) <- paste(1:length(indNames(cats)),"-",substr(indNames(cats),1,8),sep="")
-#   cat("Individual names were not unique and therefore adjusted.\n")
+#   message("Individual names were not unique and therefore adjusted.\n")
 #   }
 # 
 # 
@@ -170,7 +170,7 @@ landgenreport <- function(cats,
 # if (length(unique(popNames(cats)))!=length(popNames(cats))) 
 #   {
 #   popNames(cats) <- paste(1:length(popNames(cats)),"-",substr(popNames(cats),1,6),sep="")
-#   cat("Subpopulation names were not unique and therefore adjusted.\n")
+#   message("Subpopulation names were not unique and therefore adjusted.\n")
 #   }
 
 
@@ -192,10 +192,12 @@ if (is.null(NN))
   dirfiles <- list.dirs(path=path.pgr, recursive=FALSE)
   if (!(tolower (file.path(path.pgr,foldername))) %in% tolower(dirfiles)) {
     dir.create(file.path(path.pgr,foldername))
-    cat("There is no ",foldername, " folder. I am trying to create it; \notherwise please create the folder manually. \n")
+    message("There is no ",foldername, " folder. I am trying to create it; \notherwise please create the folder manually. \n")
   }
   owd <-getwd()
+  on.exit(setwd(owd))
   setwd(file.path(path.pgr, foldername))
+  
  
   # coordinates must be in xy !!!!!
   coords=FALSE
@@ -255,12 +257,12 @@ if (is.null(path)) {stop("Could not find snw files in the PopGenReport library f
   required<- readLines(paste(path,"required.snw",sep=""))
   compl<-c(header.file,required) 
   
-  cat("Compiling report...\n")
-  if (coords==FALSE) cat(" - No valid coordinates were provided. \n   Be aware you need to provide a coordinate (or NA) for each individual\n   and the coordinate heading in slot @other has to be 'latlong' or 'xy'.\n   All analyses will be skipped!\n") 
+  message("Compiling report...\n")
+  if (coords==FALSE) message(" - No valid coordinates were provided. \n   Be aware you need to provide a coordinate (or NA) for each individual\n   and the coordinate heading in slot @other has to be 'latlong' or 'xy'.\n   All analyses will be skipped!\n") 
  
 if ((mk.resistance==TRUE | mk.complete==TRUE)  & (coords & !is.null(fric.raster))) 
   {
-    cat("- Landscape genetic analysis using resistance matrices...\n")  
+    message("- Landscape genetic analysis using resistance matrices...\n")  
  #   fr.raster<<-fric.raster
  #   gen.dist <<- gen.distance
     pmantel<-  readLines(paste(path,"pmantel.snw",sep=""))
@@ -269,7 +271,7 @@ if ((mk.resistance==TRUE | mk.complete==TRUE)  & (coords & !is.null(fric.raster)
   
 
 if (mk.custom==TRUE){
-  cat("- Run customised snw file, custom.snw ...\n")
+  message("- Run customised snw file, custom.snw ...\n")
   custom<-readLines(paste(path,"custom.snw",sep=""))
   compl<-c(compl,custom)
 }
@@ -292,27 +294,27 @@ close(zz)
 
 
 #setwd(paste(path.pgr,foldername, sep="/"))
-cat(paste("Analysing data ...\n", sep=""))
+message(paste("Analysing data ...\n", sep=""))
 #Sweave(paste(fname,".rnw",sep=""), output=paste(fname,".tex",sep=""), quiet=FALSE, driver=mydriver)
 flush.console()
 knit(input=rnwfile, output=texfile, quiet=TRUE, envir=pgr)
 
 if (mk.pdf==TRUE)
 {
-cat(paste("Creating pdf from: ",rnwfile," ...\n",sep=""))
+message(paste("Creating pdf from: ",rnwfile," ...\n",sep=""))
 knit2pdf(texfile, texfile)
-cat(paste("Finished.\nCheck ",fname,".pdf for results.\n", sep=""))
+message(paste("Finished.\nCheck ",fname,".pdf for results.\n", sep=""))
 }
 
 if (mk.Rcode) {
-  cat(paste("Creating R code from: ",rnwfile,"...\n"), sep="")
+  message(paste("Creating R code from: ",rnwfile,"...\n"), sep="")
   rfile <-paste(fname,".R",sep="")
   purl(input=rnwfile, output=rfile)
 #  Stangle(paste(fname,".rnw",sep=""))
 }
     
 
-cat(paste("All files are available in the folder: \n",file.path(path.pgr, foldername),"\n",sep=""))
+message(paste("All files are available in the folder: \n",file.path(path.pgr, foldername),"\n",sep=""))
 
 #reset working directory to previous
 setwd(owd)

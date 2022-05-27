@@ -4,7 +4,7 @@
 \alias{addpoly}
 \title{Function to add a polygon to a landscape}
 \usage{
-addpoly(r, pol, val, plot = T)
+addpoly(r, pol, val, plot = TRUE)
 }
 \arguments{
 \item{r}{raster that represents the landscape}

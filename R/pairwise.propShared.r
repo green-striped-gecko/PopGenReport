@@ -22,15 +22,15 @@ pairwise.propShared <- function(gi)
     
     na <- ncol(p1@tab)
     maf <- NA
-    m1 <- colMeans(p1@tab[,], na.rm=T)/2
-    m2 <- colMeans(p2@tab[,], na.rm=T)/2
+    m1 <- colMeans(p1@tab[,], na.rm=TRUE)/2
+    m2 <- colMeans(p2@tab[,], na.rm=TRUE)/2
     
-    m12 <- apply(rbind(m1,m2), 2, min, na.rm=T)
+    m12 <- apply(rbind(m1,m2), 2, min, na.rm=TRUE)
     
     lfl <- NA
     facs <- levels(p1@loc.fac)
     for (i in 1:length(locNames(p1))) 	lfl[i] <- sum(m12[p1@loc.fac==facs[i]])
-    mean(lfl, na.rm=T)	
+    mean(lfl, na.rm=TRUE)	
   }
   
   for (i in 1:ncol(allPairs))

@@ -48,13 +48,14 @@ significantly differ from zero.
 }
 \examples{
 
- #not run:
- #data(bilby)
+ \dontrun{
+ data(bilby)
  #here we use only the first 50 individuals to speep up the example
- #popgenreport(bilby, mk.null.all=TRUE, mk.pdf=FALSE)
+ popgenreport(bilby, mk.null.all=TRUE, mk.pdf=FALSE)
  
 #to get a pdf output you need to have a running Latex version installed on your system.
 #popgenreport(bilby, mk.null.all=TRUE, mk.pdf=TRUE)
+}
 }
 \references{
 Brookfield JFY. (1996) A simple new method for estimating null

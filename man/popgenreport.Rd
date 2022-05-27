@@ -140,7 +140,7 @@ analytical needs.}
 \item{mk.pdf}{switch to create a shiny pdf output. You need a working
 \bold{latex} version running on your system (e.g. MikTex (Windows) or
 Texmaker (Linux, MacOSX). For more information how to install latex on your
-system refer to the \url{www.popgenreport.org} and to the manuals of the
+system refer to the \url{http://www.popgenreport.org} and to the manuals of the
 \code{\link{knitr}} package and its manuals.}
 }
 \value{
@@ -205,16 +205,15 @@ take 14 to 15 minutes on a PC with a 3.5 Ghz processor and nearly 3 hours
 for a dataset with ~3200 individuals.
 }
 \examples{
-
-#not run:
-#data(bilby) # a generated data set
-#res <- popgenreport(bilby, mk.counts=TRUE, mk.map=TRUE, mk.pdf=FALSE)
+\dontrun{
+data(bilby) # a generated data set
+res <- popgenreport(bilby, mk.counts=TRUE, mk.map=TRUE, mk.pdf=FALSE)
 #check results via res or use created tables in the results folder.
 
 ### RUN ONLY with a working Latex version installed
-# res <- popgenreport(bilby, mk.counts=TRUE, mk.map=TRUE, mk.pdf=TRUE, path.pgr="c:/temp")
-# for a full report in a single pdf set mk.complete to TRUE
-# res <- popgenreport(bilby, mk.complete=TRUE)
+res <- popgenreport(bilby, mk.counts=TRUE, mk.map=TRUE, mk.pdf=TRUE, path.pgr="c:/temp")
+#for a full report in a single pdf set mk.complete to TRUE
+}
 }
 \references{
 Kosman E., Leonard K.J. 2005. Similarity coefficients for

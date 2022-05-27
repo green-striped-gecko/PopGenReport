@@ -19,13 +19,14 @@
 #' @author Aaron Adamack, aaron.adamack@@canberra.edu.au
 #' @seealso \code{\link{popgenreport}}
 #' @examples
-#' 
-#' # data(bilby)
+#' \dontrun{
+#'  data(bilby)
 #'  #here we use only the first 50 individuals to speep up the example
-#' # popgenreport(bilby, mk.allele.dist=TRUE, mk.pdf=FALSE)
+#'  popgenreport(bilby, mk.allele.dist=TRUE, mk.pdf=FALSE)
 #'  
 #' #to get a pdf output you need to have a running Latex version installed on your system.
-#' #popgenreport(bilby, mk.allele.dist=TRUE, mk.pdf=TRUE)
+#' popgenreport(bilby, mk.allele.dist=TRUE, mk.pdf=TRUE)
+#' }
 #' @export
 #' @importFrom calibrate textxy
 #' @importFrom pegas as.loci Fst hw.test

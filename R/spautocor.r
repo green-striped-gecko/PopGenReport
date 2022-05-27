@@ -43,11 +43,12 @@
 #' Molecular Ecology 17, 4346-4358.
 #' @examples
 #' 
-#' #not run:
-#' #data(bilby)
-#' #popgenreport(bilby, mk.spautocor=TRUE, mk.pdf=FALSE)
+#' \dontrun{
+#' data(bilby)
+#' popgenreport(bilby, mk.spautocor=TRUE, mk.pdf=FALSE)
 #' #to get a pdf output you need to have a running Latex version installed on your system.
 #' #popgenreport(bilby[1:50], mk.spautocor=TRUE, mk.pdf=TRUE)
+#' }
 #' @export
  
 

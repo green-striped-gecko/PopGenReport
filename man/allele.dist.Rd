@@ -28,13 +28,14 @@ subpopulation for each locus. Calculates relative allele proportions for
 each subpopulations and then produces a heatmap using that data.
 }
 \examples{
-
-# data(bilby)
+\dontrun{
+ data(bilby)
  #here we use only the first 50 individuals to speep up the example
-# popgenreport(bilby, mk.allele.dist=TRUE, mk.pdf=FALSE)
+ popgenreport(bilby, mk.allele.dist=TRUE, mk.pdf=FALSE)
  
 #to get a pdf output you need to have a running Latex version installed on your system.
-#popgenreport(bilby, mk.allele.dist=TRUE, mk.pdf=TRUE)
+popgenreport(bilby, mk.allele.dist=TRUE, mk.pdf=TRUE)
+}
 }
 \seealso{
 \code{\link{popgenreport}}

@@ -124,7 +124,7 @@
 #' @param mk.pdf switch to create a shiny pdf output. You need a working
 #' \bold{latex} version running on your system (e.g. MikTex (Windows) or
 #' Texmaker (Linux, MacOSX). For more information how to install latex on your
-#' system refer to the \url{www.popgenreport.org} and to the manuals of the
+#' system refer to the \url{http://www.popgenreport.org} and to the manuals of the
 #' \code{\link{knitr}} package and its manuals.
 #' @return The function returns an object (e.g. res) that has all of the
 #' results produced by this function in it. The structure of the object can be
@@ -153,16 +153,15 @@
 #' 
 #' %%Adamack & Gruber (2012)
 #' @examples
-#' 
-#' #not run:
-#' #data(bilby) # a generated data set
-#' #res <- popgenreport(bilby, mk.counts=TRUE, mk.map=TRUE, mk.pdf=FALSE)
+#' \dontrun{
+#' data(bilby) # a generated data set
+#' res <- popgenreport(bilby, mk.counts=TRUE, mk.map=TRUE, mk.pdf=FALSE)
 #' #check results via res or use created tables in the results folder.
 #' 
 #' ### RUN ONLY with a working Latex version installed
-#' # res <- popgenreport(bilby, mk.counts=TRUE, mk.map=TRUE, mk.pdf=TRUE, path.pgr="c:/temp")
-#' # for a full report in a single pdf set mk.complete to TRUE
-#' # res <- popgenreport(bilby, mk.complete=TRUE)
+#' res <- popgenreport(bilby, mk.counts=TRUE, mk.map=TRUE, mk.pdf=TRUE, path.pgr="c:/temp")
+#' #for a full report in a single pdf set mk.complete to TRUE
+#' }
 #' @importFrom ggplot2 ggplot 
 #' @importFrom dismo Mercator 
 #' @importFrom xtable xtable 
@@ -257,14 +256,14 @@ popgenreport <- function(cats=NULL,
   #locNames(cats) <- substr(locNames(cats),1,6)   
   #if (length(unique(locNames(cats)))!= length(locNames(cats))) 
   #{locNames(cats) <- paste(1:length(locNames(cats)),"-",substr(locNames(cats),1,4), sep="")
-  #cat("Loci names were not unique and therefore adjusted.\n")
+  #message("Loci names were not unique and therefore adjusted.\n")
   #}
   #levels(cats@loc.fac) <- locNames(cats)  #make sure levels and factors are the same
 #check if pop.names, indnames are unique!!!!
 #adjust if necessary and issue a notification
 # if (length(unique(indNames(cats)))!=length(indNames(cats))) 
 #   {indNames(cats) <- paste(1:length(indNames(cats)),"-",substr(indNames(cats),1,8),sep="")
-#   cat("Individual names were not unique and therefore adjusted.\n")
+#   message("Individual names were not unique and therefore adjusted.\n")
 #   }
 # 
 # 
@@ -272,7 +271,7 @@ popgenreport <- function(cats=NULL,
 # if (length(unique(popNames(cats)))!=length(popNames(cats))) 
 #   {
 #   popNames(cats) <- paste(1:length(popNames(cats)),"-",substr(popNames(cats),1,6),sep="")
-#   cat("Subpopulation names were not unique and therefore adjusted.\n")
+#   message("Subpopulation names were not unique and therefore adjusted.\n")
 #   }
 # 
 #  
@@ -291,9 +290,10 @@ popgenreport <- function(cats=NULL,
   dirfiles <- list.dirs(path=path.pgr, recursive=FALSE)
   if (!(tolower (file.path(path.pgr,foldername))) %in% tolower(dirfiles)) {
     dir.create(file.path(path.pgr,foldername))
-    cat("There is no ",foldername, " folder. I am trying to create it; \notherwise please create the folder manually. \n")
+    message("There is no ",foldername, " folder. I am trying to create it; \notherwise please create the folder manually. \n")
   }
   owd <-getwd()
+  on.exit(setwd(owd))
   setwd(file.path(path.pgr, foldername))
   # conversion of lat longs to google map data (Mercator (dismo) wants to have long lat)
   
@@ -359,84 +359,84 @@ if (is.null(path)) {stop("Could not find snw files in the PopGenReport library f
   required<- readLines(paste(path,"required.snw",sep=""))
   compl<-c(header.file,required) 
   
-  cat("Compiling report...\n")
+  message("Compiling report...\n")
   if(mk.counts | mk.complete){
-    cat("- General summary...\n")
+    message("- General summary...\n")
     overview<-readLines(paste(path,"counts.snw",sep=""))
     compl<-c(compl,overview)
   }
-  if (coords==FALSE) cat(" - No valid coordinates were provided. \n   Be aware you need to provide a coordinate (or NA) for each individual\n   and the coordinate heading in slot @other has to be 'latlong' or 'xy'.\n   Some of the analyses require coordinates and will be skipped!\n") 
+  if (coords==FALSE) message(" - No valid coordinates were provided. \n   Be aware you need to provide a coordinate (or NA) for each individual\n   and the coordinate heading in slot @other has to be 'latlong' or 'xy'.\n   Some of the analyses require coordinates and will be skipped!\n") 
   if ((mk.map==TRUE | mk.complete) & coords){
-    cat("- Map of individuals...\n")  
+    message("- Map of individuals...\n")  
     mapping<-  readLines(paste(path,"map.snw",sep=""))
     compl<-c(compl,mapping)
   }
   
   if (mk.locihz | mk.complete){
-    cat("- Statistics on population heterogeneity ...\n")  
+    message("- Statistics on population heterogeneity ...\n")  
     popheterozygosity <- readLines(paste(path,"locihz.snw",sep=""))
     compl<-c(compl,popheterozygosity)
   }
   
   if (mk.allele.dist | mk.complete){
-    cat("- Allelic distances ...\n")  
+    message("- Allelic distances ...\n")  
     numloci<-length(cats@loc.n.all)
     alleledistn <- readLines(paste(path,"allele.dist.snw",sep=""))
     compl<-c(compl,alleledistn)
 }
 if (mk.fst| mk.complete){
-     cat("- Pairwise Fst ...\n")  
+     message("- Pairwise Fst ...\n")  
   popfst<-readLines(paste(path,"fst.snw",sep=""))
   compl<-c(compl,popfst)
 }
 if (mk.null.all | mk.complete){
-     cat("- Checking for null alleles ...\n")  
+     message("- Checking for null alleles ...\n")  
      null.stat<-readLines(paste(path,"null.all.snw",sep=""))
   compl<-c(compl,null.stat)
 }
 if (mk.allel.rich | mk.complete){
-     cat("- Allelic richness ...\n")  
+     message("- Allelic richness ...\n")  
      all.stat<-readLines(paste(path,"allel.rich.snw",sep=""))
   compl<-c(compl,all.stat)
 }
 if (mk.differ.stats | mk.complete){
-     cat("- Pairwise differentiations ...\n")  
+     message("- Pairwise differentiations ...\n")  
      diff.stat<-readLines(paste(path,"differ.stats.snw",sep=""))
   compl<-c(compl,diff.stat)
 }
 
 if (mk.hwe | mk.complete){
-  cat("- Test for Hardy-Weinberg-Equilibrium ...\n") 
-  cat("  !! You may get warnings when running HWE tests, if the test is based\n")
-  cat(" on an entry in the chi-square table which is less than five.!! \n")
+  message("- Test for Hardy-Weinberg-Equilibrium ...\n") 
+  message("  !! You may get warnings when running HWE tests, if the test is based\n")
+  message(" on an entry in the chi-square table which is less than five.!! \n")
   popHWEll<-readLines(paste(path,"hwe.snw",sep=""))
   compl<-c(compl,popHWEll)
 }
 
 if ((mk.gd.kosman==TRUE | mk.complete) & coords){
-  cat("- Kosman & Leonard 2005 genetic distances...\n")
+  message("- Kosman & Leonard 2005 genetic distances...\n")
   kosman<-readLines(paste(path,"gd.kosman.snw",sep=""))
   compl<-c(compl,kosman)
 }
 
 if ((mk.gd.smouse==TRUE | mk.complete) & coords){
-  cat("- Smouse & Peakall 1999 genetic distances...\n")
+  message("- Smouse & Peakall 1999 genetic distances...\n")
   smouse<-readLines(paste(path,"gd.smouse.snw",sep=""))
   compl<-c(compl,smouse)
 }
 if ((mk.spautocor==TRUE | mk.complete) & coords){
-  cat("- Spatial autocorrelation following Smouse & Peakall 1999 ...\n")
+  message("- Spatial autocorrelation following Smouse & Peakall 1999 ...\n")
   spa<-readLines(paste(path,"spautocor.snw",sep=""))
   compl<-c(compl,spa)
 }
 if (mk.pcoa==TRUE | mk.complete){
-  cat("- Principal coordinate analysis following Jombart et al. 2009...\n")
+  message("- Principal coordinate analysis following Jombart et al. 2009...\n")
   pca<-readLines(paste(path,"pcoa.snw",sep=""))
   compl<-c(compl,pca)
 }
 
 if (mk.custom==TRUE){
-  cat("- Run customised snw file, custom.snw ...\n")
+  message("- Run customised snw file, custom.snw ...\n")
   custom<-readLines(paste(path,"custom.snw",sep=""))
   compl<-c(compl,custom)
 }
@@ -459,27 +459,27 @@ close(zz)
 
 
 #setwd(paste(path.pgr,foldername, sep="/"))
-cat(paste("Analysing data ...\n", sep=""))
+message(paste("Analysing data ...\n", sep=""))
 #Sweave(paste(fname,".rnw",sep=""), output=paste(fname,".tex",sep=""), quiet=FALSE, driver=mydriver)
 flush.console()
 knit(input=rnwfile, output=texfile, quiet=TRUE, envir=pgr)
 
 if (mk.pdf==TRUE)
 {
-cat(paste("Creating pdf from: ",rnwfile," ...\n",sep=""))
+message(paste("Creating pdf from: ",rnwfile," ...\n",sep=""))
 knit2pdf(texfile, texfile)
-cat(paste("Finished.\nCheck ",fname,".pdf for results.\n", sep=""))
+message(paste("Finished.\nCheck ",fname,".pdf for results.\n", sep=""))
 }
 
 if (mk.Rcode) {
-  cat(paste("Creating R code from: ",rnwfile,"...\n"), sep="")
+  message(paste("Creating R code from: ",rnwfile,"...\n"), sep="")
   rfile <-paste(fname,".R",sep="")
   purl(input=rnwfile, output=rfile)
 #  Stangle(paste(fname,".rnw",sep=""))
 }
     
 
-cat(paste("All files are available in the folder: \n",file.path(path.pgr, foldername),"\n",sep=""))
+message(paste("All files are available in the folder: \n",file.path(path.pgr, foldername),"\n",sep=""))
 
 #reset working directory to previous
 setwd(owd)

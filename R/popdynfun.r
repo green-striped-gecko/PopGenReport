@@ -36,7 +36,7 @@ addline <- function (r,x1,x2,val, plot=FALSE)
   ll <- Line(rbind(x1,x2))
   S1 = Lines(list(ll), ID="a")
   lin <- SpatialLines(list(S1))
-  r1 <-rasterize(lin, r, field=val, fun='last', background=NA,  mask=FALSE, update=T, updateValue='all', filename="", na.rm=TRUE)
+  r1 <-rasterize(lin, r, field=val, fun='last', background=NA,  mask=FALSE, update=TRUE, updateValue='all', filename="", na.rm=TRUE)
   if (plot==TRUE) plot(r1)
   r1
 }
@@ -51,11 +51,11 @@ addline <- function (r,x1,x2,val, plot=FALSE)
 #'@description adds a polygon to a raster layer
 #' @export
 
-addpoly <- function(r, pol, val, plot=T)
+addpoly <- function(r, pol, val, plot=TRUE)
 {
   addpoly <- SpatialPolygons(list(Polygons(list(Polygon(rbind(pol, pol[1,]))), 1)))
   r1 <- rasterize(addpoly, r, field=val, update=TRUE, updateValue='all')
-  if (plot==T) plot(r1)
+  if (plot==TRUE) plot(r1)
   r1
 }
 
@@ -87,7 +87,7 @@ noffset = n.cov
 
 if (!is.null(n.indp) )    #some populations might have gone extinct...
 {
-mut.ind <- which(matrix(as.logical( rbinom(n.indp*n.loci,1,p.mut)), ncol=n.loci, nrow=n.indp)==TRUE,arr.ind=T )
+mut.ind <- which(matrix(as.logical( rbinom(n.indp*n.loci,1,p.mut)), ncol=n.loci, nrow=n.indp)==TRUE,arr.ind=TRUE)
 
 if (nrow(mut.ind)>0) #are there any mutations in this population?
 {
@@ -141,20 +141,20 @@ genes.females <- (x[index.female,loci.cols])
 
 genes.females <- genes.females[rep(1:nrow(genes.females),n.off),]
 
-pick.femall <-sample(c(T,F),n.female*n.off*n.loci,replace=T)
-all.fem <-  matrix(as.vector(rbind(pick.femall,!pick.femall)),nrow=n.female*n.off, ncol=n.loci*2, byrow=T)
+pick.femall <-sample(c(T,F),n.female*n.off*n.loci,replace=TRUE)
+all.fem <-  matrix(as.vector(rbind(pick.femall,!pick.femall)),nrow=n.female*n.off, ncol=n.loci*2, byrow=TRUE)
 
 
-genes.off.fem <- matrix(t(genes.females)[t(all.fem)], ncol=n.loci, nrow=n.female*n.off, byrow=T)
+genes.off.fem <- matrix(t(genes.females)[t(all.fem)], ncol=n.loci, nrow=n.female*n.off, byrow=TRUE)
 
 
 
-breeding.males <- sample(which(index.male),n.female*n.off, replace=T)
+breeding.males <- sample(which(index.male),n.female*n.off, replace=TRUE)
 genes.males <- x[breeding.males,loci.cols]
-pick.malall <-sample(c(T,F),n.female*n.off*n.loci,replace=T)
+pick.malall <-sample(c(T,F),n.female*n.off*n.loci,replace=TRUE)
 
-all.mal <-  matrix(as.vector(rbind(pick.malall,!pick.malall)),nrow=n.female*n.off, ncol=n.loci*2, byrow=T)
-genes.off.mal <- matrix(t(genes.males)[t(all.mal)], ncol=n.loci, nrow=n.female*n.off, byrow=T)
+all.mal <-  matrix(as.vector(rbind(pick.malall,!pick.malall)),nrow=n.female*n.off, ncol=n.loci*2, byrow=TRUE)
+genes.off.mal <- matrix(t(genes.males)[t(all.mal)], ncol=n.loci, nrow=n.female*n.off, byrow=TRUE)
 
 
 popn <- x$pop[1]
@@ -188,7 +188,7 @@ npop <- nrow(x)
 #######################################
 ## Changed this to prevent error when npop drops below K
 if(npop > K) {
-    x<- x[sample(1:npop,K, replace=F),]}
+    x<- x[sample(1:npop,K, replace=FALSE),]}
 #######################################
 
 } else x<- NULL    #return NULL if only males or only females....
@@ -238,7 +238,7 @@ if (!is.null(pop.size))
 #how many migrants
 migrants[i] <- sum(ifelse(runif(pop.size)<perc.mig,1,0))
 #where do they go to (depends on emis)
-fromto <- table(sample(1:n.pops,migrants[i],replace=T, prob=emi.m[,i]))
+fromto <- table(sample(1:n.pops,migrants[i],replace=TRUE, prob=emi.m[,i]))
 
 to <- as.numeric(names(fromto))
 for (ii in 1:length(to)) migs[i,to[ii ]] <- migs[i,to[ii ]] + fromto[ii]
@@ -264,7 +264,7 @@ for (to in 1:n.pops)
   m <- migs[from, to]
   if (m>0)
     {
-    ind.from <- sample(1:psize,m,replace=F)
+    ind.from <- sample(1:psize,m,replace=FALSE)
     xp[[to]] <- rbind(xp[[to]], xp[[from]][ind.from,])
     xp[[from]] <- xp[[from]][-ind.from,]
     xp[[to]][,"pop"] <- to
@@ -454,7 +454,7 @@ pops[[i]][1:(round(n.ind*sex.ratio,0)),"sex"] <- "female"
 pops[[i]][,"sex"] <- factor(pops[[i]][,"sex"])
 
 #uniform allel distribution
-pops[[i]][,(noffset+1):(n.loci*2+noffset) ]  <- sample(1:n.allels,n.loci*2*n.ind, replace=T)
+pops[[i]][,(noffset+1):(n.loci*2+noffset) ]  <- sample(1:n.allels,n.loci*2*n.ind, replace=TRUE)
 }
 if (is.null(locs)) names(pops)<- 1:n.pops else names(pops) <- row.names(locs)   #or from genind object....
 return (pops)

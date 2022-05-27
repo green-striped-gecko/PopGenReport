@@ -31,9 +31,10 @@
 #' for haploid, diploid, and polyploidy species. Molecular Ecology 14:415-424.
 #' @examples
 #' 
-#' #not run:
-#' #data(bilby)
-#' #popgenreport(bilby, mk.gd.kosman = TRUE, mk.pdf=FALSE)
+#' \dontrun{
+#' data(bilby)
+#' popgenreport(bilby, mk.gd.kosman = TRUE, mk.pdf=FALSE)
+#' }
 #' #to get a pdf output you need to have a running Latex version installed on your system.
 #' #popgenreport(bilby, mk.gd.kosman = TRUE, mk.pdf=TRUE)
 #' @export
