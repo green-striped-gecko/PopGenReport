@@ -32,10 +32,10 @@ Boxplots show the bootstrap distribution of the expected number of homozygotes f
 \noindent
 <<null_all, echo=FALSE, fig.width=7, fig.height=4, fig.path=fig.path, dev=dev, dpi=dpi>>=
 for (i in 1:length(obs.ho)) {
-  boot.dist<-melt(boot.ho[[i]])
+  boot.dist<-reshape2::melt(boot.ho[[i]])
   obs.val<-as.matrix(obs.ho[[i]],ncol=1)
   rownames(obs.val)<-seq(1:length(obs.ho[[i]]))
-  obs.val<-melt(t(obs.val))
+  obs.val<-reshape2::melt(t(obs.val))
   print(
     ggplot(data=boot.dist,aes(as.factor(X2),value)) +geom_boxplot(fill="lightgrey")+theme_classic()+geom_point(data=obs.val,aes(as.factor(X2),value, colour="red"),size=3)+ylab("Number of homozygotes")+xlab("Allele")+ scale_x_discrete(labels=unname(cats@all.names[[i]]))+ggtitle(locNames(cats)[i])+ theme(legend.position="none")
   )
@@ -78,8 +78,8 @@ write.csv(nullalleles$homozygotes$probability.obs, paste(cats@other$filename,"-n
 <<echo=FALSE,results='hide'>>=
 method1.boot<-nullalleles$null.allele.freq$bootstrap$method1
 colnames(method1.boot)<-locNames(cats)
-method1.boot<-melt(method1.boot)
-method1.obs<-melt(nullalleles$null.allele.freq$summary1[1,])
+method1.boot<-reshape2::melt(method1.boot)
+method1.obs<-reshape2::melt(nullalleles$null.allele.freq$summary1[1,])
 method1.obs$names <- rownames(method1.obs)
 @
 
@@ -100,8 +100,8 @@ write.csv(nullalleles$null.allele.freq$summary2, paste(cats@other$filename,"-nul
 <<echo=FALSE,results='hide'>>=
 method2.boot<-nullalleles$null.allele.freq$bootstrap$method2
 colnames(method2.boot)<-locNames(cats)
-method2.boot<-melt(method2.boot)
-method2.obs<-melt(nullalleles$null.allele.freq$summary2[1,])
+method2.boot<-reshape2::melt(method2.boot)
+method2.obs<-reshape2::melt(nullalleles$null.allele.freq$summary2[1,])
 method2.obs$names <- rownames(method2.obs)
 @
 
