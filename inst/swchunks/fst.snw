@@ -33,7 +33,7 @@ print(tab_pop_Fst,include.rownames=TRUE,add.to.row=list(list(seq(1,nrow(FST_resu
 <<echo=FALSE, results='hide'>>=
 # this step recreates table 3 in Goosens (but still need statistical tests)
 # calculates all pairwise Fst values
-mat.fst <- pairwise.fst(cats, res.type="matrix")
+mat.fst <- pairwise.fstb(cats)
 #for testing purposes
 #mat.fst <-as.matrix(dist(cbind(runif(85),runif(85))))
 mat.fst[upper.tri(mat.fst)]<-NA
