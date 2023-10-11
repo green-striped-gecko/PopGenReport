@@ -1,7 +1,7 @@
 citHeader("To cite PopGenReport in publications use:")
  
-citEntry(
-	 entry = "Article",
+bibentry(
+	 bibtype = "Article",
   author = "Aaron T Adamack, Bernd Gruber",
   doi = "10.1111/2041-210X.12158",
   journal = "Methods in Ecology and Evolution",
@@ -16,8 +16,8 @@ citEntry(
 )
 
 
-citEntry(
-	 entry="Article",
+bibentry(
+	 bibtype="Article",
 author = "Aaron T Adamack, Bernd Gruber",
  doi = "10.1111/1755-0998.12381",
 	 title = "Landgenreport: a new R function to simplify landscape genetic analysis using resistance surface layers",
