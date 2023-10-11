@@ -95,7 +95,7 @@
 #' @export
 #' @importFrom vegan mantel.partial permustats 
 #' @importFrom gdistance transition geoCorrection shortestPath costDistance commuteDistance rSPDistance 
-#' @importFrom sp SpatialLinesLengths Line Lines SpatialLines SpatialPolygons Polygons Polygon coordinates 
+#' @importFrom sp SpatialLinesLengths Line Lines SpatialLines SpatialPolygons Polygons Polygon coordinates CRS
 
 landgenreport <- function(cats,
                           fric.raster,  #friction matrix   

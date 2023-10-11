@@ -56,7 +56,7 @@
 #' #popgenreport(bilby, mk.null.all=TRUE, mk.pdf=TRUE)
 #' }
 #' @importFrom plyr alply
-#' @importFrom reshape melt
+#' @importFrom reshape2 melt
 #' @export
 null.all<-function(population)
 {
@@ -115,7 +115,7 @@ null.all<-function(population)
     for (k in 1:999){ # this is looping over replicates....
       tempgenotype<-matrix(sample(1:length(allelecnt),sum(allelecnt),replace=TRUE,prob=allelefreq),ncol=2)# generating sets of genotypes
       allelepairtab<-table(tempgenotype[,1],tempgenotype[,2])
-      allelepairlong<-melt(allelepairtab)
+      allelepairlong<-reshape2::melt(allelepairtab)
       for(l in 1:length(allelecnt)){
         left<-which(allelepairlong[,1]==l)
         right<-which(allelepairlong[,2]==l)
@@ -159,7 +159,7 @@ null.all<-function(population)
         allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE) 
         allelefreq<-allelecnt/sum(allelecnt)
         exphz<-1-sum(allelefreq^2)
-        ho_cnt<-reshape::melt(table(tempalleles))
+        ho_cnt<-reshape2::melt(table(tempalleles))
         if(length(ho_cnt$value[ho_cnt$temp==2])==0) {
           numho<-0
         } else if(length(ho_cnt$value[ho_cnt$temp==2])>0){
@@ -180,7 +180,7 @@ null.all<-function(population)
       allelecnt<-apply(tempalleles,2,sum,na.rm=TRUE)
       allelefreq<-allelecnt/sum(allelecnt)
       exphz<-1-sum(allelefreq^2)
-      ho_cnt<-melt(table(tempalleles))
+      ho_cnt<-reshape2::melt(table(tempalleles))
       if(length(ho_cnt$value[ho_cnt$tempalleles==2])==0){
         numho<-0
       } else if(length(ho_cnt$value[ho_cnt$tempalleles==2])>0){

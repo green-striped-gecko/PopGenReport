@@ -208,7 +208,7 @@ fric.mat <- transition(fric.raster[[ci]],function(x) 1/x[2],NN)
 
 # fric.mat <- transition(fric.raster,function(x) 1/(abs(x[1]-x[2])),8)
 #set distances to meters  if no projected already
-fric.mat@crs@projargs<- "+proj=merc +units=m"
+fric.mat@crs<- sp::CRS("+proj=merc +units=m")
 fric.mat.cor <- geoCorrection(fric.mat)
 
 

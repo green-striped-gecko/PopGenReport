@@ -1,0 +1,952 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.6)  11 OCT 2023 11:08
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**PopGenReportIntroduction.tex
+(./PopGenReportIntroduction.tex
+LaTeX2e <2023-06-01> patch level 1
+L3 programming layer <2023-08-29>
+(c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrartcl.cls
+Document Class: scrartcl 2023/07/07 v3.41 KOMA-Script document class (article)
+(c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrkbase.sty
+Package: scrkbase 2023/07/07 v3.41 KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2023/07/07 v3.41 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2023/07/07 v3.41 KOMA-Script package (file load hooks)
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+Package: scrlfile-hook 2023/07/07 v3.41 KOMA-Script package (using LaTeX hooks)
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrlogo.sty
+Package: scrlogo 2023/07/07 v3.41 KOMA-Script package (logo)
+))) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+Applying: [2021/05/01] Usage of raw or classic option list on input line 252.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line 368.
+)) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/tocbasic.sty
+Package: tocbasic 2023/07/07 v3.41 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip48
+\scr@dte@tocline@numbox=\box51
+)
+Package tocbasic Info: omitting babel extension for `toc'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `toc' on input line 133.
+Class scrartcl Info: File `scrsize11pt.clo' used instead of
+(scrartcl)           file `scrsize11.clo' to setup font sizes on input line 2441.
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrsize11pt.clo
+File: scrsize11pt.clo 2023/07/07 v3.41 KOMA-Script font size class option (11pt)
+) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/typearea.sty
+Package: typearea 2023/07/07 v3.41 KOMA-Script package (type area)
+\ta@bcor=\skip49
+\ta@div=\count185
+Package typearea Info: You've used standard option `a4paper'.
+(typearea)             This is correct!
+(typearea)             Internally I'm using `paper=a4'.
+(typearea)             If you'd like to set the option with \KOMAoptions,
+(typearea)             you'd have to use `paper=a4' there
+(typearea)             instead of `a4paper', too.
+\ta@hblk=\skip50
+\ta@vblk=\skip51
+\ta@temp=\skip52
+\footheight=\skip53
+Package typearea Info: These are the values describing the layout:
+(typearea)             DIV  = 10
+(typearea)             BCOR = 0.0pt
+(typearea)             \paperwidth      = 597.50793pt
+(typearea)              \textwidth      = 418.25555pt
+(typearea)              DIV departure   = -6%
+(typearea)              \evensidemargin = 17.3562pt
+(typearea)              \oddsidemargin  = 17.3562pt
+(typearea)             \paperheight     = 845.04694pt
+(typearea)              \textheight     = 595.80026pt
+(typearea)              \topmargin      = -25.16531pt
+(typearea)              \headheight     = 17.0pt
+(typearea)              \headsep        = 20.40001pt
+(typearea)              \topskip        = 11.0pt
+(typearea)              \footskip       = 47.6pt
+(typearea)              \baselineskip   = 13.6pt
+(typearea)              on input line 1799.
+)
+\c@part=\count186
+\c@section=\count187
+\c@subsection=\count188
+\c@subsubsection=\count189
+\c@paragraph=\count190
+\c@subparagraph=\count191
+\scr@dte@section@maxnumwidth=\skip54
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\section on input line 5082.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\section on input line 5082.
+\scr@dte@part@maxnumwidth=\skip55
+Class scrartcl Info: using compatibility default `afterindent=false'
+(scrartcl)           for `\part on input line 5090.
+\scr@dte@subsection@maxnumwidth=\skip56
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\subsection on input line 5100.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\subsection on input line 5100.
+\scr@dte@subsubsection@maxnumwidth=\skip57
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\subsubsection on input line 5110.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\subsubsection on input line 5110.
+\scr@dte@paragraph@maxnumwidth=\skip58
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\paragraph on input line 5121.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\paragraph on input line 5121.
+\scr@dte@subparagraph@maxnumwidth=\skip59
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\subparagraph on input line 5131.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\subparagraph on input line 5131.
+\abovecaptionskip=\skip60
+\belowcaptionskip=\skip61
+\c@pti@nb@sid@b@x=\box52
+Package tocbasic Info: omitting babel extension for `lof'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lof' on input line 6309.
+\scr@dte@figure@maxnumwidth=\skip62
+\c@figure=\count192
+Package tocbasic Info: omitting babel extension for `lot'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lot' on input line 6325.
+\scr@dte@table@maxnumwidth=\skip63
+\c@table=\count193
+Class scrartcl Info: Redefining `\numberline' on input line 6495.
+\bibindent=\dimen140
+) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen141
+\Gin@req@width=\dimen142
+) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 227.
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip64
+\fb@frw=\dimen143
+\fb@frh=\dimen144
+\FrameRule=\dimen145
+\FrameSep=\dimen146
+) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/alltt.sty
+Package: alltt 2021/01/29 v2.0g defines alltt environment
+) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2022/12/19 v0.5x Insert pages of external PDF documents (AM)
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count194
+\calc@Bcount=\count195
+\calc@Adimen=\dimen147
+\calc@Bdimen=\dimen148
+\calc@Askip=\skip65
+\calc@Bskip=\skip66
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count196
+\calc@Cskip=\skip67
+) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2023/05/03 v3.0c eso-pic (RN)
+\ESO@tempdima=\dimen149
+\ESO@tempdimb=\dimen150
+)
+\AM@pagewidth=\dimen151
+\AM@pageheight=\dimen152
+\AM@fboxrule=\dimen153
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2022/12/19 v0.5x Pdfpages driver for pdfTeX (AM)
+)
+\pdfpages@includegraphics@status=\count197
+\AM@pagebox=\box53
+\AM@global@opts=\toks18
+\AM@pagecnt=\count198
+\AM@toc@title=\toks19
+\AM@lof@heading=\toks20
+\c@AM@survey=\count199
+\AM@templatesizebox=\box54
+) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count266
+\l__pdf_internal_box=\box55
+) (./PopGenReportIntroduction.aux)
+\openout1 = `PopGenReportIntroduction.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+Package scrbase Info: activating english \abstractname on input line 56.
+Package scrbase Info: activating english \partname on input line 56.
+Package scrbase Info: activating english \figurename on input line 56.
+Package scrbase Info: activating english \tablename on input line 56.
+Package scrbase Info: activating english \contentsname on input line 56.
+Package scrbase Info: activating english \listfigurename on input line 56.
+Package scrbase Info: activating english \listtablename on input line 56.
+Package scrbase Info: activating english \refname on input line 56.
+Package scrbase Info: activating english \indexname on input line 56.
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+)) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
+Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PDF (HO)
+ (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+) (c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+))
+<./figures/PopGenReportIntroduction.pdf, id=1, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf  used on input line 57.
+(pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf  used on input line 57.
+(pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
+<./figures/PopGenReportIntroduction.pdf, id=4, page=1, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 1>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page1 used on input line 57.
+(pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 1>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page1 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 1>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page1 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 1>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page1 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 1>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page1 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [1
+
+ <./figures/PopGenReportIntroduction.pdf{c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}>]
+<./figures/PopGenReportIntroduction.pdf, id=24, page=2, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 2>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page2 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 2>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page2 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 2>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page2 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [2 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=32, page=3, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 3>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page3 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 3>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page3 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 3>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page3 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [3 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=44, page=4, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 4>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page4 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 4>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page4 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 4>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page4 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [4 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=48, page=5, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 5>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page5 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 5>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page5 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 5>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page5 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [5 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=56, page=6, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 6>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page6 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 6>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page6 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 6>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page6 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [6 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=60, page=7, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 7>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page7 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 7>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page7 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 7>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page7 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [7 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=65, page=8, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 8>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page8 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 8>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page8 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 8>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page8 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [8 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=69, page=9, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 9>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page9 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 9>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page9 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 9>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page9 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [9 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=73, page=10, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 10>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page10 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 10>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page10 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 10>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page10 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [10 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=84, page=11, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 11>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page11 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 11>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page11 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 11>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page11 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [11 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=88, page=12, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 12>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page12 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 12>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page12 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 12>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page12 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [12 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=92, page=13, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 13>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page13 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 13>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page13 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 13>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page13 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [13 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=101, page=14, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 14>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page14 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 14>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page14 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 14>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page14 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [14 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=105, page=15, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 15>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page15 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 15>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page15 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 15>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page15 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [15 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=111, page=16, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 16>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page16 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 16>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page16 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 16>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page16 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [16 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=118, page=17, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 17>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page17 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 17>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page17 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 17>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page17 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [17 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=122, page=18, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 18>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page18 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 18>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page18 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 18>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page18 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [18 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=127, page=19, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 19>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page19 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 19>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page19 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 19>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page19 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [19 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=132, page=20, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 20>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page20 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 20>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page20 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 20>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page20 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [20 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=136, page=21, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 21>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page21 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 21>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page21 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 21>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page21 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [21 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=140, page=22, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 22>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page22 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 22>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page22 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 22>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page22 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [22 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=144, page=23, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 23>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page23 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 23>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page23 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 23>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page23 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [23 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=148, page=24, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 24>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page24 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 24>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page24 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 24>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page24 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [24 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=152, page=25, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 25>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page25 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 25>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page25 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 25>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page25 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [25 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=161, page=26, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 26>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page26 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 26>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page26 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 26>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page26 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [26 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=165, page=27, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 27>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page27 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 27>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page27 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 27>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page27 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [27 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=191, page=28, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 28>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page28 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 28>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page28 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 28>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page28 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [28 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=195, page=29, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 29>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page29 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 29>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page29 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 29>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page29 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [29 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=199, page=30, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 30>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page30 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 30>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page30 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 30>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page30 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [30 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=203, page=31, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 31>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page31 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 31>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page31 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 31>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page31 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [31 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=208, page=32, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 32>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page32 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 32>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page32 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 32>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page32 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [32 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=213, page=33, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 33>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page33 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 33>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page33 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 33>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page33 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [33 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=219, page=34, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 34>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page34 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 34>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page34 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 34>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page34 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [34 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=225, page=35, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 35>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page35 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 35>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page35 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 35>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page35 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [35 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=231, page=36, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 36>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page36 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 36>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page36 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 36>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page36 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [36 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=241, page=37, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 37>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page37 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 37>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page37 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 37>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page37 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [37 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=251, page=38, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 38>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page38 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 38>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page38 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 38>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page38 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [38 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=260, page=39, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 39>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page39 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 39>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page39 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 39>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page39 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [39 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=264, page=40, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 40>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page40 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 40>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page40 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 40>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page40 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [40 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=271, page=41, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 41>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page41 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 41>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page41 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 41>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page41 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [41 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=279, page=42, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 42>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page42 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 42>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page42 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 42>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page42 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [42 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=286, page=43, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 43>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page43 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 43>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page43 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 43>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page43 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [43 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=293, page=44, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 44>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page44 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 44>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page44 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 44>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page44 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [44 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=297, page=45, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 45>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page45 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 45>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page45 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 45>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page45 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [45 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=303, page=46, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 46>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page46 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 46>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page46 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 46>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page46 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [46 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=308, page=47, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 47>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page47 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 47>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page47 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 47>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page47 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [47 <./figures/PopGenReportIntroduction.pdf>]
+<./figures/PopGenReportIntroduction.pdf, id=314, page=48, 597.51233pt x 845.0471pt>
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 48>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page48 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 48>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page48 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+File: ./figures/PopGenReportIntroduction.pdf Graphic file (type pdf)
+<use ./figures/PopGenReportIntroduction.pdf, page 48>
+Package pdftex.def Info: ./figures/PopGenReportIntroduction.pdf , page48 used on input line 57.
+(pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
+ [48 <./figures/PopGenReportIntroduction.pdf>] (./PopGenReportIntroduction.aux)
+ ***********
+LaTeX2e <2023-06-01> patch level 1
+L3 programming layer <2023-08-29>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 5556 strings out of 476893
+ 121920 string characters out of 5807354
+ 1920785 words of memory out of 5000000
+ 26834 multiletter control sequences out of 15000+600000
+ 558369 words of font info for 37 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 108i,17n,107p,10996b,428s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb><c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/s425824/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on PopGenReportIntroduction.pdf (48 pages, 1078221 bytes).
+PDF statistics:
+ 335 PDF objects out of 1000 (max. 8388607)
+ 166 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 256 words of extra memory for PDF output out of 10000 (max. 10000000)
+
