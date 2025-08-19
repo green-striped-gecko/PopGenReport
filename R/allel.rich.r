@@ -16,7 +16,7 @@
 #' allelic.richness only works for haploid and diploid species.
 #' 
 #' 
-#' @param population a \code{\link{genind}} object (from package adegenet)
+#' @param population a \code{\link[adegenet]{genind}} object (from package adegenet)
 #' @param min.alleles the minimum number of alleles that will be sampled for
 #' calculating allelic richness. If min.alleles is set to NULL the min.alleles
 #' sampled will be determined automatically (see description)

@@ -49,7 +49,7 @@ in the least-cost paths in the NN=8 case, therefore we strongly recommend to
 inspect the actual least-cost paths in the provided output.}
 
 \item{pathtype}{Type of cost distance to be calculated (based on function in
-the \code{\link{gdistance}} package. Available distances are 'leastcost',
+the \code{\link[gdistance]{gdistance}} package. Available distances are 'leastcost',
 'commute' or 'rSPDistance'. See functions in the gdistance package for
 futher explanations.}
 
@@ -58,7 +58,7 @@ pathtype='leastcost'. Be aware this slows down the computation, but it is
 recommended to check least cost paths visually.}
 
 \item{theta}{value needed for rSPDistance function. see
-\code{\link{rSPDistance}} in package \code{gdistance}.}
+\code{\link[gdistance]{rSPDistance}} in package \code{gdistance}.}
 
 \item{mk.resistance}{switch to do the landscape genetic analysis based on
 resistance matrices, should be set to TRUE}

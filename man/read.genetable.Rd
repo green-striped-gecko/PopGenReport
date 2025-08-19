@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.genetable.r
 \name{read.genetable}
 \alias{read.genetable}
-\title{Function to convert textfiles into a \linkS4class{genind} object (the format
+\title{Function to convert textfiles into a \linkS4class[adegenet]{genind} object (the format
 required for popgenreport)}
 \usage{
 read.genetable(
@@ -74,7 +74,7 @@ This function converts genetic data provided in a tabular 'comma separated
 value' (.csv) file into a genind object, the data format required to run
 PopGenReport. At the moment it works only for codominant markers (e.g.
 microsatellites). This function is based on df2genind from the
-\code{\link{adegenet}} package.
+\code{adegenet} package.
 }
 \details{
 The format of the .csv file is very important. Make sure your \bold{headings
@@ -128,9 +128,9 @@ platy2c <- read.genetable( paste(.libPaths()[1],"/PopGenReport/extdata/platypus2
 #res<- popgenreport(platy2c, mk.counts=TRUE, mk.map=TRUE, mk.allele.dist=TRUE, mk.pdf=TRUE)
 }
 \seealso{
-\code{\link{import2genind}}, \code{\link{df2genind}},
-\code{\link{read.fstat}}, \code{\link{read.structure}},
-\code{\link{read.genetix}} \code{\link{read.genepop}}
+\code{\link[adegenet]{import2genind}}, \code{\link[adegenet]{df2genind}},
+\code{\link[adegenet]{read.fstat}}, \code{\link[adegenet]{read.structure}},
+\code{\link[adegenet]{read.genetix}} \code{\link[adegenet]{read.genepop}}
 }
 \author{
 Bernd Gruber (bernd.gruber@canberra.edu.au)

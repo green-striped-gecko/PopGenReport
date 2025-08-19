@@ -7,7 +7,7 @@
 gd.kosman(population)
 }
 \arguments{
-\item{population}{this is the \code{\link{genind}} object the analysis will
+\item{population}{this is the \code{\link[adegenet]{genind}} object the analysis will
 be based on.}
 }
 \value{

@@ -18,7 +18,7 @@
 #' dropped from the analysis and a warning message will be generated.
 #' 
 #' 
-#' @param population this is the \code{\link{genind}} object that the analysis
+#' @param population this is the \code{\link[adegenet]{genind}} object that the analysis
 #' will be based on.
 #' @param verbose information on progress. For large data sets this could be
 #' informative as it allows the user to estimate the amount of time remaining

@@ -11,7 +11,7 @@ genlight object
 bilby
 }
 \description{
-This is a synthetic sample data set (in \code{\link{genind}} format) of
+This is a synthetic sample data set (in \code{\link[adegenet]{genind}} format) of
 microsatellite data.
 }
 \author{

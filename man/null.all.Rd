@@ -7,7 +7,7 @@
 null.all(population)
 }
 \arguments{
-\item{population}{a \code{\link{genind}} object (from the package adegenet)}
+\item{population}{a \code{\link[adegenet]{genind}} object (from the package adegenet)}
 }
 \value{
 The function returns a list with two main components: homozygotes

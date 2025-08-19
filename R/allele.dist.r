@@ -5,7 +5,7 @@
 #' each subpopulations and then produces a heatmap using that data.
 #' 
 #' 
-#' @param population this is the \code{\link{genind}} object the analysis will
+#' @param population this is the \code{\link[adegenet]{genind}} object the analysis will
 #' be based on
 #' @param mk.figures if set to FALSE no figures are plotted. Default is TRUE.
 #' @return Produces heatmaps of the relative allele frequencies for each

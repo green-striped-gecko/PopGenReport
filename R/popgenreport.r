@@ -1,5 +1,5 @@
 #' This is the main function of the package. It analyses an object of class
-#' \code{\link{genind}} and then creates a report containing the results of the
+#' \code{\link[adegenet]{genind}} and then creates a report containing the results of the
 #' analysis. There are several routines that can be optionally included in the
 #' analysis and there are multiple output options including a PDF with the
 #' report, R-code and an object (\code{fname.results}) containing all of the
@@ -9,12 +9,12 @@
 #' to provide a framework for analysing microsatellite and also SNP genetic
 #' data (if not too many loci, say below 1000) using a mix of existing and new
 #' functions. The function works on an object of class \code{genind}. There are
-#' several ways to convert data into a \code{\link{genind}} object using
+#' several ways to convert data into a \code{\link[adegenet]{genind}} object using
 #' existing functions provided by the \code{adegenet} package (
-#' \code{\link{import2genind}},
-#' \code{\link{df2genind}},\code{\link{read.fstat}},
-#' \code{\link{read.structure}}, \code{\link{read.genetix}}
-#' ,\code{\link{read.genepop}}) or refer to \code{read.genetable} how to import
+#' \code{\link[adegenet]{import2genind}},
+#' \code{\link[adegenet]{df2genind}},\code{\link[adegenet]{read.fstat}},
+#' \code{\link[adegenet]{read.structure}}, \code{\link[adegenet]{read.genetix}}
+#' ,\code{\link[adegenet]{read.genepop}}) or refer to \code{read.genetable} how to import
 #' data from an EXCEL (csv) document. The function performs a number of
 #' different genetic analyses (e.g. counts of indivuals and alleles across
 #' sub-populations, tests for heterozygosity and Hardy-Weinberg Equilibrium,
@@ -29,8 +29,8 @@
 #' to use the read.genetable function and use the \code{lat}, \code{long} or
 #' \code{x}, \code{y} arguments for WGS1984 projected data or mercator
 #' projected data respectively. To calculate distances the data are internally
-#' reprojected using the \code{\link{Mercator}} function in package
-#' \code{\link{dismo}}), which is the projection used by google maps. Or you
+#' reprojected using the \code{\link[dismo]{Mercator}} function in package
+#' \code{\link[dismo]{dismo}}), which is the projection used by google maps. Or you
 #' can add data manually to your \code{genind} object using the mentioned (e.g.
 #' \code{genindobject@other$latlong <- yourlatlong data} or
 #' \code{genindobject@other$xy <- your_xy_data}). If you have your data in a
@@ -50,7 +50,7 @@
 #' for a dataset with ~3200 individuals.
 #' 
 #' 
-#' @param cats this is the \code{\link{genind}} object the analysis will be
+#' @param cats this is the \code{\link[adgenet]{genind}} object the analysis will be
 #' based on.
 #' @param mk.counts switch is to provide overview counts of the number of
 #' individuals sampled, numbers of individuals and alleles sampled per
@@ -125,7 +125,7 @@
 #' \bold{latex} version running on your system (e.g. MikTex (Windows) or
 #' Texmaker (Linux, MacOSX). For more information how to install latex on your
 #' system refer to the \url{http://www.popgenreport.org} and to the manuals of the
-#' \code{\link{knitr}} package and its manuals.
+#' \code{\link[knitr]{knitr}} package and its manuals.
 #' @return The function returns an object (e.g. res) that has all of the
 #' results produced by this function in it. The structure of the object can be
 #' accessed via \code{str(res)}. The main slots in this object (if you ran a
@@ -142,7 +142,6 @@
 #' specified subfolder.
 #' @author Aaron Adamack & Bernd Gruber, aaron.adamack@@canberra.edu.au,
 #' bernd.gruber@@canberra.edu.au
-#' @seealso \code{\link{adegenet}}, \code{\link{pegas}}, \code{\link{mmod}}
 #' @references Kosman E., Leonard K.J. 2005. Similarity coefficients for
 #' molecular markers in studies of genetic relationships between individuals
 #' for haploid, diploid, and polyploidy species. Molecular Ecology 14:415-424

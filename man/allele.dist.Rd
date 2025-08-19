@@ -7,7 +7,7 @@
 allele.dist(population, mk.figures = TRUE)
 }
 \arguments{
-\item{population}{this is the \code{\link{genind}} object the analysis will
+\item{population}{this is the \code{\link[adegenet]{genind}} object the analysis will
 be based on}
 
 \item{mk.figures}{if set to FALSE no figures are plotted. Default is TRUE.}

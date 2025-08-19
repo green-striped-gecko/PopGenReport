@@ -13,7 +13,7 @@
 #' significantly differ from zero.
 #' 
 #' 
-#' @param population a \code{\link{genind}} object (from the package adegenet)
+#' @param population a \code{\link[adegenet]{genind}} object (from the package adegenet)
 #' @return The function returns a list with two main components: homozygotes
 #' and null.allele.freq.  Homozygotes contains the output of the first part of
 #' the analysis: determining the observed number of homozygotes for allele at

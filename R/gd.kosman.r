@@ -17,7 +17,7 @@
 #' 84 seconds for 2000 individuals, and 194 seconds for 3000 individuals.
 #' 
 #' 
-#' @param population this is the \code{\link{genind}} object the analysis will
+#' @param population this is the \code{\link[adegenet]{genind}} object the analysis will
 #' be based on.
 #' @return Returns a list with two distance matrices. The first (geneticdist)
 #' contains pairwise individual genetic distances for each individual within a

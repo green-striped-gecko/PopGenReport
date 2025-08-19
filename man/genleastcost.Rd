@@ -31,7 +31,7 @@ linear structures may cause artefacts in the least-cost paths, therefore
 inspect the actual least-cost paths in the provided output.}
 
 \item{pathtype}{Type of cost distance to be calculated (based on function in
-the \code{\link{gdistance}} package. Available distances are 'leastcost',
+the \code{\link[gdistance]{gdistance}} package. Available distances are 'leastcost',
 'commute' or 'rSPDistance'. See functions in the gdistance package for
 futher explanations. If the path type is set to 'leastcost' then paths and
 also pathlength are returned.}
@@ -41,7 +41,7 @@ pathtype='leastcost'. Be aware this slows down the computation, but it is
 recommended to do this to check least cost paths visually.}
 
 \item{theta}{value needed for rSPDistance function. see
-\code{\link{rSPDistance}} in package \code{gdistance}.}
+\code{\link[gdistance]{rSPDistance}} in package \code{gdistance}.}
 }
 \value{
 returns a list that consists of four pairwise distance matrixes

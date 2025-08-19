@@ -7,7 +7,7 @@
 allel.rich(population, min.alleles = NULL)
 }
 \arguments{
-\item{population}{a \code{\link{genind}} object (from package adegenet)}
+\item{population}{a \code{\link[adegenet]{genind}} object (from package adegenet)}
 
 \item{min.alleles}{the minimum number of alleles that will be sampled for
 calculating allelic richness. If min.alleles is set to NULL the min.alleles

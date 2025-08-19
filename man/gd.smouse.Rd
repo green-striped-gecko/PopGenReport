@@ -7,7 +7,7 @@
 gd.smouse(population, verbose = TRUE)
 }
 \arguments{
-\item{population}{this is the \code{\link{genind}} object that the analysis
+\item{population}{this is the \code{\link[adegenet]{genind}} object that the analysis
 will be based on.}
 
 \item{verbose}{information on progress. For large data sets this could be
