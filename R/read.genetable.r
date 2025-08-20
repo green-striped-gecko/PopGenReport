@@ -1,4 +1,4 @@
-#' Function to convert textfiles into a \linkS4class[adegenet]{genind} object (the format
+#' Function to convert textfiles into a genind object (the format
 #' required for popgenreport)
 #' 
 #' This function converts genetic data provided in a tabular 'comma separated

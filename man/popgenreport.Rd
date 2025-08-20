@@ -40,7 +40,7 @@ popgenreport(
 )
 }
 \arguments{
-\item{cats}{this is the \code{\link[adgenet]{genind}} object the analysis will be
+\item{cats}{this is the \code{\link[adegenet]{genind}} object the analysis will be
 based on.}
 
 \item{mk.counts}{switch is to provide overview counts of the number of

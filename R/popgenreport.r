@@ -50,7 +50,7 @@
 #' for a dataset with ~3200 individuals.
 #' 
 #' 
-#' @param cats this is the \code{\link[adgenet]{genind}} object the analysis will be
+#' @param cats this is the \code{\link[adegenet]{genind}} object the analysis will be
 #' based on.
 #' @param mk.counts switch is to provide overview counts of the number of
 #' individuals sampled, numbers of individuals and alleles sampled per

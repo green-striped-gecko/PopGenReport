@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.genetable.r
 \name{read.genetable}
 \alias{read.genetable}
-\title{Function to convert textfiles into a \linkS4class[adegenet]{genind} object (the format
+\title{Function to convert textfiles into a genind object (the format
 required for popgenreport)}
 \usage{
 read.genetable(
